@@ -1,0 +1,21 @@
+:root {
+  --verde: #008F35;
+  --verde-claro: #D9EEE1;
+  --verde-oscuro: #005620;
+    
+  --rojo: #E1001A;
+
+  --gris-claro: #d9d9d935;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Open Sans;
+}
+
+body {
+  margin: 0;
+  padding: 0; 
+}

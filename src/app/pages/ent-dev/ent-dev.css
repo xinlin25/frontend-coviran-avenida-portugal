@@ -1,0 +1,78 @@
+h1 {
+    max-width: 1500px;
+    margin: 50px auto 0;
+}
+
+
+.contenedor {
+    background-color: var(--gris-claro);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1500px;
+    margin: 50px auto;
+    padding: 30px;
+    border-radius: 15px;
+    gap: 20px;
+}
+
+img {
+    width: 400px;
+    height: 250px;
+    border-radius: 15px;
+}
+
+.texto {
+    max-width: 600px;
+}
+
+h2 {
+    font-size: 35px;
+}
+
+.caption {
+    font-size: 15px;
+}
+
+.info {
+    font-size: 20px;
+}
+
+.indicacion {
+    color: gray;
+}
+
+.botones {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-self: center;
+}
+
+button {
+    background-color: var(--verde);
+    border: none;
+    color: white;
+    width: 300px;
+    height: 50px;
+    padding: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 15px;
+}
+
+@media (max-width: 900px) {
+    h1 , .contenedor{
+        margin: 25px 40px;
+    }
+
+    .contenedor {
+        justify-content: center;
+    }
+
+    img {
+        width: 250px;
+        height: 170px;
+    }
+}

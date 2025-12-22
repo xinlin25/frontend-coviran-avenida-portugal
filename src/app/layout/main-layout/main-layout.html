@@ -1,0 +1,50 @@
+<header>
+  <nav>
+    <!-- Logo -->
+    <a routerLink="">
+      <img src="/logos/logo-simple.png" alt="logo coviran" class="logo-simple">
+    </a>
+
+    <!-- Menú -->
+    <a routerLink="" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
+    <a routerLink="/categorias" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: false }">Categorías</a>
+
+    <!-- Barra de búsqueda -->
+    <div class="search-container">
+      <input type="text" placeholder="Buscar productos..." class="search-input">
+      <button class="search-button">
+        <img src="/icons/buscar.png" alt="Icono de búsqueda">
+      </button>
+    </div>
+
+    <!-- Cuenta y carrito -->
+    <a routerLink="/cuenta" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: false }">Mi Cuenta</a>
+    <a routerLink="/carrito" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: false }">Carrito</a>
+  </nav>
+</header>
+
+
+<main>
+  <router-outlet></router-outlet>
+</main>
+
+<footer>
+  <div>
+    <h3>Supermercados Coviran Online</h3>
+    <p>En Covirán Avenida Portugal trabajamos para ti. Productos frescos, trato cercano y los mejores precios del barrio.</p>
+  </div>
+  
+  <div>
+    <h3>Enlaces de interés</h3>
+    <a routerLink="/localizacion-contacto">Contacto</a>
+    <a routerLink="/localizacion-contacto">Localización</a>
+    <a routerLink="/entrega-devoluciones">Devoluciones</a>
+    <a routerLink="/entrega-devoluciones">Entregas</a>
+  </div>
+
+<div class="footer-logo">
+  <a routerLink="">
+    <img src="/logos/logo.webp" alt="logo coviran" class="logo">
+  </a>
+</div>
+</footer>

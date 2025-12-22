@@ -1,0 +1,50 @@
+<h1>Entrega y Devoluciones</h1>
+
+<div class="contenedor">
+    <div>
+        <img src="/img/entrega.jpg" alt="imagen tiempo de entrega">
+    </div>
+
+    <div class="texto">
+        <h2>¿Cuánto tiempo tarda mi pedido?</h2>
+        <p class="caption">¿Necesitas rapidez?</p><br>
+        <p class="info">Los pedidos serán atendidos inmediatamente, y 
+            posteriormente enviados a su domicilio. En caso de
+            realizarlo en horas de cierre se atenderá a primera 
+            hora de apertura.
+        </p><br>
+        <p class="indicacion">*Antes de finalizar el pedido puedes indicar la hora a la
+            que quieres que se entregue apróximadamente el pedido.
+        </p>
+    </div>
+
+    <div class="botones">
+        <button (click)="buscar('Horario Supermercado Covirán Avenida Portugal Cádiz')">Horario</button>
+        <button (click)="buscar('Como llegar a Coviran Avenida Portugal Cádiz')">Cómo Llegar</button>
+        <button routerLink="/localizacion-contacto">Localización</button>
+    </div>
+</div>
+
+<div class="contenedor">
+    <div>
+        <img src="/img/devolucion.jpg" alt="imagen devoluciones">
+    </div>
+
+    <div class="texto">
+        <h2>¿Cómo hacer una devolución?</h2>
+        <p class="caption">¿Hay algún producto que quieras devolver?</p><br>
+        <p class="info">Todos nuestros productos pueden ser devueltos, solo 
+            tienes que presentar el ticket de compra junto al producto que 
+            desees cambiar o devolver.
+        </p><br>
+        <p class="indicacion">*Los productos fríos solo se podrán devolver 
+            en caso de fecha de expiración anterior al día de compra.
+        </p>
+    </div>
+
+    <div class="botones">
+        <button (click)="buscar('Horario Supermercado Covirán Avenida Portugal Cádiz')">Horario</button>
+        <button (click)="buscar('Como llegar a Coviran Avenida Portugal Cádiz')">Cómo Llegar</button>
+        <button routerLink="/localizacion-contacto">Localización</button>
+    </div>
+</div>
