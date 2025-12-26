@@ -1,1 +1,21 @@
-<p>inicio-sesion works!</p>
+<div class="contenedor">
+    <div class="contenido">
+        <img src="/img/formularios.jpg" alt="Imagen Frutería Covirán">
+    </div>
+
+    <div class="contenido formulario">
+        <h1>Iniciar Sesión</h1>
+        <form action="post">
+            <input type="email" placeholder="Correo electrónico*" required 
+            minlength="10" maxlength="100" id="email"
+            pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}">
+
+            <input type="password" id="password" required min="5" placeholder="Contraseña*">
+            
+            <a routerLink="/recuperar-contraseña">¿Has olvidado la contraseña?</a>
+
+            <button type="submit">Continuar</button>
+        </form>
+        
+    </div>
+</div>

@@ -9,5 +9,8 @@ import { RouterOutlet, RouterLinkWithHref } from "@angular/router";
   standalone: true,
 })
 export class SimpleLayout {
+volver() {
+  history.back();
+}
 
 }
