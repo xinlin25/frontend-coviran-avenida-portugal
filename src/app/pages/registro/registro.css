@@ -1,0 +1,66 @@
+.contenedor {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 400px;
+}
+
+form div {
+    display: flex;
+    gap: 12px;
+}
+
+form div input {
+    flex: 1;
+}
+
+input {
+    width: 400px;
+    height: 60px;
+    border-radius: 15px;
+    border-color: var(--gris-claro);
+    font-size: clamp(14px, 1.2vw, 15px);
+    padding-left: 20px;
+}
+
+/*Para que no salga rojo directamente*/
+input:invalid:not(:placeholder-shown) {
+    border-color: rgba(255, 0, 0, 0.31);
+}
+
+input:valid {
+    border-color: var(--verde-claro);
+}
+
+button {
+    margin-top: 20px;
+    align-self: center;
+    background-color: var(--verde);
+    color: white;
+    width: 150px;
+    height: 60px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 15px;
+    border: none;
+}
+
+p {
+    align-self: center;
+}
+
+a {
+    align-self: center;
+    color: var(--verde-oscuro);
+    text-decoration: none;
+    font-size: 15px;
+}

@@ -5,14 +5,15 @@
 
     <div class="contenido formulario">
         <h1>Iniciar Sesión</h1>
+        <a routerLink="/registro" class="registro">o Crear Cuenta</a>
         <form action="post">
             <input type="email" placeholder="Correo electrónico*" required 
             minlength="10" maxlength="100" id="email"
             pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}">
 
-            <input type="password" id="password" required min="5" placeholder="Contraseña*">
+            <input type="password" id="password" required minlength="5" placeholder="Contraseña*">
             
-            <a routerLink="/recuperar-contraseña">¿Has olvidado la contraseña?</a>
+            <a routerLink="/recuperar-contraseña" class="password">¿Has olvidado la contraseña?</a>
 
             <button type="submit">Continuar</button>
         </form>
