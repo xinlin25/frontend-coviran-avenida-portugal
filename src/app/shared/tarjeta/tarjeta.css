@@ -1,0 +1,56 @@
+.tarjeta {
+    background-color: white;
+    max-width: 250px;
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 15px;
+    border: 1px solid black;
+}
+
+img {
+    max-width: 150px;
+    max-height: 200px;
+    align-self: center;
+}
+
+.descripcion {
+    color: rgba(128, 128, 128, 0.795);
+    font-size: 12px;
+}
+
+.precio {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.precio-original {
+    text-decoration: line-through;
+}
+
+.precio-oferta, .precio-normal {
+    font-size: 20px;
+}
+
+.precio-oferta {
+    color: var(--rojo);
+}
+
+.unidad {
+    color: rgba(128, 128, 128, 0.795);
+}
+
+button {
+    background-color: var(--verde);
+    color: white;
+    border: none;
+    border-radius: 15px;
+    align-self: center;
+    width: 75%;
+}

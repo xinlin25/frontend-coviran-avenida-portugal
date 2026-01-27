@@ -106,6 +106,12 @@ footer a {
   align-items: center;
 }
 
+@media (max-width: 2000px) {
+  footer {
+    gap: 200px;
+  }
+}
+
 @media (max-width: 900px) {
   header {
     padding: 15px;      

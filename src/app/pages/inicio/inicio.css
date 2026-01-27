@@ -1,0 +1,38 @@
+.contenedor {
+    width: 75%;
+    margin: 30px auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.banner {
+    width: 100%;
+    border-radius: 15px;  
+}
+
+.contenido {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.116);
+    display: flex;
+    flex-direction: column;
+    border-radius: 15px;
+    gap: 20px;
+}
+
+.categorias-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap; 
+    justify-content: center;
+}
+
+.categoria img {
+    border-radius: 50%;
+    width: 150px;
+    margin-bottom: 5px;
+}
+
+.categoria p {
+    justify-self: center;
+}

@@ -1,0 +1,16 @@
+<div class="tarjeta">
+    <img [src]="imagen" alt="{{titulo}}" class="tarjeta-img"/>
+    <h5 class="titulo">{{ titulo }}</h5>
+    <p class="descripcion">{{ descripcion }}</p>
+    <p class="precio">
+        @if (enOferta && precioOriginal) {
+            <span class="precio-original"> {{ precioOriginal }}€</span>
+            <span class="precio-oferta">{{ precio }}€</span>
+            <span class="unidad">/{{ unidad }}</span>
+        } @else {
+            <span class="precio-normal">{{ precio }}€</span>
+            <span class="unidad">/{{ unidad }}</span>
+        }
+    </p>
+    <button (click)="manejarClick()">Añadir</button>
+</div>

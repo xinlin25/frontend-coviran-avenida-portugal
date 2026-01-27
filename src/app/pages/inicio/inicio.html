@@ -1,1 +1,50 @@
-<p>inicio works!</p>
+<div class="contenedor">
+    <img src="/img/inicio/banner.png" alt="Banner inicio" class="banner">
+
+    <div class="contenido">
+        <h3>Categorías destacadas</h3>
+        <div class="categorias-container">
+            <div class="categoria">
+                <img src="/img/inicio/fruta-verdura.png" alt="categoría fruta y verdura" class="categoria">
+                <p>Fruta y verdura</p>
+            </div>
+            <div class="categoria">
+                <img src="/img/inicio/panaderia.png" alt="categoría panadería" class="categoria">
+                <p>Panadería</p>
+            </div>
+            <div class="categoria">
+                <img src="/img/inicio/limpieza.png" alt="categoría limpieza" class="categoria">
+                <p>Limpieza</p>
+            </div>
+            <div class="categoria">
+                <img src="/img/inicio/bebidas.png" alt="categoría bebidas" class="categoria">
+                <p>Bebidas</p>
+            </div>
+            <div class="categoria">
+                <img src="/img/inicio/alimentacion.png" alt="categoría alimentación" class="categoria">
+                <p>Alimentación</p>
+            </div>
+            <div class="categoria">
+                <img src="/img/inicio/higiene.png" alt="categoría higiene" class="categoria">
+                <p>Higiene</p>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="contenido">
+        <h3>Ofertas</h3>
+        <div class="oferta">
+            <app-tarjeta
+            titulo="Pastas Coviran"
+            descripcion="Pack 350gr"
+            [precio]="19.99"
+            [precioOriginal]="50.99"
+            [enOferta]="true"
+            unidad="ud"
+            imagen="\img\productos\Galletas\pastas-coviran.png"
+            (agregar)="agregarProducto()"
+            ></app-tarjeta>
+        </div>
+    </div>
+</div>
