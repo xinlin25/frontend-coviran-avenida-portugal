@@ -3,6 +3,10 @@
 
     <div class="contenido">
         <h3>Categorías destacadas</h3>
+        <div class="mas">
+            <a routerLink="/categorias">Ver todo</a>
+        </div>
+        
         <div class="categorias-container">
             <div class="categoria">
                 <img src="/img/inicio/fruta-verdura.png" alt="categoría fruta y verdura" class="categoria">
@@ -34,17 +38,23 @@
 
     <div class="contenido">
         <h3>Ofertas</h3>
-        <div class="oferta">
-            <app-tarjeta
-            titulo="Pastas Coviran"
-            descripcion="Pack 350gr"
-            [precio]="19.99"
-            [precioOriginal]="50.99"
-            [enOferta]="true"
-            unidad="ud"
-            imagen="\img\productos\Galletas\pastas-coviran.png"
-            (agregar)="agregarProducto()"
-            ></app-tarjeta>
+        <div class="mas">
+            <a routerLink="/categorias">Ver todo</a>
         </div>
+        <div class="ofertas-container">
+            <div class="oferta">
+                <app-tarjeta
+                titulo="Pastas Coviran"
+                descripcion="Pack 350gr"
+                [precio]="19.99"
+                [precioOriginal]="50.99"
+                [enOferta]="true"
+                unidad="ud"
+                imagen="\img\productos\Galletas\pastas-coviran.png"
+                (agregar)="agregarProducto()"
+                ></app-tarjeta>
+            </div>
+        </div>
+        
     </div>
 </div>
