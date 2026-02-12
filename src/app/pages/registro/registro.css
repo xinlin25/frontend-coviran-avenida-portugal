@@ -64,3 +64,13 @@ a {
     text-decoration: none;
     font-size: 15px;
 }
+
+.success {
+    color: var(--verde);
+    font-weight: bold;
+}
+
+.error {
+    color: var(--rojo);
+    font-weight: bold;
+}

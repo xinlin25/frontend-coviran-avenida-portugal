@@ -11,7 +11,25 @@
 
         <input type="password" placeholder="Contraseña*" formControlName="password">
 
+        @if (registerForm.get('password')?.touched && registerForm.get('password')?.invalid) {
+            @if (registerForm.get('password')?.errors?.['required']) {
+                <p class="error">La contraseña es obligatoria</p>
+            }
+
+            @if (registerForm.get('password')?.errors?.['minlength']) {
+                <p class="error">La contraseña debe tener mínimo 8 caracteres</p>
+            }
+
+            @if (registerForm.get('password')?.errors?.['maxlength']) {
+                <p class="error">La contraseña no puede superar 60 caracteres</p>
+            }
+        }
+
         <input type="text" placeholder="Dirección*" formControlName="direccion">
+
+        @if (mensaje) {
+        <p [class.success]="!esError" [class.error]="esError">{{ mensaje }}</p>
+        }
 
         <button type="submit" [disabled]="registerForm.invalid">
             Crear cuenta

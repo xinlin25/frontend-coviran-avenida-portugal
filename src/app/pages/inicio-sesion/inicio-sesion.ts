@@ -14,9 +14,11 @@ import { Router } from '@angular/router';
 
 export class InicioSesion {
   loginForm: FormGroup;
+  mensaje: string = '';
+  esError: boolean = false;
 
   constructor(
-    private fb:FormBuilder,
+    private fb: FormBuilder,
     private authService: Auth,
     private router: Router
   ) {
@@ -31,10 +33,13 @@ export class InicioSesion {
 
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
-        console.log('Token recibido:', response.token);
+        this.authService.guardarToken(response.token);
+        this.esError = false;
+        this.router.navigate(['/']);
       },
       error: () => {
-        alert("Credenciales incorrectaas");
+        this.mensaje = "Credenciales incorrectas";
+        this.esError = true;
       }
     });
   }

@@ -12,6 +12,8 @@ import { Auth } from '../../services/auth';
 })
 export class Registro {
   registerForm: FormGroup;
+  mensaje: string = '';
+  esError: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -32,11 +34,17 @@ export class Registro {
 
     this.authService.register(this.registerForm.value).subscribe({
       next: () => {
-        alert("Usuario registrado correctamente");
-        this.router.navigate(['/inicio-sesion']);
+        this.mensaje = "Usuario registrado correctamente";
+        this.esError = false;
+
+        setTimeout(() => {
+          this.router.navigate(['/inicio-sesion']);
+        }, 2000);
+        
       },
       error: () => {
-        alert("Error al regitrar usuario");
+        this.mensaje = "Error al registrar usuario";
+        this.esError = true;
       } 
     })
   }

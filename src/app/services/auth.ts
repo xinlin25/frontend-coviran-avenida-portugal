@@ -30,4 +30,16 @@ export class Auth {
   register(data: any) {
     return this.http.post(`${this.apiURL}/register`, data);
   }
+
+  guardarToken(token: string) {
+    localStorage.setItem('token', token);
+  }
+
+  obtenerToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
+  logout() {
+    localStorage.removeItem('token');
+  }
 }

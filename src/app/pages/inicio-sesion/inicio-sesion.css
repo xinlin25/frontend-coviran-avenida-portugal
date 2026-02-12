@@ -74,6 +74,16 @@ button {
     border: none;
 }
 
+.success {
+    color: var(--verde);
+    font-weight: bold;
+}
+
+.error {
+    color: var(--rojo);
+    font-weight: bold;
+}
+
 @media (max-width: 900px) {
     .contenedor {
         flex-direction: column;
