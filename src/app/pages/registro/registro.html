@@ -1,35 +1,25 @@
 <div class="contenedor">
     <h1>Crea tu cuenta</h1>
 
-    <form action="post">
-        <div>
-            <input type="text" id="name" placeholder="Nombre*" required
-            minlength="2" maxlength="20">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
-            <input type="text" id="surname" placeholder="Apellidos*" required
-            minlength="2" maxlength="20">
-        </div>
+        <input type="text" placeholder="Nombre completo*" formControlName="nombreCompleto">
 
-        <input type="number" id="tlf" placeholder="Teléfono*" required
-        pattern="(\+34|0034|34)?[ -]*(6|7)[ -]*([0-9][ -]*){8}">
+        <input type="text" placeholder="Teléfono*" formControlName="tlf">
 
-        <input type="email" id="email" placeholder="Correo electrónico*" required 
-        minlength="10" maxlength="100" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}">
+        <input type="email" placeholder="Correo electrónico*" formControlName="correo">
 
-        <input type="email" id="confirmEmail" placeholder="Repetir correo electrónico*" required
-        minlength="10" maxlength="100" pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}">
+        <input type="password" placeholder="Contraseña*" formControlName="password">
 
-        <input type="password" id="password" placeholder="Contraseña*" required
-        minlength="5">
+        <input type="text" placeholder="Dirección*" formControlName="direccion">
 
-        <input type="password" id="confirmPassword" placeholder="Repetir contraseña*" required
-        minlength="5">
+        <button type="submit" [disabled]="registerForm.invalid">
+            Crear cuenta
+        </button>
 
-        <input type="text" id="direccion" placeholder="Dirección*" required
-        minlength="5" maxlength="100">
-
-        <button type="submit">Crear cuenta</button>
         <p>¿Ya tienes cuenta?</p>
         <a routerLink="/inicio-sesion">Iniciar Sesión</a>
+
     </form>
+
 </div>

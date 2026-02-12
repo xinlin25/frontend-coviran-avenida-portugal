@@ -6,17 +6,15 @@
     <div class="contenido formulario">
         <h1>Iniciar Sesión</h1>
         <a routerLink="/registro" class="registro">o Crear Cuenta</a>
-        <form action="post">
-            <input type="email" placeholder="Correo electrónico*" required 
-            minlength="10" maxlength="100" id="email"
-            pattern="[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,5}">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <input type="email" formControlName="correo" placeholder="Correo electrónico*">
 
-            <input type="password" id="password" required minlength="5" placeholder="Contraseña*">
-            
+            <input type="password" formControlName="password" placeholder="Contraseña*">
+
             <a routerLink="/recuperar-contraseña" class="password">¿Has olvidado la contraseña?</a>
 
-            <button type="submit">Continuar</button>
+            <button type="submit" [disabled]="loginForm.invalid">Continuar</button>
         </form>
-        
+
     </div>
 </div>
