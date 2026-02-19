@@ -8,21 +8,45 @@
         <input type="text" placeholder="Teléfono*" formControlName="tlf">
 
         <input type="email" placeholder="Correo electrónico*" formControlName="correo">
+        @if (f['correo'].invalid && (f['correo'].touched || f['correo'].dirty)) {
+
+            @if (f['correo'].errors?.['required']) {
+                <p class="error">El correo es obligatorio</p>
+            }
+
+            @if (f['correo'].errors?.['email']) {
+                <p class="error">Formato de correo inválido</p>
+            }
+
+            @if (f['correo'].errors?.['minlength']) {
+                <p class="error">Debe tener al menos 5 caracteres</p>
+            }
+
+            @if (f['correo'].errors?.['maxlength']) {
+                <p class="error">No puede superar 100 caracteres</p>
+            }
+
+            @if (f['correo'].errors?.['correoDuplicado']) {
+                <p class="error">Este correo ya está registrado</p>
+            }
+        }
+
 
         <input type="password" placeholder="Contraseña*" formControlName="password">
+        @if (f['password'].invalid && (f['password'].touched || f['password'].dirty)) {
 
-        @if (registerForm.get('password')?.touched && registerForm.get('password')?.invalid) {
-            @if (registerForm.get('password')?.errors?.['required']) {
+            @if (f['password'].errors?.['required']) {
                 <p class="error">La contraseña es obligatoria</p>
             }
 
-            @if (registerForm.get('password')?.errors?.['minlength']) {
-                <p class="error">La contraseña debe tener mínimo 8 caracteres</p>
+            @if (f['password'].errors?.['minlength']) {
+                <p class="error">Debe tener mínimo 8 caracteres</p>
             }
 
-            @if (registerForm.get('password')?.errors?.['maxlength']) {
-                <p class="error">La contraseña no puede superar 60 caracteres</p>
+            @if (f['password'].errors?.['maxlength']) {
+                <p class="error">No puede superar 60 caracteres</p>
             }
+
         }
 
         <input type="text" placeholder="Dirección*" formControlName="direccion">

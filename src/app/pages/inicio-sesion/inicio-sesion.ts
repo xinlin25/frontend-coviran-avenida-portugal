@@ -37,8 +37,13 @@ export class InicioSesion {
         this.esError = false;
         this.router.navigate(['/']);
       },
-      error: () => {
-        this.mensaje = "Credenciales incorrectas";
+      error: (err) => {
+        if (err.status === 401) {
+          this.mensaje = "Correo o contraseña incorrectos";
+        } else {
+          this.mensaje = "Error en el servidor";
+        }
+
         this.esError = true;
       }
     });

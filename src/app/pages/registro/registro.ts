@@ -29,6 +29,10 @@ export class Registro {
     });
   }
 
+  get f() {
+    return this.registerForm.controls;
+  }
+
   onSubmit() {
     if (this.registerForm.invalid) return;
 
@@ -42,8 +46,15 @@ export class Registro {
         }, 2000);
         
       },
-      error: () => {
-        this.mensaje = "Error al registrar usuario";
+      error: (err) => {
+        if (err.status === 409) {
+          // Añadimos error manual al control correo
+          this.registerForm.get("correo")?.setErrors({ correoDuplicado: true });
+          this.registerForm.get("correo")?.markAsTouched();
+        } else {
+          this.mensaje = "Error al registrar usuario";
+        }
+
         this.esError = true;
       } 
     })

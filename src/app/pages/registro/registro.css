@@ -72,5 +72,6 @@ a {
 
 .error {
     color: var(--rojo);
-    font-weight: bold;
+    font-size: 14px;
+    margin: 4px 0 0 5px;
 }

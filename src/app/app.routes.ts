@@ -10,7 +10,7 @@ import { DetalleProd } from './pages/detalle-prod/detalle-prod';
 import { Empleados } from './pages/empleados/empleados';
 import { EntDev } from './pages/ent-dev/ent-dev';
 import { LocCon } from './pages/loc-con/loc-con';
-import { MiCuenta } from './pages/mi-cuenta/mi-cuenta';
+import { MiPerfil } from './pages/mi-perfil/mi-perfil';
 import { Pedidos } from './pages/pedidos/pedidos';
 import { Recuperar } from './pages/recuperar/recuperar';
 import { Registro } from './pages/registro/registro';
@@ -25,7 +25,7 @@ export const routes: Routes = [
       { path: 'detalle-producto', component: DetalleProd },
       { path: 'localizacion-contacto', component: LocCon },
       { path: 'entrega-devoluciones', component: EntDev },
-      { path: 'cuenta', component: MiCuenta },
+      { path: 'mi-perfil', component: MiPerfil },
       { path: 'pedidos', component: Pedidos }
     ]
   },

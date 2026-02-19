@@ -39,7 +39,15 @@ export class Auth {
     return localStorage.getItem('token');
   }
 
+  estaAutenticado(): boolean {
+    return !!localStorage.getItem("token");
+  }
+
   logout() {
     localStorage.removeItem('token');
+  }
+
+  getMiPerfil() {
+    return this.http.get("http://localhost:8080/usuarios/mi-perfil");
   }
 }
