@@ -14,6 +14,7 @@ import { MiPerfil } from './pages/mi-perfil/mi-perfil';
 import { Pedidos } from './pages/pedidos/pedidos';
 import { Recuperar } from './pages/recuperar/recuperar';
 import { Registro } from './pages/registro/registro';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
   {
@@ -25,7 +26,7 @@ export const routes: Routes = [
       { path: 'detalle-producto', component: DetalleProd },
       { path: 'localizacion-contacto', component: LocCon },
       { path: 'entrega-devoluciones', component: EntDev },
-      { path: 'mi-perfil', component: MiPerfil },
+      { path: 'mi-perfil', component: MiPerfil, canActivate: [authGuard] },
       { path: 'pedidos', component: Pedidos }
     ]
   },
