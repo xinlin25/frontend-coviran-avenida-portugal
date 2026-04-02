@@ -3,7 +3,7 @@ import { SimpleLayout } from './layout/simple-layout/simple-layout';
 
 import { Routes } from '@angular/router';
 import { Inicio } from './pages/inicio/inicio';
-import { InicioSesion } from './pages/inicio-sesion/inicio-sesion'
+import { InicioSesion } from './pages/inicio-sesion/inicio-sesion';
 import { Carrito } from './pages/carrito/carrito';
 import { Categorias } from './pages/categorias/categorias';
 import { DetalleProd } from './pages/detalle-prod/detalle-prod';
@@ -26,9 +26,8 @@ export const routes: Routes = [
       { path: 'detalle-producto', component: DetalleProd },
       { path: 'localizacion-contacto', component: LocCon },
       { path: 'entrega-devoluciones', component: EntDev },
-      { path: 'mi-perfil', component: MiPerfil, canActivate: [authGuard] },
-      { path: 'pedidos', component: Pedidos }
-    ]
+      { path: 'pedidos', component: Pedidos },
+    ],
   },
 
   {
@@ -39,8 +38,8 @@ export const routes: Routes = [
       { path: 'recuperar-contraseña', component: Recuperar },
       { path: 'carrito', component: Carrito },
       { path: 'empleados', component: Empleados },
-      { path: 'inicio-sesion', component: InicioSesion}
-    ]
-  }
+      { path: 'mi-perfil', component: MiPerfil, canActivate: [authGuard] },
+      { path: 'inicio-sesion', component: InicioSesion },
+    ],
+  },
 ];
-

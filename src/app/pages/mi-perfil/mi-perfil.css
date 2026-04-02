@@ -1,0 +1,38 @@
+h1 {
+  padding-bottom: 5px;
+}
+
+.container {
+  padding: 50px 0;
+  width: fit-content;
+}
+
+p {
+  font-size: 18px;
+}
+
+.datos {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  padding: 5px 0;
+}
+.fila {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  border: none;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.editar {
+  background-color: var(--verde);
+  color: white;
+}
+
+.sesion {
+  background-color: var(--rojo);
+  color: white;
+}

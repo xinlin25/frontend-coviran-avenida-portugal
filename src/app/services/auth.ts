@@ -19,7 +19,7 @@ interface LoginResponse {
 
 export class Auth {
   //Conecta con @RequestMapping("/auth")
-  private apiURL = "http://localhost:8080/auth";
+  private apiURL = "https://localhost:8443/auth";
   //Para hacer peticiones HTTP
   constructor(private http:HttpClient) {}
 
@@ -48,6 +48,10 @@ export class Auth {
   }
 
   getMiPerfil() {
-    return this.http.get("http://localhost:8080/usuarios/mi-perfil");
+    return this.http.get<UsuarioPerfil>("https://localhost:8443/usuarios/mi-perfil");
+  }
+
+  actualizarPerfil(data: any) {
+    return this.http.put('https://localhost:8443/usuarios/mi-perfil', data);
   }
 }

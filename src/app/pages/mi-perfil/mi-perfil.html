@@ -1,9 +1,39 @@
-<h1>Mi Perfil</h1>
+<div class="container">
+  <h1>Mi Perfil</h1>
 
-@if (usuario) {
-  <p><strong>Nombre:</strong> {{ usuario.nombreCompleto }}</p>
-  <p><strong>Correo:</strong> {{ usuario.correo }}</p>
-  <p><strong>Teléfono:</strong> {{ usuario.tlf }}</p>
-  <p><strong>Dirección:</strong> {{ usuario.direccion }}</p>
-  <p><strong>Rol:</strong> {{ usuario.rol }}</p>
-}
+  @if (usuario && !modoEdicion) {
+    <div class="datos">
+      <p><strong>Nombre</strong></p>
+      <p>{{ usuario.nombreCompleto }}</p>
+    </div>
+
+    <div class="datos">
+      <p><strong>Correo</strong></p>
+      <p>{{ usuario.correo }}</p>
+    </div>
+
+    <div class="datos">
+      <p><strong>Teléfono</strong></p>
+      <p>{{ usuario.tlf }}</p>
+    </div>
+
+    <div class="datos">
+      <p><strong>Dirección</strong></p>
+      <p>{{ usuario.direccion }}</p>
+    </div>
+
+    <div class="fila">
+      <button (click)="activarEdicion()" class="editar">Editar perfil</button>
+      <button (click)="logout()" class="sesion">Cerrar sesión</button>
+    </div>
+  }
+
+  @if (modoEdicion) {
+    <app-formulario-perfil
+      [usuario]="usuario"
+      (cancelar)="cancelarEdicion()"
+      (guardado)="perfilActualizado()"
+    >
+    </app-formulario-perfil>
+  }
+</div>
