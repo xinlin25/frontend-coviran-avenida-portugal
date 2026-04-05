@@ -9,17 +9,16 @@ import { FormularioPerfil } from './formulario-perfil/formulario-perfil';
   standalone: true,
   imports: [CommonModule, FormularioPerfil],
   templateUrl: './mi-perfil.html',
-  styleUrl: './mi-perfil.css'
+  styleUrl: './mi-perfil.css',
 })
 export class MiPerfil implements OnInit {
-
   usuario: any;
   modoEdicion: boolean = false;
 
   constructor(
     private authService: Auth,
     private cdr: ChangeDetectorRef,
-    private router: Router
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -34,7 +33,7 @@ export class MiPerfil implements OnInit {
       },
       error: (err) => {
         console.error(err);
-      }
+      },
     });
   }
 
@@ -46,8 +45,12 @@ export class MiPerfil implements OnInit {
     this.modoEdicion = false;
   }
 
-  perfilActualizado() {
+  perfilActualizado(datos: any) {
     this.modoEdicion = false;
+    this.usuario = {
+      ...this.usuario,
+      ...datos,
+    };
     this.cargarPerfil();
   }
 

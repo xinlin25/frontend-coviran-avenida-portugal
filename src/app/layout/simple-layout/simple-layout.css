@@ -1,26 +1,29 @@
 header {
-    background-color: var(--verde-claro);
-    display: flex;
-    align-items: center;
-    position: relative;
-    height: 60px;
-    padding: 0 20px;
+  background-color: var(--verde-claro);
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 60px;
+  padding: 0 20px;
 }
 
 p {
-    margin: 0;
-    font-weight: 500;
+  margin: 0;
+  font-weight: 500;
 }
 
 p:hover {
-    color: var(--verde-oscuro);
-    
+  cursor: pointer;
+}
+
+p:hover {
+  color: var(--verde-oscuro);
 }
 
 header div {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
 }

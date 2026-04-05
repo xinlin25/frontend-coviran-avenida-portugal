@@ -8,10 +8,9 @@ import { Auth } from '../../../services/auth';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './formulario-perfil.html',
-  styleUrl: './formulario-perfil.css'
+  styleUrl: './formulario-perfil.css',
 })
 export class FormularioPerfil {
-
   @Input() usuario: any;
 
   @Output() cancelar = new EventEmitter<void>();
@@ -24,12 +23,12 @@ export class FormularioPerfil {
 
   constructor(
     private fb: FormBuilder,
-    private authService: Auth
+    private authService: Auth,
   ) {
     this.perfilForm = this.fb.group({
       nombreCompleto: ['', [Validators.required, Validators.minLength(3)]],
       tlf: ['', [Validators.required, Validators.minLength(9)]],
-      direccion: ['', [Validators.required, Validators.minLength(5)]]
+      direccion: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
 
@@ -38,7 +37,7 @@ export class FormularioPerfil {
       this.perfilForm.patchValue({
         nombreCompleto: this.usuario.nombreCompleto,
         tlf: this.usuario.tlf,
-        direccion: this.usuario.direccion
+        direccion: this.usuario.direccion,
       });
     }
   }
@@ -48,16 +47,15 @@ export class FormularioPerfil {
 
     this.authService.actualizarPerfil(this.perfilForm.value).subscribe({
       next: () => {
-        this.mensaje = "Perfil actualizado correctamente";
+        this.mensaje = 'Perfil actualizado correctamente';
         this.esError = false;
 
-        this.guardado.emit();
+        this.guardado.emit(this.perfilForm.value);
       },
       error: () => {
-        this.mensaje = "Error al actualizar perfil";
+        this.mensaje = 'Error al actualizar perfil';
         this.esError = true;
-      }
+      },
     });
   }
-
 }

@@ -32,7 +32,7 @@
     <app-formulario-perfil
       [usuario]="usuario"
       (cancelar)="cancelarEdicion()"
-      (guardado)="perfilActualizado()"
+      (guardado)="perfilActualizado($event)"
     >
     </app-formulario-perfil>
   }

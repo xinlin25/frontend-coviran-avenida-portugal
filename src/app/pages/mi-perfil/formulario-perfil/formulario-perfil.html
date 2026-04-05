@@ -1,18 +1,18 @@
-<h2>Editar Perfil</h2>
+<div class="contenedor">
+  <h2>Editar Perfil</h2>
 
-<form [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
-
-  <input type="text" placeholder="Nombre" formControlName="nombreCompleto">
-  <input type="text" placeholder="Teléfono" formControlName="tlf">
-  <input type="text" placeholder="Dirección" formControlName="direccion">
-
-  <button type="submit">Guardar</button>
-  <button type="button" (click)="cancelar.emit()">Cancelar</button>
-
-</form>
-
-@if (mensaje) {
-  <p [class.success]="!esError" [class.error]="esError">
-    {{ mensaje }}
-  </p>
-}
+  <form [formGroup]="perfilForm" (ngSubmit)="onSubmit()">
+    <input type="text" placeholder="Nombre" formControlName="nombreCompleto" />
+    <input type="text" placeholder="Teléfono" formControlName="tlf" />
+    <input type="text" placeholder="Dirección" formControlName="direccion" />
+    @if (mensaje) {
+      <p [class.success]="!esError" [class.error]="esError" class="error">
+        {{ mensaje }}
+      </p>
+    }
+    <div class="botones">
+      <button type="submit" class="guardar">Guardar</button>
+      <button type="button" class="sesion" (click)="cancelar.emit()">Cancelar</button>
+    </div>
+  </form>
+</div>
