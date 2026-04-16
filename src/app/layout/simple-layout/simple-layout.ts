@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLinkWithHref } from "@angular/router";
+import { RouterOutlet, RouterLinkWithHref, Router } from '@angular/router';
 
 @Component({
   selector: 'app-simple-layout',
@@ -9,8 +9,9 @@ import { RouterOutlet, RouterLinkWithHref } from "@angular/router";
   standalone: true,
 })
 export class SimpleLayout {
-volver() {
-  history.back();
-}
+  constructor(private router: Router) {}
 
+  volver() {
+    this.router.navigate(['/']);
+  }
 }
