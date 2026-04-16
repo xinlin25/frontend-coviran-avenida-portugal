@@ -36,3 +36,9 @@ button {
   background-color: var(--rojo);
   color: white;
 }
+
+@media (max-width: 900px) {
+  .container {
+    width: fit-content;
+  }
+}

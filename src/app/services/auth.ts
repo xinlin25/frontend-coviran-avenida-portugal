@@ -16,12 +16,11 @@ interface LoginResponse {
 @Injectable({
   providedIn: 'root',
 })
-
 export class Auth {
   //Conecta con @RequestMapping("/auth")
-  private apiURL = "https://localhost:8443/auth";
+  private apiURL = 'https://localhost:8443/auth';
   //Para hacer peticiones HTTP
-  constructor(private http:HttpClient) {}
+  constructor(private http: HttpClient) {}
 
   login(data: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiURL}/login`, data);
@@ -40,7 +39,18 @@ export class Auth {
   }
 
   estaAutenticado(): boolean {
-    return !!localStorage.getItem("token");
+    const payload = this.getTokenPayload();
+
+    if (!payload) return false;
+
+    const ahora = Math.floor(Date.now() / 1000);
+
+    if (payload.exp < ahora) {
+      this.logout();
+      return false;
+    }
+
+    return true;
   }
 
   logout() {
@@ -48,10 +58,23 @@ export class Auth {
   }
 
   getMiPerfil() {
-    return this.http.get<UsuarioPerfil>("https://localhost:8443/usuarios/mi-perfil");
+    return this.http.get<UsuarioPerfil>('https://localhost:8443/usuarios/mi-perfil');
   }
 
   actualizarPerfil(data: any) {
     return this.http.put('https://localhost:8443/usuarios/mi-perfil', data);
+  }
+
+  private getTokenPayload(): any {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+
+    const payload = token.split('.')[1];
+    return JSON.parse(atob(payload));
+  }
+
+  getRol(): string | null {
+    const payload = this.getTokenPayload();
+    return payload?.rol || null;
   }
 }

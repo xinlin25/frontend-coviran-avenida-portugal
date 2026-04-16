@@ -2,53 +2,77 @@
   <nav>
     <!-- Logo -->
     <a routerLink="">
-      <img src="/logos/logo-simple.png" alt="logo coviran" class="logo-simple">
+      <img src="/logos/logo-simple.png" alt="logo coviran" class="logo-simple" />
     </a>
 
     <!-- Menú -->
-    <a routerLink="" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">Inicio</a>
-    <a routerLink="/categorias" routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: false }">Categorías</a>
+    <a routerLink="" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }"
+      >Inicio</a
+    >
+
+    @if (authService.getRol() === 'ADMIN' || authService.getRol() === 'EMPLEADO') {
+      <a routerLink="/admin">Admin</a>
+    }
+
+    <a
+      routerLink="/categorias"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: false }"
+      >Categorías</a
+    >
 
     <!-- Barra de búsqueda -->
     <div class="search-container">
-      <input type="text" placeholder="Buscar productos..." class="search-input">
+      <input type="text" placeholder="Buscar productos..." class="search-input" />
       <button class="search-button">
         <i class="bi bi-search"></i>
       </button>
     </div>
 
     <!-- Carrito y cuenta -->
-    <a routerLink="/carrito" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: false }"><i
-        class="bi bi-cart3"></i> Carrito</a>
+    <a
+      routerLink="/carrito"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: false }"
+      ><i class="bi bi-cart3"></i> Carrito</a
+    >
 
     @if (!authService.estaAutenticado()) {
-    <a routerLink="/inicio-sesion" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: false }">Iniciar
-      Sesión</a>
+      <a
+        routerLink="/inicio-sesion"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: false }"
+        >Iniciar Sesión</a
+      >
     } @else {
-    <div class="dropdown">
-      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-person-circle"></i></a>
+      <div class="dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <i class="bi bi-person-circle"></i
+        ></a>
 
-      <ul class="dropdown-menu dropdown-menu-end">
-        <li>
-          <a class="dropdown-item" routerLink="/mi-perfil">
-            <i class="bi bi-person"></i> Mi Perfil</a>
-        </li>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li>
+            <a class="dropdown-item" routerLink="/mi-perfil">
+              <i class="bi bi-person"></i> Mi Perfil</a
+            >
+          </li>
 
-        <li>
-          <a class="dropdown-item" (click)="logout()">
-            <i class="bi bi-box-arrow-right"></i> Cerrar sesión
-          </a>
-        </li>
-      </ul>
-    </div>
+          <li>
+            <a class="dropdown-item" (click)="logout()">
+              <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+            </a>
+          </li>
+        </ul>
+      </div>
     }
-
   </nav>
 </header>
-
-
 <main>
   <router-outlet></router-outlet>
 </main>
@@ -56,8 +80,10 @@
 <footer>
   <div>
     <h3>Supermercados Coviran Online</h3>
-    <p>En Covirán Avenida Portugal trabajamos para ti. Productos frescos, trato cercano y los mejores precios del
-      barrio.</p>
+    <p>
+      En Covirán Avenida Portugal trabajamos para ti. Productos frescos, trato cercano y los mejores
+      precios del barrio.
+    </p>
   </div>
 
   <div>
@@ -70,7 +96,7 @@
 
   <div class="footer-logo">
     <a routerLink="">
-      <img src="/logos/logo.webp" alt="logo coviran" class="logo">
+      <img src="/logos/logo.webp" alt="logo coviran" class="logo" />
     </a>
   </div>
 </footer>

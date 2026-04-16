@@ -1,0 +1,29 @@
+<header>
+  <p (click)="volver()">< Volver</p>
+  <h2>Panel de Administración</h2>
+
+  <nav class="admin-nav">
+    <a
+      routerLink="usuarios"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Usuarios</a
+    >
+    <a
+      routerLink="productos"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: false }"
+      >Productos</a
+    >
+    <a
+      routerLink="categorias"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: false }"
+      >Categorías</a
+    >
+  </nav>
+</header>
+
+<main>
+  <router-outlet></router-outlet>
+</main>

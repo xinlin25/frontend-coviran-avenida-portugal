@@ -2,6 +2,7 @@ header {
   background-color: var(--verde-claro);
   display: flex;
   align-items: center;
+  justify-content: space-between;
   position: relative;
   height: 60px;
   padding: 0 20px;
@@ -17,10 +18,33 @@ p:hover {
   color: var(--verde-oscuro);
 }
 
-header div {
+h2 {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  margin: 0;
+  pointer-events: none;
+}
+
+.admin-nav {
   display: flex;
   align-items: center;
+  gap: 20px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  font-size: 18px;
+}
+
+a.active-link {
+  color: var(--verde-oscuro);
+  text-decoration: underline;
+}
+
+a:hover {
+  color: var(--rojo);
+  text-decoration: none;
+  cursor: pointer;
 }

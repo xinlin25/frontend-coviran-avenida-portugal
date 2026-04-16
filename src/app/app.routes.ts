@@ -15,6 +15,11 @@ import { Pedidos } from './pages/pedidos/pedidos';
 import { Recuperar } from './pages/recuperar/recuperar';
 import { Registro } from './pages/registro/registro';
 import { authGuard } from './guards/auth-guard';
+import { PanelAdmin } from './pages/admin/panel-admin/panel-admin';
+import { UsuariosAdmin } from './pages/admin/usuarios-admin/usuarios-admin';
+import { ProductosAdmin } from './pages/admin/productos-admin/productos-admin';
+import { CategoriasAdmin } from './pages/admin/categorias-admin/categorias-admin';
+import { adminGuard } from './guards/admin-guard';
 
 export const routes: Routes = [
   {
@@ -40,6 +45,18 @@ export const routes: Routes = [
       { path: 'empleados', component: Empleados },
       { path: 'mi-perfil', component: MiPerfil, canActivate: [authGuard] },
       { path: 'inicio-sesion', component: InicioSesion },
+    ],
+  },
+
+  {
+    path: 'admin',
+    component: PanelAdmin,
+    canActivate: [authGuard, adminGuard],
+    children: [
+      { path: '', component: UsuariosAdmin },
+      { path: 'usuarios', component: UsuariosAdmin },
+      { path: 'productos', component: ProductosAdmin },
+      { path: 'categorias', component: CategoriasAdmin },
     ],
   },
 ];

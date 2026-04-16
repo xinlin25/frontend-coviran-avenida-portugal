@@ -1,0 +1,30 @@
+.contenedor {
+  margin: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 80%;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.lista {
+  width: 100%;
+  padding-top: 20px;
+}
+
+.titulo {
+  padding-left: 10px;
+}
+
+.item {
+  border-top: 1px solid #ccc;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: #f0f0f0;
+}

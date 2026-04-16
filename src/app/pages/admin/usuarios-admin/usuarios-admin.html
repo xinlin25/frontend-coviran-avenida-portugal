@@ -1,0 +1,109 @@
+<div class="contenedor">
+  <!-- LISTA -->
+  <div class="lista">
+    <h2 class="titulo">Usuarios</h2>
+
+    @for (u of usuarios; track u.id) {
+      <div
+        class="item"
+        (click)="abrirModal(u)"
+        data-bs-toggle="modal"
+        data-bs-target="#usuarioModal"
+      >
+        {{ u.nombreCompleto }} - {{ u.rol }}
+      </div>
+    }
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal fade" id="usuarioModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalle Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      @if (usuarioEditando) {
+        <div class="modal-body">
+          <!-- NOMBRE -->
+          <div>
+            <label>Nombre</label>
+            @if (modoEdicion) {
+              <input type="text" [(ngModel)]="usuarioEditando.nombreCompleto" />
+            } @else {
+              <p>{{ usuarioEditando.nombreCompleto }}</p>
+            }
+          </div>
+
+          <!-- CORREO -->
+          <div>
+            <label>Correo</label>
+            <p>{{ usuarioEditando.correo }}</p>
+          </div>
+
+          <!-- TELÉFONO -->
+          <div>
+            <label>Teléfono</label>
+            @if (modoEdicion) {
+              <input type="text" [(ngModel)]="usuarioEditando.tlf" />
+            } @else {
+              <p>{{ usuarioEditando.tlf }}</p>
+            }
+          </div>
+
+          <!-- DIRECCIÓN -->
+          <div>
+            <label>Dirección</label>
+            @if (modoEdicion) {
+              <input type="text" [(ngModel)]="usuarioEditando.direccion" />
+            } @else {
+              <p>{{ usuarioEditando.direccion }}</p>
+            }
+          </div>
+
+          <!-- ROL -->
+          <div>
+            <label>Rol</label>
+            @if (modoEdicion) {
+              <select [(ngModel)]="usuarioEditando.rol">
+                <option value="CLIENTE">CLIENTE</option>
+                <option value="EMPLEADO">EMPLEADO</option>
+                <option value="ADMIN">ADMIN</option>
+              </select>
+            } @else {
+              <p>{{ usuarioEditando.rol }}</p>
+            }
+          </div>
+
+          <!-- ESTADO -->
+          <div>
+            <label>Estado</label>
+
+            @if (modoEdicion) {
+              <select [(ngModel)]="usuarioEditando.enabled">
+                <option [ngValue]="true">Activo</option>
+                <option [ngValue]="false">Inactivo</option>
+              </select>
+            } @else {
+              <p>{{ usuarioEditando.enabled ? 'Activo' : 'Inactivo' }}</p>
+            }
+          </div>
+        </div>
+      }
+
+      <div class="modal-footer">
+        @if (!modoEdicion) {
+          <button class="btn btn-primary" (click)="modoEdicion = true">Editar</button>
+        }
+
+        @if (modoEdicion) {
+          <button class="btn btn-success" (click)="guardarCambios()">Guardar</button>
+        }
+
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
