@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Auth } from '../../services/auth';
+import { Auth } from '../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormularioPerfil } from './formulario-perfil/formulario-perfil';

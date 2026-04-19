@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Auth } from '../../../services/auth';
+import { Auth } from '../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-formulario-perfil',

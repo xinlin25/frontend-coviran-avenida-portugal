@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from "@angular/router";
-import { Auth } from '../../services/auth';
+import { RouterLink } from '@angular/router';
+import { Auth } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -11,7 +10,6 @@ import { Router } from '@angular/router';
   templateUrl: './inicio-sesion.html',
   styleUrl: './inicio-sesion.css',
 })
-
 export class InicioSesion {
   loginForm: FormGroup;
   mensaje: string = '';
@@ -20,11 +18,11 @@ export class InicioSesion {
   constructor(
     private fb: FormBuilder,
     private authService: Auth,
-    private router: Router
+    private router: Router,
   ) {
     this.loginForm = this.fb.group({
       correo: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]]
+      password: ['', [Validators.required, Validators.minLength(8)]],
     });
   }
 
@@ -39,13 +37,13 @@ export class InicioSesion {
       },
       error: (err) => {
         if (err.status === 401) {
-          this.mensaje = "Correo o contraseña incorrectos";
+          this.mensaje = 'Correo o contraseña incorrectos';
         } else {
-          this.mensaje = "Error en el servidor";
+          this.mensaje = 'Error en el servidor';
         }
 
         this.esError = true;
-      }
+      },
     });
   }
 }

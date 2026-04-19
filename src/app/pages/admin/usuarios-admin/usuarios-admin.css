@@ -1,17 +1,19 @@
 .contenedor {
   margin: 20px;
   display: flex;
+  flex-direction: column;
   gap: 20px;
   align-items: flex-start;
   justify-content: flex-start;
   width: 80%;
   margin: 20px auto;
-  border: 1px solid #ccc;
+
   border-radius: 5px;
 }
 
 .lista {
   width: 100%;
+  border: 1px solid #ccc;
   padding-top: 20px;
 }
 

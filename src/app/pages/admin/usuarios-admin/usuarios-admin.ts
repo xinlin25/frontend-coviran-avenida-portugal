@@ -76,27 +76,56 @@ export class UsuariosAdmin implements OnInit {
   guardarCambios() {
     if (!this.usuarioEditando) return;
 
-    this.usuarioService.actualizarUsuario(this.usuarioEditando.id, this.usuarioEditando).subscribe({
-      next: () => {
-        this.usuarioSeleccionado = { ...this.usuarioEditando } as Usuario;
-        this.modoEdicion = false;
+    if (this.usuarioEditando.id === 0) {
+      this.usuarioService.crearUsuario(this.usuarioEditando).subscribe({
+        next: () => {
+          this.modoEdicion = false;
+          this.cargarUsuarios();
 
-        this.cargarUsuarios();
+          const modal = document.getElementById('usuarioModal');
+          if (modal) {
+            (window as any).bootstrap.Modal.getInstance(modal)?.hide();
+          }
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Error al crear usuario');
+        },
+      });
+    } else {
+      this.usuarioService
+        .actualizarUsuario(this.usuarioEditando.id, this.usuarioEditando)
+        .subscribe({
+          next: () => {
+            this.usuarioSeleccionado = { ...this.usuarioEditando } as Usuario;
+            this.modoEdicion = false;
 
-        const modal = document.getElementById('usuarioModal');
-        if (modal) {
-          (window as any).bootstrap.Modal.getInstance(modal)?.hide();
-        }
-      },
-      error: (err) => {
-        console.error(err);
+            this.cargarUsuarios();
 
-        if (err.status === 403 || err.status === 401) {
-          alert('No tienes permisos o sesión expirada');
-        } else {
-          alert('Error al guardar usuario');
-        }
-      },
-    });
+            const modal = document.getElementById('usuarioModal');
+            if (modal) {
+              (window as any).bootstrap.Modal.getInstance(modal)?.hide();
+            }
+          },
+          error: (err) => {
+            console.error(err);
+            alert('Error al guardar usuario');
+          },
+        });
+    }
+  }
+
+  nuevoUsuario() {
+    this.modoEdicion = true;
+
+    this.usuarioEditando = {
+      id: 0,
+      nombreCompleto: '',
+      correo: '',
+      tlf: '',
+      direccion: '',
+      rol: 'CLIENTE',
+      enabled: true,
+    } as Usuario;
   }
 }

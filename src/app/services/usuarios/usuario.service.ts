@@ -6,7 +6,7 @@ import { Usuario } from '../../models/usuario';
   providedIn: 'root',
 })
 export class UsuarioService {
-  private apiURL = 'https://localhost:8443/usuarios';
+  private apiURL = 'https://backend-coviran.onrender.com/usuarios';
 
   constructor(private http: HttpClient) {}
 
@@ -29,6 +29,18 @@ export class UsuarioService {
       direccion: data.direccion,
       rol: data.rol,
       enabled: data.enabled,
+    });
+  }
+
+  crearUsuario(data: any) {
+    return this.http.post(this.apiURL, {
+      nombreCompleto: data.nombreCompleto,
+      correo: data.correo,
+      tlf: data.tlf,
+      direccion: data.direccion,
+      rol: data.rol,
+      enabled: data.enabled,
+      password: data.password,
     });
   }
 }
