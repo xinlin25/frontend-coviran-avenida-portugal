@@ -1,25 +1,24 @@
 <div class="contenedor">
-    <div class="contenido">
-        <img src="/img/formularios.jpg" alt="Imagen Frutería Covirán">
-    </div>
+  <div class="contenido">
+    <img src="/img/formularios.jpg" alt="Imagen Frutería Covirán" />
+  </div>
 
-    <div class="contenido formulario">
-        <h1>Iniciar Sesión</h1>
-        <a routerLink="/registro" class="registro">o Crear Cuenta</a>
+  <div class="contenido formulario">
+    <h1>Iniciar Sesión</h1>
+    <a routerLink="/registro" class="registro">o Crear Cuenta</a>
 
-        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-            <input type="email" formControlName="correo" placeholder="Correo electrónico*">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <input type="email" formControlName="correo" placeholder="Correo electrónico*" />
 
-            <input type="password" formControlName="password" placeholder="Contraseña*">
+      <input type="password" formControlName="password" placeholder="Contraseña*" />
 
-            <a routerLink="/recuperar-contraseña" class="password">¿Has olvidado la contraseña?</a>
+      <a routerLink="/recuperar-contraseña" class="password">¿Has olvidado la contraseña?</a>
 
-            @if (mensaje) {
-                <p [class.success]="!esError" [class.error]="esError">{{ mensaje }}</p>
-            }
-            
-            <button type="submit" [disabled]="loginForm.invalid">Continuar</button>
-        </form>
+      @if (mensaje) {
+        <p [class.success]="!esError" [class.error]="esError">{{ mensaje }}</p>
+      }
 
-    </div>
+      <button type="submit" [disabled]="loginForm.invalid">Continuar</button>
+    </form>
+  </div>
 </div>
