@@ -30,3 +30,17 @@
 .item:hover {
   background-color: #f0f0f0;
 }
+
+.btn {
+  color: white;
+}
+
+.modal-body div {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body input,
+.modal-body select {
+  margin-bottom: 10px;
+}

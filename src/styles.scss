@@ -1,13 +1,13 @@
-@import 'bootstrap/dist/css/bootstrap.min.css';
-@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import 'bootstrap/scss/functions';
+@import './styles/custom-variables';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/bootstrap';
 
 :root {
-  --verde: #008F35;
-  --verde-claro: #D9EEE1;
+  --verde: #008f35;
+  --verde-claro: #d9eee1;
   --verde-oscuro: #005620;
-    
-  --rojo: #E1001A;
-
+  --rojo: #e1001a;
   --gris-claro: #d9d9d935;
 }
 
@@ -20,7 +20,7 @@
 
 body {
   margin: 0;
-  padding: 0; 
+  padding: 0;
 }
 
 a {
