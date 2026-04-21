@@ -8,11 +8,14 @@ import { RouterLink } from '@angular/router';
   styleUrl: './loc-con.css',
 })
 export class LocCon {
+  mapLoading = true;
+
+  onMapLoad() {
+    this.mapLoading = false;
+  }
+
   buscar(texto: string) {
     const busqueda = encodeURIComponent(texto);
-    window.open (
-      `https://www.google.com/search?q=${busqueda}`,
-      '_blank'
-    );
+    window.open(`https://www.google.com/search?q=${busqueda}`, '_blank');
   }
 }
