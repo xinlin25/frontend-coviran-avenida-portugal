@@ -77,9 +77,49 @@ export class UsuariosAdmin implements OnInit {
     if (!this.usuarioEditando) return;
 
     if (this.usuarioEditando.id === 0) {
-      this.usuarioService.crearUsuario(this.usuarioEditando).subscribe({
+      if (!this.usuarioEditando.password || this.usuarioEditando.password.trim() === '') {
+        alert('La contraseña es obligatoria');
+        return;
+      }
+
+      const usuarioCrear = {
+        nombreCompleto: this.usuarioEditando.nombreCompleto,
+        correo: this.usuarioEditando.correo,
+        password: this.usuarioEditando.password,
+        tlf: this.usuarioEditando.tlf,
+        direccion: this.usuarioEditando.direccion,
+        rol: this.usuarioEditando.rol,
+        enabled: this.usuarioEditando.enabled,
+      };
+
+      this.usuarioService.crearUsuario(usuarioCrear).subscribe({
         next: () => {
           this.modoEdicion = false;
+          this.cargarUsuarios();
+
+          const modal = document.getElementById('usuarioModal');
+          if (modal) (window as any).bootstrap.Modal.getInstance(modal)?.hide();
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Error al crear usuario');
+        },
+      });
+    } else {
+      const usuarioActualizar = {
+        nombreCompleto: this.usuarioEditando.nombreCompleto,
+        correo: this.usuarioEditando.correo,
+        tlf: this.usuarioEditando.tlf,
+        direccion: this.usuarioEditando.direccion,
+        rol: this.usuarioEditando.rol,
+        enabled: this.usuarioEditando.enabled,
+      };
+
+      this.usuarioService.actualizarUsuario(this.usuarioEditando.id, usuarioActualizar).subscribe({
+        next: () => {
+          this.usuarioSeleccionado = { ...this.usuarioEditando } as Usuario;
+          this.modoEdicion = false;
+
           this.cargarUsuarios();
 
           const modal = document.getElementById('usuarioModal');
@@ -88,30 +128,13 @@ export class UsuariosAdmin implements OnInit {
           }
         },
         error: (err) => {
-          console.error(err);
+          console.error('ERROR COMPLETO:', err);
+          console.error('STATUS:', err.status);
+          console.error('BODY:', err.error);
+
           alert('Error al crear usuario');
         },
       });
-    } else {
-      this.usuarioService
-        .actualizarUsuario(this.usuarioEditando.id, this.usuarioEditando)
-        .subscribe({
-          next: () => {
-            this.usuarioSeleccionado = { ...this.usuarioEditando } as Usuario;
-            this.modoEdicion = false;
-
-            this.cargarUsuarios();
-
-            const modal = document.getElementById('usuarioModal');
-            if (modal) {
-              (window as any).bootstrap.Modal.getInstance(modal)?.hide();
-            }
-          },
-          error: (err) => {
-            console.error(err);
-            alert('Error al guardar usuario');
-          },
-        });
     }
   }
 
@@ -122,10 +145,17 @@ export class UsuariosAdmin implements OnInit {
       id: 0,
       nombreCompleto: '',
       correo: '',
+      password: '',
       tlf: '',
       direccion: '',
       rol: 'CLIENTE',
       enabled: true,
     } as Usuario;
+  }
+
+  cerrarModal() {
+    this.usuarioEditando = null;
+    this.usuarioSeleccionado = null;
+    this.modoEdicion = false;
   }
 }

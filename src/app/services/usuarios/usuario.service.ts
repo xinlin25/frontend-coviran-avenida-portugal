@@ -22,7 +22,7 @@ export class UsuarioService {
     return this.http.put(`${this.apiURL}/${id}/toggle-activo`, {});
   }
 
-  actualizarUsuario(id: number, data: Usuario) {
+  actualizarUsuario(id: number, data: Partial<Usuario>) {
     return this.http.put(`${this.apiURL}/${id}`, {
       nombreCompleto: data.nombreCompleto,
       tlf: data.tlf,
@@ -32,7 +32,7 @@ export class UsuarioService {
     });
   }
 
-  crearUsuario(data: any) {
+  crearUsuario(data: Partial<Usuario>) {
     return this.http.post(this.apiURL, {
       nombreCompleto: data.nombreCompleto,
       correo: data.correo,

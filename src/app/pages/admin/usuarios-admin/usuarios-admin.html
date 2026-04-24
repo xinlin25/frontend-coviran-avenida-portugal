@@ -28,7 +28,7 @@
 </div>
 
 <!-- MODAL -->
-<div class="modal fade" id="usuarioModal" tabindex="-1">
+<div class="modal fade" id="usuarioModal" tabindex="-1" (hidden.bs.modal)="cerrarModal()">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -37,84 +37,126 @@
       </div>
 
       @if (usuarioEditando) {
-        <div class="modal-body">
-          <!-- NOMBRE -->
-          <div>
-            <label>Nombre</label>
-            @if (modoEdicion) {
-              <input type="text" [(ngModel)]="usuarioEditando.nombreCompleto" />
-            } @else {
-              <p>{{ usuarioEditando.nombreCompleto }}</p>
+        <form #formUsuario="ngForm">
+          <div class="modal-body">
+            <!-- NOMBRE -->
+            <div>
+              <label>Nombre Completo</label>
+              @if (modoEdicion) {
+                <input
+                  type="text"
+                  name="nombreCompleto"
+                  [(ngModel)]="usuarioEditando.nombreCompleto"
+                  required
+                />
+              } @else {
+                <p>{{ usuarioEditando.nombreCompleto }}</p>
+              }
+            </div>
+
+            <!-- CORREO -->
+            <div>
+              <label>Correo</label>
+              @if (modoEdicion) {
+                <input type="email" name="correo" [(ngModel)]="usuarioEditando.correo" required />
+              } @else {
+                <p>{{ usuarioEditando.correo }}</p>
+              }
+            </div>
+
+            <!-- CONTRASEÑA -->
+            @if (modoEdicion && usuarioEditando?.id === 0) {
+              <div>
+                <label>Contraseña</label>
+                <input
+                  type="password"
+                  name="password"
+                  [(ngModel)]="usuarioEditando.password"
+                  required
+                />
+              </div>
             }
-          </div>
 
-          <!-- CORREO -->
-          <div>
-            <label>Correo</label>
-            <p>{{ usuarioEditando.correo }}</p>
-          </div>
+            <!-- TELÉFONO -->
+            <div>
+              <label>Teléfono</label>
+              @if (modoEdicion) {
+                <input type="text" name="tlf" [(ngModel)]="usuarioEditando.tlf" required />
+              } @else {
+                <p>{{ usuarioEditando.tlf }}</p>
+              }
+            </div>
 
-          <!-- TELÉFONO -->
-          <div>
-            <label>Teléfono</label>
-            @if (modoEdicion) {
-              <input type="text" [(ngModel)]="usuarioEditando.tlf" />
-            } @else {
-              <p>{{ usuarioEditando.tlf }}</p>
+            <!-- DIRECCIÓN -->
+            <div>
+              <label>Dirección</label>
+              @if (modoEdicion) {
+                <input
+                  type="text"
+                  name="direccion"
+                  [(ngModel)]="usuarioEditando.direccion"
+                  required
+                />
+              } @else {
+                <p>{{ usuarioEditando.direccion }}</p>
+              }
+            </div>
+
+            <!-- ROL -->
+            <div>
+              <label>Rol</label>
+              @if (modoEdicion) {
+                <select name="rol" [(ngModel)]="usuarioEditando.rol" required>
+                  <option value="CLIENTE">CLIENTE</option>
+                  <option value="EMPLEADO">EMPLEADO</option>
+                  <option value="ADMIN">ADMIN</option>
+                </select>
+              } @else {
+                <p>{{ usuarioEditando.rol }}</p>
+              }
+            </div>
+
+            <!-- ESTADO -->
+            <div>
+              <label>Estado</label>
+
+              @if (modoEdicion) {
+                <select
+                  name="enabled"
+                  [(ngModel)]="usuarioEditando.enabled"
+                  required
+                  defaultValue="true"
+                >
+                  <option [ngValue]="true">Activo</option>
+                  <option [ngValue]="false">Inactivo</option>
+                </select>
+              } @else {
+                <p>{{ usuarioEditando.enabled ? 'Activo' : 'Inactivo' }}</p>
+              }
+            </div>
+          </div>
+          <div class="modal-footer">
+            @if (!modoEdicion) {
+              <button class="btn btn-primary" type="button" (click)="modoEdicion = true">
+                Editar
+              </button>
             }
-          </div>
-
-          <!-- DIRECCIÓN -->
-          <div>
-            <label>Dirección</label>
-            @if (modoEdicion) {
-              <input type="text" [(ngModel)]="usuarioEditando.direccion" />
-            } @else {
-              <p>{{ usuarioEditando.direccion }}</p>
-            }
-          </div>
-
-          <!-- ROL -->
-          <div>
-            <label>Rol</label>
-            @if (modoEdicion) {
-              <select [(ngModel)]="usuarioEditando.rol">
-                <option value="CLIENTE">CLIENTE</option>
-                <option value="EMPLEADO">EMPLEADO</option>
-                <option value="ADMIN">ADMIN</option>
-              </select>
-            } @else {
-              <p>{{ usuarioEditando.rol }}</p>
-            }
-          </div>
-
-          <!-- ESTADO -->
-          <div>
-            <label>Estado</label>
 
             @if (modoEdicion) {
-              <select [(ngModel)]="usuarioEditando.enabled">
-                <option [ngValue]="true">Activo</option>
-                <option [ngValue]="false">Inactivo</option>
-              </select>
-            } @else {
-              <p>{{ usuarioEditando.enabled ? 'Activo' : 'Inactivo' }}</p>
+              <button
+                class="btn btn-success"
+                (click)="guardarCambios()"
+                [disabled]="formUsuario.invalid"
+                type="button"
+              >
+                Guardar
+              </button>
             }
+
+            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cerrar</button>
           </div>
-        </div>
+        </form>
       }
-
-      <div class="modal-footer">
-        @if (!modoEdicion) {
-          <button class="btn btn-primary" (click)="modoEdicion = true">Editar</button>
-        }
-
-        @if (modoEdicion) {
-          <button class="btn btn-success" (click)="guardarCambios()">Guardar</button>
-        }
-
-        <button class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-      </div>
     </div>
   </div>
 </div>
