@@ -8,6 +8,15 @@
     >
       + Crear usuario
     </button>
+    <div class="buscador">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Buscar usuario..."
+        [(ngModel)]="busqueda"
+        (input)="onBuscarChange()"
+      />
+    </div>
   </div>
 
   <!-- LISTA -->

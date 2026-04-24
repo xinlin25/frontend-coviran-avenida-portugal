@@ -43,4 +43,8 @@ export class UsuarioService {
       password: data.password,
     });
   }
+
+  buscarUsuarios(query: string) {
+    return this.http.get<Usuario[]>(`${this.apiURL}/buscar?query=${query}`);
+  }
 }

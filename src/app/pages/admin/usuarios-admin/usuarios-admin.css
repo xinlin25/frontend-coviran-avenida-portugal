@@ -44,3 +44,9 @@
 .modal-body select {
   margin-bottom: 10px;
 }
+
+.fila {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}

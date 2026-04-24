@@ -4,6 +4,8 @@ import { UsuarioService } from '../../../services/usuarios/usuario.service';
 import { Usuario } from '../../../models/usuario';
 import { ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { debounceTime } from 'rxjs/operators';
 
 @Component({
   selector: 'app-usuarios-admin',
@@ -16,6 +18,8 @@ export class UsuariosAdmin implements OnInit {
   usuarioSeleccionado: Usuario | null = null;
   modoEdicion: boolean = false;
   usuarioEditando: Usuario | null = null;
+  busqueda: string = '';
+  private busquedaSubject = new Subject<string>();
 
   constructor(
     private usuarioService: UsuarioService,
@@ -24,6 +28,10 @@ export class UsuariosAdmin implements OnInit {
 
   ngOnInit(): void {
     this.cargarUsuarios();
+
+    this.busquedaSubject.pipe(debounceTime(500)).subscribe((texto) => {
+      this.buscar(texto);
+    });
   }
 
   cargarUsuarios() {
@@ -157,5 +165,25 @@ export class UsuariosAdmin implements OnInit {
     this.usuarioEditando = null;
     this.usuarioSeleccionado = null;
     this.modoEdicion = false;
+  }
+
+  buscar(texto: string) {
+    if (!texto || texto.trim() === '') {
+      this.cargarUsuarios();
+      return;
+    }
+
+    this.usuarioService.buscarUsuarios(texto).subscribe({
+      next: (data) => {
+        this.usuarios = data;
+      },
+      error: (err) => {
+        console.error('Error en búsqueda:', err);
+      },
+    });
+  }
+
+  onBuscarChange() {
+    this.busquedaSubject.next(this.busqueda);
   }
 }
