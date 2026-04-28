@@ -1,0 +1,14 @@
+{
+  "cookies": [],
+  "origins": [
+    {
+      "origin": "https://frontend-coviran-avenida-portugal.vercel.app",
+      "localStorage": [
+        {
+          "name": "token",
+          "value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c3VhcmlvMUBkZW1vLmNvbSIsInJvbCI6IkNMSUVOVEUiLCJpYXQiOjE3NzczOTQwNTIsImV4cCI6MTc3NzM5NzY1Mn0.uN1nmp6outjT5zPA923gF9LjnJ5Z4ewV7wEDxfUx-1o"
+        }
+      ]
+    }
+  ]
+}
