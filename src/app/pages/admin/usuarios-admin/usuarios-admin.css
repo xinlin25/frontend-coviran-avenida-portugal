@@ -17,6 +17,11 @@
   padding-top: 20px;
 }
 
+.inactivo {
+  color: red;
+  margin-left: 10px;
+}
+
 .titulo {
   padding-left: 10px;
 }

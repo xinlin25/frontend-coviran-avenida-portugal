@@ -136,10 +136,6 @@ export class UsuariosAdmin implements OnInit {
           }
         },
         error: (err) => {
-          console.error('ERROR COMPLETO:', err);
-          console.error('STATUS:', err.status);
-          console.error('BODY:', err.error);
-
           alert('Error al crear usuario');
         },
       });

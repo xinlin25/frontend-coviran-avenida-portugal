@@ -1,1 +1,170 @@
-<p>productos-admin works!</p>
+<div class="contenedor">
+  <div class="fila">
+    <button
+      class="btn btn-success"
+      (click)="nuevoProducto()"
+      data-bs-toggle="modal"
+      data-bs-target="#productoModal"
+    >
+      + Crear producto
+    </button>
+
+    <div class="buscador">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Buscar producto..."
+        [(ngModel)]="busqueda"
+        (input)="onBuscarChange()"
+      />
+    </div>
+  </div>
+
+  <!-- LISTA -->
+  <div class="lista">
+    <h2 class="titulo">Productos</h2>
+
+    @for (p of productos; track p.id) {
+      <div
+        class="item"
+        (click)="abrirModal(p)"
+        data-bs-toggle="modal"
+        data-bs-target="#productoModal"
+      >
+        {{ p.nombre }} - {{ p.marca }}
+
+        @if (!p.activo) {
+          <span class="inactivo">(INACTIVO)</span>
+        }
+      </div>
+    }
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal fade" id="productoModal" tabindex="-1" (hidden.bs.modal)="cerrarModal()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalle Producto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      @if (productoEditando) {
+        <form #formProducto="ngForm">
+          <div class="modal-body">
+            <!-- NOMBRE -->
+            <div>
+              <label>Nombre</label>
+              @if (modoEdicion) {
+                <input type="text" name="nombre" [(ngModel)]="productoEditando.nombre" required />
+              } @else {
+                <p>{{ productoEditando.nombre }}</p>
+              }
+            </div>
+
+            <!-- DESCRIPCIÓN -->
+            <div>
+              <label>Descripción</label>
+              @if (modoEdicion) {
+                <input
+                  type="text"
+                  name="descripcion"
+                  [(ngModel)]="productoEditando.descripcion"
+                  required
+                />
+              } @else {
+                <p>{{ productoEditando.descripcion }}</p>
+              }
+            </div>
+
+            <!-- PRECIO -->
+            <div>
+              <label>Precio</label>
+              @if (modoEdicion) {
+                <input type="number" name="precio" [(ngModel)]="productoEditando.precio" required />
+              } @else {
+                <p>{{ productoEditando.precio }} €</p>
+              }
+            </div>
+
+            <!-- MARCA -->
+            <div>
+              <label>Marca</label>
+              @if (modoEdicion) {
+                <input type="text" name="marca" [(ngModel)]="productoEditando.marca" required />
+              } @else {
+                <p>{{ productoEditando.marca }}</p>
+              }
+            </div>
+
+            <!-- STOCK -->
+            <div>
+              <label>Stock</label>
+              @if (modoEdicion) {
+                <input type="number" name="stock" [(ngModel)]="productoEditando.stock" required />
+              } @else {
+                <p>{{ productoEditando.stock }}</p>
+              }
+            </div>
+
+            <!-- CATEGORÍA -->
+            <div>
+              <label>Categoría</label>
+              @if (modoEdicion) {
+                <select name="categoriaId" [(ngModel)]="productoEditando.categoriaId" required>
+                  <option [ngValue]="null">Selecciona una categoría</option>
+
+                  @for (c of categorias; track c.id) {
+                    <option [ngValue]="c.id">
+                      {{ c.nombre }}
+                    </option>
+                  }
+                </select>
+              } @else {
+                <p>{{ productoEditando.categoria?.nombre || 'Sin categoría' }}</p>
+              }
+            </div>
+
+            <!-- ACTIVO -->
+            <div>
+              <label>Estado</label>
+
+              @if (modoEdicion) {
+                <select name="activo" [(ngModel)]="productoEditando.activo" required>
+                  <option [ngValue]="true">Activo</option>
+                  <option [ngValue]="false">Inactivo</option>
+                </select>
+              } @else {
+                <p>
+                  {{ productoEditando.activo ? 'Activo' : 'Inactivo' }}
+                </p>
+              }
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            @if (!modoEdicion) {
+              <button class="btn btn-primary" type="button" (click)="modoEdicion = true">
+                Editar
+              </button>
+            }
+
+            @if (modoEdicion) {
+              <button
+                class="btn btn-success"
+                (click)="guardarCambios()"
+                [disabled]="formProducto.invalid"
+                type="button"
+              >
+                Guardar
+              </button>
+            }
+
+            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cerrar</button>
+          </div>
+        </form>
+      }
+    </div>
+  </div>
+</div>

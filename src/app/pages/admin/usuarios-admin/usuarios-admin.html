@@ -31,6 +31,9 @@
         data-bs-target="#usuarioModal"
       >
         {{ u.nombreCompleto }} - {{ u.rol }}
+        @if (!u.enabled) {
+          <span class="inactivo">(INACTIVO)</span>
+        }
       </div>
     }
   </div>
