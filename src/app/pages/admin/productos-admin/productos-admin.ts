@@ -7,6 +7,7 @@ import { ProductoService } from '../../../services/productos/productos.service';
 
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
+import { Categoria } from '../../../models/categoria';
 
 @Component({
   selector: 'app-productos-admin',
@@ -21,7 +22,8 @@ export class ProductosAdmin implements OnInit {
   productoSeleccionado: Producto | null = null;
   modoEdicion: boolean = false;
   productoEditando: any = null;
-  categorias: any[] = [];
+  categorias: Categoria[] = [];
+  imagenSeleccionada: File | null = null;
 
   private busquedaSubject = new Subject<string>();
 
@@ -93,7 +95,19 @@ export class ProductosAdmin implements OnInit {
       marca: '',
       stock: 0,
       categoriaId: null,
+      activo: true,
+      imagenUrl: '',
+      enOferta: false,
+      precioOferta: 0,
     };
+  }
+
+  onImagenSeleccionada(event: any) {
+    const archivo = event.target.files[0];
+
+    if (archivo) {
+      this.imagenSeleccionada = archivo;
+    }
   }
 
   cerrarModal() {
@@ -106,16 +120,26 @@ export class ProductosAdmin implements OnInit {
     if (!this.productoEditando) return;
 
     if (this.productoEditando.id === 0) {
-      const productoCrear = {
-        nombre: this.productoEditando.nombre,
-        descripcion: this.productoEditando.descripcion,
-        precio: this.productoEditando.precio,
-        marca: this.productoEditando.marca,
-        stock: this.productoEditando.stock,
-        categoriaId: this.productoEditando.categoriaId,
-      };
+      const formData = new FormData();
 
-      this.productoService.crearProducto(productoCrear).subscribe({
+      formData.append('nombre', this.productoEditando.nombre);
+      formData.append('descripcion', this.productoEditando.descripcion);
+      formData.append('precio', this.productoEditando.precio.toString());
+      formData.append('marca', this.productoEditando.marca);
+      formData.append('stock', this.productoEditando.stock.toString());
+      formData.append('categoriaId', this.productoEditando.categoriaId.toString());
+
+      formData.append('activo', this.productoEditando.activo.toString());
+
+      formData.append('enOferta', this.productoEditando.enOferta.toString());
+
+      formData.append('precioOferta', this.productoEditando.precioOferta.toString());
+
+      if (this.imagenSeleccionada) {
+        formData.append('imagen', this.imagenSeleccionada);
+      }
+
+      this.productoService.crearProducto(formData).subscribe({
         next: () => {
           this.modoEdicion = false;
           this.cargarProductos();
@@ -129,35 +153,35 @@ export class ProductosAdmin implements OnInit {
         },
       });
     } else {
-      const productoActualizar = {
-        nombre: this.productoEditando.nombre,
-        descripcion: this.productoEditando.descripcion,
-        precio: this.productoEditando.precio,
-        marca: this.productoEditando.marca,
-        stock: this.productoEditando.stock,
-        categoriaId: this.productoEditando.categoriaId,
-        activo: this.productoEditando.activo,
-      };
+      const formData = new FormData();
+      formData.append('nombre', this.productoEditando.nombre);
+      formData.append('descripcion', this.productoEditando.descripcion);
+      formData.append('precio', this.productoEditando.precio.toString());
+      formData.append('marca', this.productoEditando.marca);
+      formData.append('stock', this.productoEditando.stock.toString());
+      formData.append('categoriaId', this.productoEditando.categoriaId.toString());
+      formData.append('activo', this.productoEditando.activo.toString());
+      formData.append('enOferta', this.productoEditando.enOferta.toString());
+      formData.append('precioOferta', this.productoEditando.precioOferta.toString());
+      if (this.imagenSeleccionada) formData.append('imagen', this.imagenSeleccionada);
 
-      this.productoService
-        .actualizarProducto(this.productoEditando.id, productoActualizar)
-        .subscribe({
-          next: () => {
-            this.productoSeleccionado = { ...this.productoEditando } as Producto;
-            this.modoEdicion = false;
+      this.productoService.actualizarProducto(this.productoEditando.id, formData).subscribe({
+        next: () => {
+          this.productoSeleccionado = { ...this.productoEditando } as Producto;
+          this.modoEdicion = false;
 
-            this.cargarProductos();
+          this.cargarProductos();
 
-            const modal = document.getElementById('productoModal');
-            if (modal) {
-              (window as any).bootstrap.Modal.getInstance(modal)?.hide();
-            }
-          },
-          error: (err) => {
-            console.error(err);
-            alert('Error al actualizar producto');
-          },
-        });
+          const modal = document.getElementById('productoModal');
+          if (modal) {
+            (window as any).bootstrap.Modal.getInstance(modal)?.hide();
+          }
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Error al actualizar producto');
+        },
+      });
     }
   }
 }

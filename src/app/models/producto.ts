@@ -6,6 +6,10 @@ export interface Producto {
   marca: string;
   stock: number;
   activo: boolean;
+  imagenUrl?: string;
+  enOferta?: boolean;
+  precioOferta?: number;
+  categoriaId?: number | null;
 
   categoria: {
     id: number;

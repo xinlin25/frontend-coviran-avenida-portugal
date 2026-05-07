@@ -98,6 +98,18 @@
               }
             </div>
 
+            <!-- IMAGEN -->
+            <div>
+              <label>Imagen</label>
+
+              @if (modoEdicion) {
+                <input type="file" accept="image/*" (change)="onImagenSeleccionada($event)" />
+              }
+              @if (productoEditando.imagenUrl) {
+                <img [src]="productoEditando.imagenUrl" alt="producto" class="img" />
+              }
+            </div>
+
             <!-- STOCK -->
             <div>
               <label>Stock</label>
@@ -138,6 +150,42 @@
               } @else {
                 <p>
                   {{ productoEditando.activo ? 'Activo' : 'Inactivo' }}
+                </p>
+              }
+            </div>
+
+            <!-- EN OFERTA -->
+            <div>
+              <label>¿En oferta?</label>
+
+              @if (modoEdicion) {
+                <select name="enOferta" [(ngModel)]="productoEditando.enOferta">
+                  <option [ngValue]="false">No</option>
+                  <option [ngValue]="true">Sí</option>
+                </select>
+              } @else {
+                <p>{{ productoEditando.enOferta ? 'Sí' : 'No' }}</p>
+              }
+            </div>
+
+            <!-- PRECIO DE OFERTA -->
+            <div>
+              <label>Precio oferta</label>
+
+              @if (modoEdicion) {
+                <input
+                  type="number"
+                  step="0.01"
+                  name="precioOferta"
+                  [(ngModel)]="productoEditando.precioOferta"
+                />
+              } @else {
+                <p>
+                  {{
+                    productoEditando.precioOferta
+                      ? productoEditando.precioOferta + ' €'
+                      : 'Sin oferta'
+                  }}
                 </p>
               }
             </div>
