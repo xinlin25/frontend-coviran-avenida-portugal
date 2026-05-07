@@ -1,1 +1,129 @@
-<p>categorias-admin works!</p>
+<div class="contenedor">
+  <div class="fila">
+    <button
+      class="btn btn-success"
+      (click)="nuevaCategoria()"
+      data-bs-toggle="modal"
+      data-bs-target="#categoriaModal"
+    >
+      + Crear categoría
+    </button>
+
+    <div class="buscador">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Buscar categoría..."
+        [(ngModel)]="busqueda"
+        (input)="onBuscarChange()"
+      />
+    </div>
+  </div>
+
+  <!-- LISTA -->
+  <div class="lista">
+    <h2 class="titulo">Categorías</h2>
+
+    @for (c of categorias; track c.id) {
+      <div
+        class="item"
+        (click)="abrirModal(c)"
+        data-bs-toggle="modal"
+        data-bs-target="#categoriaModal"
+      >
+        {{ c.nombre }}
+
+        @if (!c.activo) {
+          <span class="inactivo">(INACTIVO)</span>
+        }
+      </div>
+    }
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal fade" id="categoriaModal" tabindex="-1" (hidden.bs.modal)="cerrarModal()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Detalle Categoría</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      @if (categoriaEditando) {
+        <form #formCategoria="ngForm">
+          <div class="modal-body">
+            <!-- NOMBRE -->
+            <div>
+              <label>Nombre</label>
+              @if (modoEdicion) {
+                <input type="text" name="nombre" [(ngModel)]="categoriaEditando.nombre" required />
+              } @else {
+                <p>{{ categoriaEditando.nombre }}</p>
+              }
+            </div>
+
+            <!-- CATEGORÍA PADRE -->
+            <div>
+              <label>Categoría padre</label>
+              @if (modoEdicion) {
+                <select name="categoriaPadreId" [(ngModel)]="categoriaEditando.categoriaPadreId">
+                  <option [ngValue]="null">Sin categoría padre</option>
+
+                  @for (c of categorias; track c.id) {
+                    @if (c.id !== categoriaEditando.id) {
+                      <option [ngValue]="c.id">
+                        {{ c.nombre }}
+                      </option>
+                    }
+                  }
+                </select>
+              } @else {
+                <p>
+                  {{ categoriaEditando.parent?.nombre || 'Sin categoría padre' }}
+                </p>
+              }
+            </div>
+
+            <!-- ESTADO -->
+            <div>
+              <label>Estado</label>
+
+              @if (modoEdicion) {
+                <select name="activo" [(ngModel)]="categoriaEditando.activo" required>
+                  <option [ngValue]="true">Activo</option>
+                  <option [ngValue]="false">Inactivo</option>
+                </select>
+              } @else {
+                <p>
+                  {{ categoriaEditando.activo ? 'Activo' : 'Inactivo' }}
+                </p>
+              }
+            </div>
+          </div>
+
+          <div class="modal-footer">
+            @if (!modoEdicion) {
+              <button class="btn btn-primary" type="button" (click)="modoEdicion = true">
+                Editar
+              </button>
+            }
+
+            @if (modoEdicion) {
+              <button
+                class="btn btn-success"
+                (click)="guardarCambios()"
+                [disabled]="formCategoria.invalid"
+                type="button"
+              >
+                Guardar
+              </button>
+            }
+
+            <button class="btn btn-secondary" data-bs-dismiss="modal" type="button">Cerrar</button>
+          </div>
+        </form>
+      }
+    </div>
+  </div>
+</div>

@@ -30,7 +30,7 @@ export class ProductosAdmin implements OnInit {
   ngOnInit(): void {
     this.cargarProductos();
     this.cargarCategorias();
-    this.busquedaSubject.pipe(debounceTime(300)).subscribe((texto) => {
+    this.busquedaSubject.pipe(debounceTime(500)).subscribe((texto) => {
       this.buscar(texto);
     });
   }
