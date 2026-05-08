@@ -24,6 +24,7 @@ export class ProductosAdmin implements OnInit {
   productoEditando: any = null;
   categorias: Categoria[] = [];
   imagenSeleccionada: File | null = null;
+  destacado?: boolean;
 
   private busquedaSubject = new Subject<string>();
 
@@ -81,6 +82,7 @@ export class ProductosAdmin implements OnInit {
       ...producto,
       categoriaId: producto.categoria?.id || null,
       activo: producto.activo !== undefined ? producto.activo : true,
+      destacado: producto.destacado !== undefined ? producto.destacado : false,
     };
   }
 
@@ -99,6 +101,7 @@ export class ProductosAdmin implements OnInit {
       imagenUrl: '',
       enOferta: false,
       precioOferta: 0,
+      destacado: false,
     };
   }
 
@@ -134,7 +137,7 @@ export class ProductosAdmin implements OnInit {
       formData.append('enOferta', this.productoEditando.enOferta.toString());
 
       formData.append('precioOferta', this.productoEditando.precioOferta.toString());
-
+      formData.append('destacado', this.productoEditando.destacado.toString());
       if (this.imagenSeleccionada) {
         formData.append('imagen', this.imagenSeleccionada);
       }
@@ -163,6 +166,7 @@ export class ProductosAdmin implements OnInit {
       formData.append('activo', this.productoEditando.activo.toString());
       formData.append('enOferta', this.productoEditando.enOferta.toString());
       formData.append('precioOferta', this.productoEditando.precioOferta.toString());
+      formData.append('destacado', this.productoEditando.destacado.toString());
       if (this.imagenSeleccionada) formData.append('imagen', this.imagenSeleccionada);
 
       this.productoService.actualizarProducto(this.productoEditando.id, formData).subscribe({

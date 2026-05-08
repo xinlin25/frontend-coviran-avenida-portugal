@@ -171,7 +171,6 @@
             <!-- PRECIO DE OFERTA -->
             <div>
               <label>Precio oferta</label>
-
               @if (modoEdicion) {
                 <input
                   type="number"
@@ -186,6 +185,21 @@
                       ? productoEditando.precioOferta + ' €'
                       : 'Sin oferta'
                   }}
+                </p>
+              }
+            </div>
+            <!-- DESTACADO -->
+            <!-- DESTACADO -->
+            <div>
+              <label>¿Producto destacado?</label>
+              @if (modoEdicion) {
+                <select name="destacado" [(ngModel)]="productoEditando.destacado">
+                  <option [ngValue]="false">No</option>
+                  <option [ngValue]="true">Sí</option>
+                </select>
+              } @else {
+                <p>
+                  {{ productoEditando.destacado ? 'Sí' : 'No' }}
                 </p>
               }
             </div>

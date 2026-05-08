@@ -1,43 +1,38 @@
 <div class="container-fluid">
   <div class="row">
-    <!-- Sidebar vertical -->
-    <nav class="col-3 col-md-2 d-md-block bg-light sidebar min-vh-100">
+    <!-- SIDEBAR -->
+    <nav class="col-3 col-md-2 bg-light sidebar min-vh-100">
       <div class="position-sticky pt-3">
-
         <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">
-              Inicio
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Categoría 1
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Categoría 2
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Categoría 3
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Contacto
-            </a>
-          </li>
+          @for (categoria of categorias; track categoria.id) {
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/categorias', categoria.id]">
+                {{ categoria.nombre }}
+              </a>
+            </li>
+          }
         </ul>
-
       </div>
     </nav>
 
-    <!-- Contenido principal -->
+    <!-- CONTENIDO -->
     <main class="col-9 ms-sm-auto px-md-4">
-      <h1>Nombre de Categoría</h1>
-      <h4>Nombre de subcategoría.</h4>
-    </main>4  </div>
+      <div class="productos-grid">
+        @for (producto of productos; track producto.id) {
+          <app-tarjeta
+            [id]="producto.id"
+            [titulo]="producto.nombre"
+            [descripcion]="producto.descripcion"
+            [precio]="producto.enOferta ? (producto.precioOferta ?? 0) : producto.precio"
+            [precioOriginal]="producto.enOferta ? producto.precio : undefined"
+            [enOferta]="producto.enOferta ?? false"
+            [imagen]="producto.imagenUrl"
+            unidad="ud"
+            (agregar)="agregarProducto()"
+          >
+          </app-tarjeta>
+        }
+      </div>
+    </main>
+  </div>
 </div>

@@ -29,4 +29,16 @@ export class ProductoService {
   getCategorias() {
     return this.http.get<any[]>('https://backend-coviran.onrender.com/categorias');
   }
+
+  getProductosPorCategoria(id: number) {
+    return this.http.get<Producto[]>(`${this.apiURL}/categoria/${id}`);
+  }
+
+  getOfertas() {
+    return this.http.get<Producto[]>(`${this.apiURL}/ofertas`);
+  }
+
+  getDestacados() {
+    return this.http.get<Producto[]>(`${this.apiURL}/destacados`);
+  }
 }

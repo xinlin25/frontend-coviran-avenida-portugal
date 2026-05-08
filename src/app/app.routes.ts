@@ -28,7 +28,8 @@ export const routes: Routes = [
     children: [
       { path: '', component: Inicio },
       { path: 'categorias', component: Categorias },
-      { path: 'detalle-producto', component: DetalleProd },
+      { path: 'categorias/:id', component: Categorias },
+      { path: 'detalle-producto/:id', component: DetalleProd },
       { path: 'localizacion-contacto', component: LocCon },
       { path: 'entrega-devoluciones', component: EntDev },
       { path: 'pedidos', component: Pedidos },

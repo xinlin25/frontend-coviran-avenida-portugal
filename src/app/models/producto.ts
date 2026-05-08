@@ -10,6 +10,7 @@ export interface Producto {
   enOferta?: boolean;
   precioOferta?: number;
   categoriaId?: number | null;
+  destacado?: boolean;
 
   categoria: {
     id: number;

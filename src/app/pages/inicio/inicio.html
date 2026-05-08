@@ -10,34 +10,14 @@
     </div>
 
     <div class="categorias-container">
-      <div class="categoria">
-        <img
-          src="/img/inicio/fruta-verdura.png"
-          alt="categoría fruta y verdura"
-          class="categoria"
-        />
-        <p>Fruta y verdura</p>
-      </div>
-      <div class="categoria">
-        <img src="/img/inicio/panaderia.png" alt="categoría panadería" class="categoria" />
-        <p>Panadería</p>
-      </div>
-      <div class="categoria">
-        <img src="/img/inicio/limpieza.png" alt="categoría limpieza" class="categoria" />
-        <p>Limpieza</p>
-      </div>
-      <div class="categoria">
-        <img src="/img/inicio/bebidas.png" alt="categoría bebidas" class="categoria" />
-        <p>Bebidas</p>
-      </div>
-      <div class="categoria">
-        <img src="/img/inicio/alimentacion.png" alt="categoría alimentación" class="categoria" />
-        <p>Alimentación</p>
-      </div>
-      <div class="categoria">
-        <img src="/img/inicio/higiene.png" alt="categoría higiene" class="categoria" />
-        <p>Higiene</p>
-      </div>
+      @for (categoria of categorias; track categoria.id) {
+        <a class="categoria-link" [routerLink]="['/categorias', categoria.id]">
+          <div class="categoria">
+            <img [src]="getImagenCategoria(categoria.nombre)" [alt]="categoria.nombre" />
+            <p>{{ categoria.nombre }}</p>
+          </div>
+        </a>
+      }
     </div>
   </div>
 
@@ -49,18 +29,47 @@
       </div>
     </div>
     <div class="ofertas-container">
-      <div class="oferta">
+      @for (producto of ofertas; track producto.id) {
         <app-tarjeta
-          titulo="Pastas Coviran"
-          descripcion="Pack 350gr"
-          [precio]="19.99"
-          [precioOriginal]="50.99"
-          [enOferta]="true"
+          [id]="producto.id"
+          [titulo]="producto.nombre"
+          [descripcion]="producto.descripcion"
+          [precio]="producto.enOferta ? (producto.precioOferta ?? 0) : producto.precio"
+          [precioOriginal]="producto.enOferta ? producto.precio : undefined"
+          [enOferta]="producto.enOferta ?? false"
+          [imagen]="producto.imagenUrl"
           unidad="ud"
-          imagen="\img\productos\Galletas\pastas-coviran.png"
           (agregar)="agregarProducto()"
-        ></app-tarjeta>
+        >
+        </app-tarjeta>
+      }
+    </div>
+  </div>
+
+  <div class="contenido">
+    <div class="fila">
+      <h3>Productos destacados</h3>
+
+      <div class="mas">
+        <a routerLink="/categorias">Ver todo</a>
       </div>
+    </div>
+
+    <div class="ofertas-container">
+      @for (producto of destacados; track producto.id) {
+        <app-tarjeta
+          [id]="producto.id"
+          [titulo]="producto.nombre"
+          [descripcion]="producto.descripcion"
+          [precio]="producto.enOferta ? (producto.precioOferta ?? 0) : producto.precio"
+          [precioOriginal]="producto.enOferta ? producto.precio : undefined"
+          [enOferta]="producto.enOferta ?? false"
+          [imagen]="producto.imagenUrl"
+          unidad="ud"
+          (agregar)="agregarProducto()"
+        >
+        </app-tarjeta>
+      }
     </div>
   </div>
 </div>

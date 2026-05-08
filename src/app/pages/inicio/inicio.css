@@ -29,6 +29,14 @@
   justify-content: center;
 }
 
+.categoria-link:hover {
+  color: var(--verde);
+}
+
+.categoria {
+  cursor: pointer;
+}
+
 .categoria img {
   border-radius: 50%;
   width: 150px;
@@ -43,4 +51,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.ofertas-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
