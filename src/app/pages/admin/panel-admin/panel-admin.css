@@ -81,3 +81,9 @@ a:hover {
     padding: 30px 0;
   }
 }
+
+@media (max-width: 550px) {
+  .fila h2 {
+    font-size: 20px;
+  }
+}
