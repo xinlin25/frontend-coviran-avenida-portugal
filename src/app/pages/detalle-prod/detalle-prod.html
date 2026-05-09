@@ -1,1 +1,82 @@
-<p>detalle-prod works!</p>
+@if (producto) {
+  <div class="breadcrumbs">
+    <a routerLink="/"> Inicio </a>
+    @if (producto.categoria?.parent) {
+      <span>></span>
+      <a [routerLink]="['/categorias', producto.categoria?.parent?.id]">
+        {{ producto.categoria?.parent?.nombre }}
+      </a>
+    }
+    <span>></span>
+    <a [routerLink]="['/categorias', producto.categoria?.id]">
+      {{ producto.categoria?.nombre }}
+    </a>
+
+    <span>></span>
+
+    <span class="actual">
+      {{ producto.nombre }}
+    </span>
+  </div>
+  <div class="detalle-container">
+    <!-- IZQUIERDA -->
+    <div class="imagen-container">
+      <img [src]="producto.imagenUrl" [alt]="producto.nombre" class="imagen-producto" />
+    </div>
+
+    <!-- DERECHA -->
+    <div class="info-container">
+      <h1 class="titulo">
+        {{ producto.nombre }}
+      </h1>
+
+      <p class="descripcion">
+        {{ producto.descripcion }}
+      </p>
+
+      <!-- PRECIO -->
+      <div class="precio-container">
+        @if (producto.enOferta) {
+          <div class="precios">
+            <span class="precio-original"> {{ producto.precio.toFixed(2) }}€ </span>
+
+            <span class="precio-oferta"> {{ producto.precioOferta?.toFixed(2) }}€ </span>
+
+            <span class="unidad"> /ud </span>
+          </div>
+        } @else {
+          <div class="precios">
+            <span class="precio-normal"> {{ producto.precio.toFixed(2) }}€ </span>
+
+            <span class="unidad"> /ud </span>
+          </div>
+        }
+      </div>
+
+      <button class="btn-add" (click)="agregarProducto()">Añadir</button>
+    </div>
+  </div>
+
+  @if (productosRelacionados.length > 0) {
+    <div class="relacionados-container">
+      <h2>Productos relacionados</h2>
+
+      <div class="productos-relacionados">
+        @for (producto of productosRelacionados; track producto.id) {
+          <app-tarjeta
+            [id]="producto.id"
+            [titulo]="producto.nombre"
+            [descripcion]="producto.descripcion"
+            [precio]="producto.enOferta ? (producto.precioOferta ?? 0) : producto.precio"
+            [precioOriginal]="producto.enOferta ? producto.precio : undefined"
+            [enOferta]="producto.enOferta ?? false"
+            [imagen]="producto.imagenUrl"
+            unidad="ud"
+            (agregar)="agregarProducto()"
+          >
+          </app-tarjeta>
+        }
+      </div>
+    </div>
+  }
+}

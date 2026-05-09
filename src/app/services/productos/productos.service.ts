@@ -41,4 +41,8 @@ export class ProductoService {
   getDestacados() {
     return this.http.get<Producto[]>(`${this.apiURL}/destacados`);
   }
+
+  getProductoById(id: number) {
+    return this.http.get<Producto>(`${this.apiURL}/${id}`);
+  }
 }

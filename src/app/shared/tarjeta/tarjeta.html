@@ -4,11 +4,11 @@
   <p class="descripcion">{{ descripcion }}</p>
   <p class="precio">
     @if (enOferta && precioOriginal) {
-      <span class="precio-original"> {{ precioOriginal }}€</span>
-      <span class="precio-oferta">{{ precio }}€</span>
+      <span class="precio-original"> {{ precioOriginal | number: '1.2-2' }}€</span>
+      <span class="precio-oferta">{{ precio | number: '1.2-2' }}€</span>
       <span class="unidad">/{{ unidad }}</span>
     } @else {
-      <span class="precio-normal">{{ precio.toFixed(2) }}€</span>
+      <span class="precio-normal">{{ precio | number: '1.2-2' }}€</span>
       <span class="unidad">/{{ unidad }}</span>
     }
   </p>

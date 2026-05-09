@@ -1,3 +1,5 @@
+import { Categoria } from './categoria';
+
 export interface Producto {
   id: number;
   nombre: string;
@@ -11,9 +13,5 @@ export interface Producto {
   precioOferta?: number;
   categoriaId?: number | null;
   destacado?: boolean;
-
-  categoria: {
-    id: number;
-    nombre: string;
-  };
+  categoria?: Categoria;
 }
