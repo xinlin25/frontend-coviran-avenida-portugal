@@ -1,54 +1,20 @@
 <div class="container-fluid">
   <div class="row">
     <!-- SIDEBAR -->
-    <nav class="col-3 col-md-2 bg-light sidebar min-vh-100">
-      <div class="position-sticky pt-3">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/categorias/ofertas']"> Ofertas </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/categorias/destacados']"> Destacados </a>
-          </li>
-          @for (categoria of categorias; track categoria.id) {
-            <li class="nav-item">
-              <!-- PADRE -->
-              <div class="categoria-padre">
-                <a class="nav-link" [routerLink]="['/categorias', categoria.id]">
-                  {{ categoria.nombre }}
-                </a>
-
-                @if (categoria.hijos?.length) {
-                  <button class="btn-toggle" (click)="toggleCategoria(categoria.id)">
-                    @if (categoriasExpandidas.includes(categoria.id)) {
-                      <i class="bi bi-caret-down"></i>
-                    } @else {
-                      <i class="bi bi-caret-right"></i>
-                    }
-                  </button>
-                }
-              </div>
-
-              <!-- HIJOS -->
-              @if (categoriasExpandidas.includes(categoria.id)) {
-                <ul class="subcategorias">
-                  @for (hijo of categoria.hijos; track hijo.id) {
-                    <li>
-                      <a class="nav-link subcategoria-link" [routerLink]="['/categorias', hijo.id]">
-                        {{ hijo.nombre }}
-                      </a>
-                    </li>
-                  }
-                </ul>
-              }
-            </li>
-          }
-        </ul>
-      </div>
-    </nav>
+    <div class="col-3 col-md-2 p-0">
+      <app-menu></app-menu>
+    </div>
 
     <!-- CONTENIDO -->
-    <main class="col-9 ms-sm-auto px-md-4">
+    <main class="col-9 col-md-10 px-md-4">
+      <h1 class="titulo-categoria">
+        {{ tituloPagina }}
+      </h1>
+      @if (subtituloPagina) {
+        <h3 class="subtitulo-categoria">
+          {{ subtituloPagina }}
+        </h3>
+      }
       <div class="productos-grid">
         @for (producto of productos; track producto.id) {
           <app-tarjeta

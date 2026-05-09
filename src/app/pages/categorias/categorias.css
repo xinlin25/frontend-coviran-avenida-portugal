@@ -5,33 +5,13 @@
   padding-top: 20px;
 }
 
-.nav-link {
-  cursor: pointer;
+.titulo-categoria {
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
-.categoria-padre {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.btn-toggle {
-  border: none;
-  background: none;
-  font-size: 20px;
-  cursor: pointer;
-}
-
-.btn-toggle i {
-  font-size: 12px;
-}
-
-.subcategorias {
-  list-style: none;
-  padding-left: 20px;
-}
-
-.subcategoria-link {
-  font-size: 14px;
-  color: gray;
+.subtitulo-categoria {
+  color: var(--verde);
+  margin-top: -15px;
+  margin-bottom: 30px;
 }

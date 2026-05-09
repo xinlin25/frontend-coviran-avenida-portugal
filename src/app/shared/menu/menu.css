@@ -1,0 +1,32 @@
+.nav-link {
+  cursor: pointer;
+}
+
+.categoria-padre {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 20px;
+  align-items: center;
+}
+
+.btn-toggle {
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.btn-toggle i {
+  font-size: 12px;
+}
+
+.subcategorias {
+  list-style: none;
+  padding-left: 20px;
+}
+
+.subcategoria-link {
+  font-size: 14px;
+  color: gray;
+}

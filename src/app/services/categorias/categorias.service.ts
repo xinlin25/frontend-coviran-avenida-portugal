@@ -14,6 +14,10 @@ export class CategoriasService {
     return this.http.get<Categoria[]>(this.apiURL);
   }
 
+  getCategoriaPorId(id: number) {
+    return this.http.get<Categoria>(`${this.apiURL}/${id}`);
+  }
+
   crearCategoria(data: any) {
     return this.http.post(this.apiURL, data);
   }
