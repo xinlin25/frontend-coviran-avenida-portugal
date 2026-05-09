@@ -28,6 +28,8 @@ export const routes: Routes = [
     children: [
       { path: '', component: Inicio },
       { path: 'categorias', component: Categorias },
+      { path: 'categorias/ofertas', component: Categorias },
+      { path: 'categorias/destacados', component: Categorias },
       { path: 'categorias/:id', component: Categorias },
       { path: 'detalle-producto/:id', component: DetalleProd },
       { path: 'localizacion-contacto', component: LocCon },

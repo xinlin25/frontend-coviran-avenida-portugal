@@ -4,6 +4,12 @@
     <nav class="col-3 col-md-2 bg-light sidebar min-vh-100">
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/categorias/ofertas']"> Ofertas </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLink]="['/categorias/destacados']"> Destacados </a>
+          </li>
           @for (categoria of categorias; track categoria.id) {
             <li class="nav-item">
               <a class="nav-link" [routerLink]="['/categorias', categoria.id]">

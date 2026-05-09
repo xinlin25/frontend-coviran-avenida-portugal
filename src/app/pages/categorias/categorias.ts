@@ -34,7 +34,13 @@ export class Categorias implements OnInit {
     this.route.params.subscribe((params) => {
       const id = params['id'];
 
-      if (id) {
+      const url = this.route.snapshot.url.map((segment) => segment.path).join('/');
+
+      if (url.includes('ofertas')) {
+        this.cargarOfertas();
+      } else if (url.includes('destacados')) {
+        this.cargarDestacados();
+      } else if (id) {
         this.categoriaSeleccionadaId = +id;
         this.cargarProductos(+id);
       }
@@ -45,6 +51,24 @@ export class Categorias implements OnInit {
     this.categoriasService.getCategorias().subscribe({
       next: (data) => {
         this.categorias = data.filter((categoria) => categoria.parent == null && categoria.activo);
+      },
+      error: (err) => console.error(err),
+    });
+  }
+
+  cargarOfertas() {
+    this.productoService.getOfertas().subscribe({
+      next: (data) => {
+        this.productos = data;
+      },
+      error: (err) => console.error(err),
+    });
+  }
+
+  cargarDestacados() {
+    this.productoService.getDestacados().subscribe({
+      next: (data) => {
+        this.productos = data;
       },
       error: (err) => console.error(err),
     });
