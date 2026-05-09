@@ -15,6 +15,7 @@
   width: 100%;
   border: 1px solid #ccc;
   padding-top: 20px;
+  background-color: var(--verde-claro);
 }
 
 .inactivo {
@@ -54,4 +55,8 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.fila-par {
+  background-color: white;
 }

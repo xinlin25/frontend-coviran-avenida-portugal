@@ -23,9 +23,10 @@
   <div class="lista">
     <h2 class="titulo">Usuarios</h2>
 
-    @for (u of usuarios; track u.id) {
+    @for (u of usuarios; track u.id; let i = $index) {
       <div
         class="item"
+        [class.fila-par]="i % 2 === 0"
         (click)="abrirModal(u)"
         data-bs-toggle="modal"
         data-bs-target="#usuarioModal"

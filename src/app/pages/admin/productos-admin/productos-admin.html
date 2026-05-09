@@ -24,14 +24,20 @@
   <div class="lista">
     <h2 class="titulo">Productos</h2>
 
-    @for (p of productos; track p.id) {
+    @for (p of productos; track p.id; let i = $index) {
       <div
         class="item"
+        [class.fila-par]="i % 2 === 0"
         (click)="abrirModal(p)"
         data-bs-toggle="modal"
         data-bs-target="#productoModal"
       >
         {{ p.nombre }} - {{ p.marca }}
+        @if (p.stock == 0) {
+          <span class="agotado">(AGOTADO)</span>
+        } @else {
+          - {{ p.stock }} unidades
+        }
 
         @if (!p.activo) {
           <span class="inactivo">(INACTIVO)</span>

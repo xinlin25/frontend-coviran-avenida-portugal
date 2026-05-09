@@ -15,9 +15,11 @@
   width: 100%;
   border: 1px solid #ccc;
   padding-top: 20px;
+  background-color: var(--verde-claro);
 }
 
-.inactivo {
+.inactivo,
+.agotado {
   color: red;
   margin-left: 10px;
 }
@@ -58,4 +60,8 @@
 
 .img {
   width: 120px;
+}
+
+.fila-par {
+  background-color: white;
 }
