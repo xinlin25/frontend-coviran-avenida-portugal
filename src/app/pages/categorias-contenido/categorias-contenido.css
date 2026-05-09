@@ -23,3 +23,9 @@
   margin-top: -15px;
   margin-bottom: 30px;
 }
+
+@media (max-width: 800px) {
+  .productos-grid {
+    justify-content: center;
+  }
+}
