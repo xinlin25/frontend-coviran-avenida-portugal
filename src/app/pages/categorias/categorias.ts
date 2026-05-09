@@ -19,7 +19,7 @@ import { TarjetaComponent } from '../../shared/tarjeta/tarjeta';
 export class Categorias implements OnInit {
   categorias: Categoria[] = [];
   productos: Producto[] = [];
-
+  categoriasExpandidas: number[] = [];
   categoriaSeleccionadaId?: number;
 
   constructor(
@@ -33,14 +33,13 @@ export class Categorias implements OnInit {
 
     this.route.params.subscribe((params) => {
       const id = params['id'];
-
       const url = this.route.snapshot.url.map((segment) => segment.path).join('/');
 
       if (url.includes('ofertas')) {
         this.cargarOfertas();
       } else if (url.includes('destacados')) {
         this.cargarDestacados();
-      } else if (id) {
+      } else if (id && !isNaN(Number(id))) {
         this.categoriaSeleccionadaId = +id;
         this.cargarProductos(+id);
       }
@@ -85,5 +84,13 @@ export class Categorias implements OnInit {
 
   agregarProducto() {
     console.log('Producto añadido');
+  }
+
+  toggleCategoria(id: number) {
+    if (this.categoriasExpandidas.includes(id))
+      this.categoriasExpandidas = this.categoriasExpandidas.filter(
+        (categoriaId) => categoriaId !== id,
+      );
+    else this.categoriasExpandidas.push(id);
   }
 }
