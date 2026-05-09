@@ -1,17 +1,12 @@
-.productos-grid {
+.categorias-layout {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding-top: 20px;
+  align-items: stretch;
 }
 
-.titulo-categoria {
-  margin-top: 20px;
-  margin-bottom: 30px;
-}
-
-.subtitulo-categoria {
-  color: var(--verde);
-  margin-top: -15px;
-  margin-bottom: 30px;
+.sidebar {
+  width: 260px;
+  min-width: 260px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  border-right: 1px solid #ddd;
 }

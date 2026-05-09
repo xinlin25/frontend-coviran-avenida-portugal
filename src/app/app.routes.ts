@@ -20,6 +20,7 @@ import { UsuariosAdmin } from './pages/admin/usuarios-admin/usuarios-admin';
 import { ProductosAdmin } from './pages/admin/productos-admin/productos-admin';
 import { CategoriasAdmin } from './pages/admin/categorias-admin/categorias-admin';
 import { adminGuard } from './guards/admin-guard';
+import { CategoriasContenido } from './pages/categorias-contenido/categorias-contenido';
 
 export const routes: Routes = [
   {
@@ -27,10 +28,16 @@ export const routes: Routes = [
     component: MainLayout,
     children: [
       { path: '', component: Inicio },
-      { path: 'categorias', component: Categorias },
-      { path: 'categorias/ofertas', component: Categorias },
-      { path: 'categorias/destacados', component: Categorias },
-      { path: 'categorias/:id', component: Categorias },
+      {
+        path: 'categorias',
+        component: Categorias,
+        children: [
+          { path: '', component: CategoriasContenido },
+          { path: 'ofertas', component: CategoriasContenido },
+          { path: 'destacados', component: CategoriasContenido },
+          { path: ':id', component: CategoriasContenido },
+        ],
+      },
       { path: 'detalle-producto/:id', component: DetalleProd },
       { path: 'localizacion-contacto', component: LocCon },
       { path: 'entrega-devoluciones', component: EntDev },

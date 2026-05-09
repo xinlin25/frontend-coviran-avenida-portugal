@@ -1,36 +1,7 @@
-<div class="container-fluid">
-  <div class="row">
-    <!-- SIDEBAR -->
-    <div class="col-3 col-md-2 p-0">
-      <app-menu></app-menu>
-    </div>
+<div class="categorias-layout">
+  <aside class="sidebar">
+    <app-menu></app-menu>
+  </aside>
 
-    <!-- CONTENIDO -->
-    <main class="col-9 col-md-10 px-md-4">
-      <h1 class="titulo-categoria">
-        {{ tituloPagina }}
-      </h1>
-      @if (subtituloPagina) {
-        <h3 class="subtitulo-categoria">
-          {{ subtituloPagina }}
-        </h3>
-      }
-      <div class="productos-grid">
-        @for (producto of productos; track producto.id) {
-          <app-tarjeta
-            [id]="producto.id"
-            [titulo]="producto.nombre"
-            [descripcion]="producto.descripcion"
-            [precio]="producto.enOferta ? (producto.precioOferta ?? 0) : producto.precio"
-            [precioOriginal]="producto.enOferta ? producto.precio : undefined"
-            [enOferta]="producto.enOferta ?? false"
-            [imagen]="producto.imagenUrl"
-            unidad="ud"
-            (agregar)="agregarProducto()"
-          >
-          </app-tarjeta>
-        }
-      </div>
-    </main>
-  </div>
+  <router-outlet></router-outlet>
 </div>

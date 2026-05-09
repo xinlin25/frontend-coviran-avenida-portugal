@@ -30,3 +30,11 @@
   font-size: 14px;
   color: gray;
 }
+
+.sidebar {
+  min-height: 100vh;
+}
+
+.categorias-layout {
+  align-items: flex-start;
+}
