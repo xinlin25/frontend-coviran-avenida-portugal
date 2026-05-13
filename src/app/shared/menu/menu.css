@@ -19,6 +19,7 @@
 
 .btn-toggle i {
   font-size: 12px;
+  color: var(--verde-oscuro);
 }
 
 .subcategorias {

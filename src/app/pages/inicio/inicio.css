@@ -61,6 +61,12 @@
 }
 
 @media (max-width: 800px) {
+  .banner {
+    object-fit: cover;
+    height: 110px;
+    border-radius: 0;
+  }
+
   .categorias-container,
   .ofertas-container,
   .destacados-container {
