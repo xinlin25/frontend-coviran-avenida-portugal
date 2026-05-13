@@ -4,6 +4,7 @@ import { TarjetaComponent } from '../../shared/tarjeta/tarjeta';
 import { RouterLink } from '@angular/router';
 
 import { CategoriasService } from '../../services/categorias/categorias.service';
+import { CarritoService } from '../../services/carrito/carrito.service';
 import { Categoria } from '../../models/categoria';
 import { Producto } from '../../models/producto';
 import { ProductoService } from '../../services/productos/productos.service';
@@ -22,6 +23,7 @@ export class Inicio implements OnInit {
   constructor(
     private categoriasService: CategoriasService,
     private productoService: ProductoService,
+    private carritoService: CarritoService,
   ) {}
 
   ngOnInit(): void {
@@ -75,5 +77,17 @@ export class Inicio implements OnInit {
     return imagenes[nombre] || '/img/inicio/default.png';
   }
 
-  agregarProducto() {}
+  agregarProducto(productoId: number) {
+    this.carritoService.agregarProducto(productoId).subscribe({
+      next: () => {
+        alert('Producto añadido');
+      },
+
+      error: (err) => {
+        console.error(err);
+
+        if (err.status === 401) alert('Debes iniciar sesión');
+      },
+    });
+  }
 }

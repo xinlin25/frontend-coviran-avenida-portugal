@@ -20,7 +20,7 @@
         [enOferta]="producto.enOferta ?? false"
         [imagen]="producto.imagenUrl"
         unidad="ud"
-        (agregar)="agregarProducto()"
+        (agregar)="agregarProducto($event)"
       >
       </app-tarjeta>
     }

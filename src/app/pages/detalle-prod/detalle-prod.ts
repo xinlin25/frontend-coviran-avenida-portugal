@@ -5,6 +5,8 @@ import { TarjetaComponent } from '../../shared/tarjeta/tarjeta';
 import { ProductoService } from '../../services/productos/productos.service';
 import { Producto } from '../../models/producto';
 
+import { CarritoService } from '../../services/carrito/carrito.service';
+
 @Component({
   selector: 'app-detalle-prod',
   imports: [CommonModule, TarjetaComponent, RouterLink],
@@ -18,6 +20,7 @@ export class DetalleProd implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productoService: ProductoService,
+    private carritoService: CarritoService,
   ) {}
 
   ngOnInit(): void {
@@ -41,8 +44,17 @@ export class DetalleProd implements OnInit {
     });
   }
 
-  agregarProducto() {
-    console.log('Producto añadido');
+  agregarProducto(productoId: number) {
+    this.carritoService.agregarProducto(productoId).subscribe({
+      next: () => {
+        alert('Producto añadido');
+      },
+
+      error: (err) => {
+        console.error(err);
+        if (err.status === 401) alert('Debes iniciar sesión');
+      },
+    });
   }
 
   cargarRelacionados(categoriaId: number, productoActualId: number) {

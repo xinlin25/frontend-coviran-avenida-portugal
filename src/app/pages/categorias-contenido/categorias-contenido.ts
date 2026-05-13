@@ -13,6 +13,7 @@ import { Producto } from '../../models/producto';
 import { Categoria } from '../../models/categoria';
 
 import { TarjetaComponent } from '../../shared/tarjeta/tarjeta';
+import { CarritoService } from '../../services/carrito/carrito.service';
 
 @Component({
   selector: 'app-categorias-contenido',
@@ -31,6 +32,7 @@ export class CategoriasContenido implements OnInit {
     private route: ActivatedRoute,
     private productoService: ProductoService,
     private categoriasService: CategoriasService,
+    private carritoService: CarritoService,
   ) {}
 
   ngOnInit(): void {
@@ -114,7 +116,16 @@ export class CategoriasContenido implements OnInit {
     });
   }
 
-  agregarProducto() {
-    console.log('Producto añadido');
+  agregarProducto(productoId: number) {
+    this.carritoService.agregarProducto(productoId).subscribe({
+      next: () => {
+        alert('Producto añadido');
+      },
+
+      error: (err) => {
+        console.error(err);
+        if (err.status === 401) alert('Debes iniciar sesión');
+      },
+    });
   }
 }

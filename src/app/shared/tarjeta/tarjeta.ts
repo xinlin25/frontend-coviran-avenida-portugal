@@ -18,9 +18,10 @@ export class TarjetaComponent {
   @Input() unidad: string = 'ud';
   @Input() precioOriginal?: number;
   @Input() enOferta: boolean = false;
-  @Output() agregar = new EventEmitter<void>();
+  @Output() agregar = new EventEmitter<number>();
 
-  manejarClick() {
-    this.agregar.emit();
+  manejarClick(event: MouseEvent) {
+    event.stopPropagation();
+    this.agregar.emit(this.id);
   }
 }
