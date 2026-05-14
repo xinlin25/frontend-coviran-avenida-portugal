@@ -1,0 +1,143 @@
+.carrito-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+.carrito-container h1 {
+  margin-bottom: 30px;
+  font-size: 38px;
+  font-weight: bold;
+}
+
+.contenido-carrito {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.items-container {
+  flex: 1;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.total-container {
+  width: 330px;
+  min-width: 330px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  position: sticky;
+  top: 20px;
+}
+
+.card-resumen,
+.card-pago {
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 25px;
+  background-color: white;
+}
+
+.card-resumen h2,
+.card-pago h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.total {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.total p {
+  margin: 0;
+}
+
+.fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.fila p {
+  font-size: 18px;
+}
+
+.detalle-titulo {
+  font-weight: bold;
+}
+
+.envio {
+  color: gray;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.opciones-pago {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.opcion {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+}
+
+.opcion input[type='radio'] {
+  accent-color: var(--verde);
+}
+
+.input-especificaciones {
+  width: 100%;
+  padding: 2px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.btn-confirmar {
+  width: 100%;
+  border: none;
+  background-color: var(--verde);
+  color: white;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-confirmar:hover {
+  opacity: 0.9;
+}
+
+.cargando {
+  font-size: 24px;
+  text-align: center;
+}
+
+@media (max-width: 800px) {
+  .contenido-carrito {
+    flex-direction: column;
+  }
+
+  .total-container {
+    width: 100%;
+    min-width: unset;
+    position: static;
+  }
+}

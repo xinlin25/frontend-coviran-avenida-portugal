@@ -1,0 +1,27 @@
+<div class="item-card">
+  <img [src]="item.producto.imagenUrl" [alt]="item.producto.nombre" class="producto-img" />
+
+  <div class="info">
+    <h3>
+      {{ item.producto.nombre }}
+    </h3>
+
+    <p class="descripcion">
+      {{ item.producto.descripcion }}
+    </p>
+
+    <p class="precio">{{ item.precioUnitario | number: '1.2-2' }} €</p>
+  </div>
+
+  <div class="acciones">
+    <div class="cantidad">
+      <button (click)="sumarCantidad()"><i class="bi bi-plus"></i></button>
+      <span> {{ item.cantidad }} </span>
+      <button (click)="restarCantidad()"><i class="bi bi-dash"></i></button>
+    </div>
+
+    <button class="btn-eliminar" (click)="eliminarItem()"><i class="bi bi-trash3"></i></button>
+
+    <p class="subtotal">{{ item.cantidad * item.precioUnitario | number: '1.2-2' }} €</p>
+  </div>
+</div>

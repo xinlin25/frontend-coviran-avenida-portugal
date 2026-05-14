@@ -1,0 +1,92 @@
+.item-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.producto-img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.info {
+  width: 50%;
+}
+
+.info h3,
+.descripcion {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 1;
+}
+
+.descripcion {
+  color: gray;
+}
+
+.precio {
+  font-weight: bold;
+}
+
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cantidad {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cantidad button {
+  width: 26px;
+  height: 26px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--verde-claro);
+  color: white;
+  cursor: pointer;
+}
+
+.cantidad button:hover {
+  color: var(--verde);
+}
+
+.btn-eliminar {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.btn-eliminar:hover {
+  color: var(--rojo);
+}
+
+.subtotal {
+  font-weight: bold;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 70px;
+  height: 100%;
+}
+
+i {
+  color: black;
+}
+
+@media (max-width: 800px) {
+  .item-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}

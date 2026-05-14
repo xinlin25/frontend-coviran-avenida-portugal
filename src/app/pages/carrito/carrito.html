@@ -1,1 +1,81 @@
-<p>carrito works!</p>
+<div class="carrito-container">
+  <h1>Mi Cesta ({{ carrito?.items?.length || 0 }} productos)</h1>
+
+  @if (cargando) {
+    <h1 class="cargando">Cargando carrito...</h1>
+  } @else {
+    @if (carrito && carrito.items.length > 0) {
+      <div class="contenido-carrito">
+        <div class="items-container">
+          @for (item of carrito.items; track item.id) {
+            <app-carrito-item-card
+              [item]="item"
+              (sumar)="sumarCantidad($event)"
+              (restar)="restarCantidad($event)"
+              (eliminar)="eliminarItem($event)"
+            >
+            </app-carrito-item-card>
+          }
+        </div>
+
+        <div class="total-container">
+          <div class="card-resumen">
+            <h2>Detalle del pedido</h2>
+
+            <div class="total">
+              <div class="fila">
+                <p class="detalle-titulo">Total Compra</p>
+                <p>{{ calcularTotal() | number: '1.2-2' }} €</p>
+              </div>
+
+              <div class="fila">
+                <p class="detalle-titulo">Gastos de envío</p>
+
+                @if (calcularEnvio() === 0) {
+                  <p>Gratis</p>
+                } @else {
+                  <p>{{ calcularEnvio() | number: '1.2-2' }} €</p>
+                }
+              </div>
+
+              <hr />
+
+              <div class="fila">
+                <p class="detalle-titulo">Total Pedido</p>
+                <p>{{ calcularTotalFinal() | number: '1.2-2' }} €</p>
+              </div>
+            </div>
+
+            <p class="envio">*A partir de 50€ envío gratuito</p>
+          </div>
+
+          <div class="card-pago">
+            <h2>Método de Pago</h2>
+
+            <div class="opciones-pago">
+              <label class="opcion">
+                <input type="radio" name="pago" value="efectivo" checked />
+                <span>Realizar la compra en efectivo</span>
+              </label>
+
+              <label class="opcion">
+                <input type="radio" name="pago" value="tarjeta" />
+                <span>Realizar la compra con tarjeta</span>
+              </label>
+            </div>
+
+            <input
+              type="text"
+              placeholder="Especificaciones Ej: horario de entrega"
+              class="input-especificaciones"
+            />
+
+            <button class="btn-confirmar">Finalizar Compra</button>
+          </div>
+        </div>
+      </div>
+    } @else {
+      <p>El carrito está vacío</p>
+    }
+  }
+</div>
