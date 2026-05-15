@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { RouterLink } from '@angular/router';
 import { Auth } from '../../services/auth/auth.service';
 import { Router } from '@angular/router';
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-inicio-sesion',
@@ -19,6 +20,7 @@ export class InicioSesion {
     private fb: FormBuilder,
     private authService: Auth,
     private router: Router,
+    private toast: ToastService,
   ) {
     this.loginForm = this.fb.group({
       correo: ['', [Validators.required, Validators.email]],
@@ -31,11 +33,13 @@ export class InicioSesion {
 
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
+        this.toast.success('Se ha iniciado sesión correctamente');
         this.authService.guardarToken(response.token);
         this.esError = false;
         this.router.navigate(['/']);
       },
       error: (err) => {
+        this.toast.error(err.message || 'Error al iniciar sesión');
         if (err.status === 401) {
           this.mensaje = 'Correo o contraseña incorrectos';
         } else {

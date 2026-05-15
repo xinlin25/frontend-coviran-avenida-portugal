@@ -24,8 +24,8 @@ export class CarritoService {
     return this.http.get<Carrito>(this.apiUrl);
   }
 
-  confirmarPedido(): Observable<any> {
-    return this.http.post(`${this.apiUrl}/confirmar`, {});
+  confirmarPedido(data: any) {
+    return this.http.post(`${this.apiUrl}/confirmar`, data);
   }
 
   sumarCantidadItem(itemId: number): Observable<Carrito> {

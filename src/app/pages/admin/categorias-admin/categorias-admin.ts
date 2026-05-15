@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CategoriasService } from '../../../services/categorias/categorias.service';
+import { ToastService } from '../../../services/toast/toast.service';
 import { Categoria } from '../../../models/categoria';
 import { debounceTime, Subject } from 'rxjs';
 
@@ -15,15 +16,15 @@ import { debounceTime, Subject } from 'rxjs';
 export class CategoriasAdmin implements OnInit {
   categorias: Categoria[] = [];
   categoriaSeleccionada: Categoria | null = null;
-
   categoriaEditando: any = null;
-
   modoEdicion: boolean = false;
-
   busqueda: string = '';
   private busquedaSubject = new Subject<string>();
 
-  constructor(private categoriaService: CategoriasService) {}
+  constructor(
+    private categoriaService: CategoriasService,
+    private toast: ToastService,
+  ) {}
 
   ngOnInit(): void {
     this.cargarCategorias();
@@ -38,7 +39,9 @@ export class CategoriasAdmin implements OnInit {
       next: (data: Categoria[]) => {
         this.categorias = data;
       },
-      error: (err: any) => console.error(err),
+      error: (err: any) => {
+        this.toast.error(err.message || 'Error al cargar categorías');
+      },
     });
   }
 
@@ -89,8 +92,7 @@ export class CategoriasAdmin implements OnInit {
           if (modal) (window as any).bootstrap.Modal.getInstance(modal)?.hide();
         },
         error: (err: any) => {
-          console.error(err);
-          alert('Error al crear categoría');
+          this.toast.error(err.message || 'Error al crear categoría');
         },
       });
     } else {
@@ -115,8 +117,7 @@ export class CategoriasAdmin implements OnInit {
             }
           },
           error: (err: any) => {
-            console.error(err);
-            alert('Error al actualizar categoría');
+            this.toast.error(err.message || 'Error al actualizar categoría');
           },
         });
     }
@@ -132,7 +133,9 @@ export class CategoriasAdmin implements OnInit {
       next: (data: Categoria[]) => {
         this.categorias = data;
       },
-      error: (err: any) => console.error(err),
+      error: (err: any) => {
+        this.toast.error(err.message || 'Error al buscar categorías');
+      },
     });
   }
 

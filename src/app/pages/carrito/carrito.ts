@@ -4,6 +4,7 @@ import { CarritoService } from '../../services/carrito/carrito.service';
 import { Carrito as CarritoModel } from '../../models/carrito';
 import { CarritoItemCard } from '../../shared/carrito-item-card/carrito-item-card';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-carrito',
@@ -20,15 +21,15 @@ export class Carrito implements OnInit {
   constructor(
     private carritoService: CarritoService,
     private fb: FormBuilder,
+    private toast: ToastService,
   ) {}
 
   ngOnInit(): void {
-    this.cargarCarrito();
     this.checkoutForm = this.fb.group({
       metodoPago: ['EFECTIVO'],
-
       especificacionesEntrega: [''],
     });
+    this.cargarCarrito();
   }
 
   cargarCarrito() {
@@ -99,6 +100,23 @@ export class Carrito implements OnInit {
   }
 
   finalizarCompra() {
-    console.log(this.checkoutForm.value);
+    const datos = this.checkoutForm.value;
+
+    if (datos.metodoPago === 'EFECTIVO') {
+      this.carritoService.confirmarPedido(datos).subscribe({
+        next: (pedido) => {
+          console.log(pedido);
+          this.toast.success('Pedido realizado correctamente');
+          this.carrito = {
+            id: 0,
+            items: [],
+          };
+        },
+
+        error: (err) => {
+          this.toast.error(err.message || 'Error al confirmar el pedido');
+        },
+      });
+    }
   }
 }
