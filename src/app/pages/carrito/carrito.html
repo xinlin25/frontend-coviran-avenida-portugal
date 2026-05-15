@@ -49,29 +49,29 @@
             <p class="envio">*A partir de 50€ envío gratuito</p>
           </div>
 
-          <div class="card-pago">
+          <form class="card-pago" [formGroup]="checkoutForm" (ngSubmit)="finalizarCompra()">
             <h2>Método de Pago</h2>
 
             <div class="opciones-pago">
               <label class="opcion">
-                <input type="radio" name="pago" value="efectivo" checked />
+                <input type="radio" value="EFECTIVO" formControlName="metodoPago" checked />
                 <span>Realizar la compra en efectivo</span>
               </label>
 
               <label class="opcion">
-                <input type="radio" name="pago" value="tarjeta" />
+                <input type="radio" value="TARJETA" formControlName="metodoPago" />
                 <span>Realizar la compra con tarjeta</span>
               </label>
             </div>
 
-            <input
-              type="text"
+            <textarea
+              formControlName="especificacionesEntrega"
               placeholder="Especificaciones Ej: horario de entrega"
               class="input-especificaciones"
-            />
+            ></textarea>
 
             <button class="btn-confirmar">Finalizar Compra</button>
-          </div>
+          </form>
         </div>
       </div>
     } @else {

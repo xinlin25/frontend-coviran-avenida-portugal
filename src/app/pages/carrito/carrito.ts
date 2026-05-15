@@ -3,22 +3,32 @@ import { CommonModule } from '@angular/common';
 import { CarritoService } from '../../services/carrito/carrito.service';
 import { Carrito as CarritoModel } from '../../models/carrito';
 import { CarritoItemCard } from '../../shared/carrito-item-card/carrito-item-card';
+import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-carrito',
   standalone: true,
-  imports: [CommonModule, CarritoItemCard],
+  imports: [CommonModule, CarritoItemCard, ReactiveFormsModule],
   templateUrl: './carrito.html',
   styleUrl: './carrito.css',
 })
 export class Carrito implements OnInit {
   carrito?: CarritoModel;
   cargando: boolean = true;
+  checkoutForm!: FormGroup;
 
-  constructor(private carritoService: CarritoService) {}
+  constructor(
+    private carritoService: CarritoService,
+    private fb: FormBuilder,
+  ) {}
 
   ngOnInit(): void {
     this.cargarCarrito();
+    this.checkoutForm = this.fb.group({
+      metodoPago: ['EFECTIVO'],
+
+      especificacionesEntrega: [''],
+    });
   }
 
   cargarCarrito() {
@@ -86,5 +96,9 @@ export class Carrito implements OnInit {
 
   calcularTotalFinal(): number {
     return this.calcularTotal() + this.calcularEnvio();
+  }
+
+  finalizarCompra() {
+    console.log(this.checkoutForm.value);
   }
 }
