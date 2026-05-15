@@ -70,7 +70,13 @@
               class="input-especificaciones"
             ></textarea>
 
-            <button class="btn-confirmar">Finalizar Compra</button>
+            <button [disabled]="procesandoCompra" class="btn-confirmar">
+              @if (procesandoCompra) {
+                Procesando...
+              } @else {
+                Finalizar Compra
+              }
+            </button>
           </form>
         </div>
       </div>
