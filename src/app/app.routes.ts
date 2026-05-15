@@ -19,6 +19,7 @@ import { PanelAdmin } from './pages/admin/panel-admin/panel-admin';
 import { UsuariosAdmin } from './pages/admin/usuarios-admin/usuarios-admin';
 import { ProductosAdmin } from './pages/admin/productos-admin/productos-admin';
 import { CategoriasAdmin } from './pages/admin/categorias-admin/categorias-admin';
+import { PedidosAdmin } from './pages/admin/pedidos-admin/pedidos-admin';
 import { adminGuard } from './guards/admin-guard';
 import { CategoriasContenido } from './pages/categorias-contenido/categorias-contenido';
 
@@ -67,6 +68,7 @@ export const routes: Routes = [
       { path: 'usuarios', component: UsuariosAdmin },
       { path: 'productos', component: ProductosAdmin },
       { path: 'categorias', component: CategoriasAdmin },
+      { path: 'pedidos', component: PedidosAdmin },
     ],
   },
 ];

@@ -1,0 +1,67 @@
+.contenedor {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 80%;
+  margin: 20px auto;
+
+  border-radius: 5px;
+}
+
+.lista {
+  width: 100%;
+  border: 1px solid #ccc;
+  padding-top: 20px;
+  background-color: var(--verde-claro);
+}
+
+.titulo {
+  padding-left: 10px;
+}
+
+.item {
+  border-top: 1px solid #ccc;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.item:hover {
+  background-color: #f0f0f0;
+}
+
+.btn {
+  color: white;
+}
+
+.modal-body div {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-body input,
+.modal-body select {
+  margin-bottom: 10px;
+}
+
+.fila {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.img {
+  width: 120px;
+}
+
+.fila-par {
+  background-color: white;
+}
+
+.estado {
+  margin-left: 10px;
+  font-weight: bold;
+  color: var(--verde);
+}

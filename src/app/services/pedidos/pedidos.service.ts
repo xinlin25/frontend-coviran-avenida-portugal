@@ -15,4 +15,8 @@ export class PedidoService {
   obtenerMisPedidos(): Observable<Pedido[]> {
     return this.http.get<Pedido[]>(`${this.apiUrl}/mis-pedidos`);
   }
+
+  obtenerTodosPedidos() {
+    return this.http.get<Pedido[]>(`${this.apiUrl}`);
+  }
 }

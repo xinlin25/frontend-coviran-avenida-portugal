@@ -1,0 +1,64 @@
+<div class="contenedor">
+  <div class="fila">
+    <div class="buscador">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Buscar pedido..."
+        [(ngModel)]="busqueda"
+        (input)="onBuscarChange()"
+      />
+    </div>
+  </div>
+  <div class="lista">
+    <h2 class="titulo">Pedidos</h2>
+
+    @for (pedido of pedidos; track pedido.id; let i = $index) {
+      <div
+        class="item"
+        (click)="abrirModal(pedido)"
+        data-bs-toggle="modal"
+        data-bs-target="#pedidoModal"
+        [class.fila-par]="i % 2 === 0"
+      >
+        Pedido #{{ pedido.id }}
+        -
+        {{ pedido.fecha }}
+        -
+        {{ pedido.total | number: '1.2-2' }} €
+        <span class="estado">
+          {{ pedido.estado }}
+        </span>
+      </div>
+    }
+  </div>
+  <div class="modal fade" id="pedidoModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Pedido #{{ pedidoSeleccionado?.id }}</h5>
+
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+
+        <div class="modal-body">
+          @if (pedidoSeleccionado) {
+            <p>Estado: {{ pedidoSeleccionado.estado }}</p>
+            <p>Fecha: {{ pedidoSeleccionado.fecha }}</p>
+            <p>Método pago: {{ pedidoSeleccionado.metodoPago }}</p>
+            <p>Total: {{ pedidoSeleccionado.total }} €</p>
+            <hr />
+            <h5>Productos</h5>
+
+            @for (detalle of pedidoSeleccionado.detalles; track detalle.id) {
+              <p>
+                {{ detalle.producto.nombre }}
+                x{{ detalle.cantidad }}
+              </p>
+            }
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
