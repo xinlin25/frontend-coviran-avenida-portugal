@@ -5,6 +5,7 @@ import { Carrito as CarritoModel } from '../../models/carrito';
 import { CarritoItemCard } from '../../shared/carrito-item-card/carrito-item-card';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { ToastService } from '../../services/toast/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-carrito',
@@ -23,6 +24,7 @@ export class Carrito implements OnInit {
     private carritoService: CarritoService,
     private fb: FormBuilder,
     private toast: ToastService,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -114,6 +116,7 @@ export class Carrito implements OnInit {
             items: [],
           };
           this.procesandoCompra = false;
+          this.router.navigate(['/pedidos']);
         },
 
         error: (err) => {

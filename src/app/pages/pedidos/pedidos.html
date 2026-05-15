@@ -1,1 +1,37 @@
-<p>pedidos works!</p>
+<div class="pedidos-container">
+  <h1>Mis pedidos</h1>
+
+  @if (cargando) {
+    <p>Cargando pedidos...</p>
+  } @else {
+    @if (pedidos.length > 0) {
+      @for (pedido of pedidos; track pedido.id) {
+        <div class="pedido-card">
+          <div class="pedido-header">
+            <div>
+              <p>Pedido #{{ pedido.id }}</p>
+              <p>{{ pedido.fecha }}</p>
+            </div>
+
+            <div>
+              <p
+                class="estado"
+                [ngClass]="{
+                  pendiente: pedido.estado === 'PENDIENTE',
+                  reparto: pedido.estado === 'REPARTO',
+                  completado: pedido.estado === 'COMPLETADO',
+                  cancelado: pedido.estado === 'CANCELADO',
+                }"
+              >
+                {{ pedido.estado }}
+              </p>
+              <p class="total">{{ pedido.total | number: '1.2-2' }} €</p>
+            </div>
+          </div>
+        </div>
+      }
+    } @else {
+      <p>Aún no tienes pedidos</p>
+    }
+  }
+</div>

@@ -1,13 +1,13 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Auth } from '../../services/auth/auth.service';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormularioPerfil } from './formulario-perfil/formulario-perfil';
 
 @Component({
   selector: 'app-mi-perfil',
   standalone: true,
-  imports: [CommonModule, FormularioPerfil],
+  imports: [CommonModule, FormularioPerfil, RouterLink],
   templateUrl: './mi-perfil.html',
   styleUrl: './mi-perfil.css',
 })

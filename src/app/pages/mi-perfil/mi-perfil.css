@@ -37,6 +37,10 @@ button {
   color: white;
 }
 
+.pedidos {
+  background-color: #f1f1f1;
+}
+
 @media (max-width: 900px) {
   .container {
     width: fit-content;

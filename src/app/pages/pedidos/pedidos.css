@@ -1,0 +1,72 @@
+.pedidos-container {
+  width: 90%;
+  max-width: 1000px;
+  margin: 40px auto;
+  height: 100vh;
+}
+
+.pedidos-container h1 {
+  font-size: 38px;
+  font-weight: bold;
+  margin-bottom: 30px;
+}
+
+.pedido-card {
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: white;
+}
+
+.pedido-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pedido-header p {
+  margin: 0;
+}
+
+.estado {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+  width: fit-content;
+}
+
+.pendiente {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.reparto {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.completado {
+  background-color: #d4edda;
+  color: var(--verde);
+}
+
+.cancelado {
+  background-color: #f8d7da;
+  color: var(--rojo);
+}
+
+.total {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px !important;
+}
+
+@media (max-width: 768px) {
+  .pedido-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+}
