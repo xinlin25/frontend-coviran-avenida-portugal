@@ -114,7 +114,7 @@ export class Carrito implements OnInit {
         },
 
         error: (err) => {
-          this.toast.error(err.message || 'Error al confirmar el pedido');
+          this.toast.error('Error al confirmar el pedido');
         },
       });
     }

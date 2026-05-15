@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { Producto } from '../../../models/producto';
 import { ProductoService } from '../../../services/productos/productos.service';
+import { ToastService } from '../../../services/toast/toast.service';
 
 import { Subject } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
@@ -28,7 +29,10 @@ export class ProductosAdmin implements OnInit {
 
   private busquedaSubject = new Subject<string>();
 
-  constructor(private productoService: ProductoService) {}
+  constructor(
+    private productoService: ProductoService,
+    private toast: ToastService,
+  ) {}
 
   ngOnInit(): void {
     this.cargarProductos();
@@ -43,7 +47,9 @@ export class ProductosAdmin implements OnInit {
       next: (data: Producto[]) => {
         this.productos = data;
       },
-      error: (err: any) => console.error(err),
+      error: (err: any) => {
+        this.toast.error('Error al cargar productos');
+      },
     });
   }
 
@@ -52,7 +58,9 @@ export class ProductosAdmin implements OnInit {
       next: (data: any[]) => {
         this.categorias = data;
       },
-      error: (err) => console.error(err),
+      error: (err) => {
+        this.toast.error('Error al cargar categorías');
+      },
     });
   }
 
@@ -66,7 +74,9 @@ export class ProductosAdmin implements OnInit {
       next: (data: Producto[]) => {
         this.productos = data;
       },
-      error: (err: any) => console.error(err),
+      error: (err: any) => {
+        this.toast.error('Error al buscar productos');
+      },
     });
   }
 
@@ -151,8 +161,7 @@ export class ProductosAdmin implements OnInit {
           if (modal) (window as any).bootstrap.Modal.getInstance(modal)?.hide();
         },
         error: (err) => {
-          console.error(err);
-          alert('Error al crear producto');
+          this.toast.error('Error al crear producto');
         },
       });
     } else {
@@ -182,8 +191,7 @@ export class ProductosAdmin implements OnInit {
           }
         },
         error: (err) => {
-          console.error(err);
-          alert('Error al actualizar producto');
+          this.toast.error('Error al actualizar producto');
         },
       });
     }

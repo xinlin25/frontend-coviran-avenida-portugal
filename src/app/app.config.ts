@@ -16,7 +16,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([authInterceptor, loadingInterceptor])),
     provideAnimations(),
     provideToastr({
-      positionClass: 'toast-top-right',
+      positionClass: 'toast-bottom-left',
       timeOut: 3000,
     }),
   ],

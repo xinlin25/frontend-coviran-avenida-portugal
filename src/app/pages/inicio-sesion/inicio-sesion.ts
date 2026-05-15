@@ -39,7 +39,7 @@ export class InicioSesion {
         this.router.navigate(['/']);
       },
       error: (err) => {
-        this.toast.error(err.message || 'Error al iniciar sesión');
+        this.toast.error('Error al iniciar sesión');
         if (err.status === 401) {
           this.mensaje = 'Correo o contraseña incorrectos';
         } else {

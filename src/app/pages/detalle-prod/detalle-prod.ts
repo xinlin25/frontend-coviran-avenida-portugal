@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TarjetaComponent } from '../../shared/tarjeta/tarjeta';
 import { ProductoService } from '../../services/productos/productos.service';
 import { Producto } from '../../models/producto';
-
+import { ToastService } from '../../services/toast/toast.service';
 import { CarritoService } from '../../services/carrito/carrito.service';
 
 @Component({
@@ -21,6 +21,7 @@ export class DetalleProd implements OnInit {
     private route: ActivatedRoute,
     private productoService: ProductoService,
     private carritoService: CarritoService,
+    private toast: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -40,19 +41,18 @@ export class DetalleProd implements OnInit {
           this.cargarRelacionados(data.categoria.id, data.id);
         }
       },
-      error: (err) => console.error(err),
+      error: (err) => this.toast.error('Error al cargar el producto'),
     });
   }
 
   agregarProducto(productoId: number) {
     this.carritoService.agregarProducto(productoId).subscribe({
       next: () => {
-        alert('Producto añadido');
+        this.toast.success('Producto añadido al carrito');
       },
 
       error: (err) => {
-        console.error(err);
-        if (err.status === 401) alert('Debes iniciar sesión');
+        if (err.status === 401) this.toast.error('Primero debes de iniciar sesión');
       },
     });
   }
@@ -63,7 +63,7 @@ export class DetalleProd implements OnInit {
         this.productosRelacionados = data.filter((p) => p.id !== productoActualId).slice(0, 4);
       },
 
-      error: (err) => console.error(err),
+      error: (err) => this.toast.error('Error al cargar productos relacionados'),
     });
   }
 }

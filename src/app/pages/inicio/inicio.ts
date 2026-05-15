@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { TarjetaComponent } from '../../shared/tarjeta/tarjeta';
 import { RouterLink } from '@angular/router';
-
+import { ToastService } from '../../services/toast/toast.service';
 import { CategoriasService } from '../../services/categorias/categorias.service';
 import { CarritoService } from '../../services/carrito/carrito.service';
 import { Categoria } from '../../models/categoria';
@@ -24,6 +24,7 @@ export class Inicio implements OnInit {
     private categoriasService: CategoriasService,
     private productoService: ProductoService,
     private carritoService: CarritoService,
+    private toast: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -40,7 +41,7 @@ export class Inicio implements OnInit {
           .slice(0, 6);
       },
       error: (err: any) => {
-        console.error(err);
+        this.toast.error('Error al cargar las categorías');
       },
     });
   }
@@ -50,7 +51,7 @@ export class Inicio implements OnInit {
       next: (data) => {
         this.ofertas = data.slice(0, 8);
       },
-      error: (err) => console.error(err),
+      error: (err) => this.toast.error('Error al cargar las ofertas'),
     });
   }
 
@@ -59,7 +60,7 @@ export class Inicio implements OnInit {
       next: (data) => {
         this.destacados = data.slice(0, 8);
       },
-      error: (err) => console.error(err),
+      error: (err) => this.toast.error('Error al cargar los productos destacados'),
     });
   }
 
@@ -80,13 +81,11 @@ export class Inicio implements OnInit {
   agregarProducto(productoId: number) {
     this.carritoService.agregarProducto(productoId).subscribe({
       next: () => {
-        alert('Producto añadido');
+        this.toast.success('Producto añadido al carrito');
       },
 
       error: (err) => {
-        console.error(err);
-
-        if (err.status === 401) alert('Debes iniciar sesión');
+        this.toast.error('Error al añadir el producto al carrito');
       },
     });
   }

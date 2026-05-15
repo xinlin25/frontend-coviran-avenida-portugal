@@ -1,19 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-
 import { ActivatedRoute } from '@angular/router';
-
 import { CommonModule } from '@angular/common';
 
 import { ProductoService } from '../../services/productos/productos.service';
-
+import { ToastService } from '../../services/toast/toast.service';
 import { CategoriasService } from '../../services/categorias/categorias.service';
+import { CarritoService } from '../../services/carrito/carrito.service';
 
 import { Producto } from '../../models/producto';
-
 import { Categoria } from '../../models/categoria';
 
 import { TarjetaComponent } from '../../shared/tarjeta/tarjeta';
-import { CarritoService } from '../../services/carrito/carrito.service';
 
 @Component({
   selector: 'app-categorias-contenido',
@@ -33,6 +30,7 @@ export class CategoriasContenido implements OnInit {
     private productoService: ProductoService,
     private categoriasService: CategoriasService,
     private carritoService: CarritoService,
+    private toast: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -119,12 +117,12 @@ export class CategoriasContenido implements OnInit {
   agregarProducto(productoId: number) {
     this.carritoService.agregarProducto(productoId).subscribe({
       next: () => {
-        alert('Producto añadido');
+        this.toast.success('Producto añadido al carrito');
       },
 
       error: (err) => {
         console.error(err);
-        if (err.status === 401) alert('Debes iniciar sesión');
+        if (err.status === 401) this.toast.error('Primero debes de iniciar sesión');
       },
     });
   }

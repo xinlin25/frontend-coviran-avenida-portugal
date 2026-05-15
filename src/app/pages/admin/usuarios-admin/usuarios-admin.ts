@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsuarioService } from '../../../services/usuarios/usuario.service';
+import { ToastService } from '../../../services/toast/toast.service';
 import { Usuario } from '../../../models/usuario';
 import { ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -24,6 +25,7 @@ export class UsuariosAdmin implements OnInit {
   constructor(
     private usuarioService: UsuarioService,
     private cdr: ChangeDetectorRef,
+    private toast: ToastService,
   ) {}
 
   ngOnInit(): void {
@@ -86,7 +88,7 @@ export class UsuariosAdmin implements OnInit {
 
     if (this.usuarioEditando.id === 0) {
       if (!this.usuarioEditando.password || this.usuarioEditando.password.trim() === '') {
-        alert('La contraseña es obligatoria');
+        this.toast.error('La contraseña es obligatoria');
         return;
       }
 
@@ -109,8 +111,7 @@ export class UsuariosAdmin implements OnInit {
           if (modal) (window as any).bootstrap.Modal.getInstance(modal)?.hide();
         },
         error: (err) => {
-          console.error(err);
-          alert('Error al crear usuario');
+          this.toast.error('Error al crear usuario');
         },
       });
     } else {
@@ -136,7 +137,7 @@ export class UsuariosAdmin implements OnInit {
           }
         },
         error: (err) => {
-          alert('Error al crear usuario');
+          this.toast.error('Error al actualizar usuario');
         },
       });
     }

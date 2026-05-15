@@ -40,7 +40,7 @@ export class CategoriasAdmin implements OnInit {
         this.categorias = data;
       },
       error: (err: any) => {
-        this.toast.error(err.message || 'Error al cargar categorías');
+        this.toast.error('Error al cargar categorías');
       },
     });
   }
@@ -92,7 +92,7 @@ export class CategoriasAdmin implements OnInit {
           if (modal) (window as any).bootstrap.Modal.getInstance(modal)?.hide();
         },
         error: (err: any) => {
-          this.toast.error(err.message || 'Error al crear categoría');
+          this.toast.error('Error al crear categoría');
         },
       });
     } else {
@@ -117,7 +117,7 @@ export class CategoriasAdmin implements OnInit {
             }
           },
           error: (err: any) => {
-            this.toast.error(err.message || 'Error al actualizar categoría');
+            this.toast.error('Error al actualizar categoría');
           },
         });
     }
@@ -134,7 +134,7 @@ export class CategoriasAdmin implements OnInit {
         this.categorias = data;
       },
       error: (err: any) => {
-        this.toast.error(err.message || 'Error al buscar categorías');
+        this.toast.error('Error al buscar categorías');
       },
     });
   }
