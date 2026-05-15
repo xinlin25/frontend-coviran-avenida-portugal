@@ -19,4 +19,12 @@ export class PedidoService {
   obtenerTodosPedidos() {
     return this.http.get<Pedido[]>(`${this.apiUrl}`);
   }
+
+  buscarPedidos(texto: string) {
+    return this.http.get<Pedido[]>(`${this.apiUrl}/buscar?texto=${texto}`);
+  }
+
+  cambiarEstado(id: number, estado: string) {
+    return this.http.put(`${this.apiUrl}/${id}/estado?estado=${estado}`, {});
+  }
 }

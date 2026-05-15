@@ -8,4 +8,9 @@ export interface Pedido {
   metodoPago: string;
   especificacionesEntrega?: string;
   detalles: DetallePedido[];
+  cliente: {
+    nombreCompleto: string;
+    tlf: string;
+    direccion: string;
+  };
 }

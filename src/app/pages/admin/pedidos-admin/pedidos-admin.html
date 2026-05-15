@@ -25,8 +25,16 @@
         -
         {{ pedido.fecha }}
         -
-        {{ pedido.total | number: '1.2-2' }} €
-        <span class="estado">
+        {{ pedido.total | number: '1.2-2' }} € -
+        {{ pedido.cliente.nombreCompleto }}
+        <span
+          [ngClass]="{
+            pendiente: pedido.estado === 'PENDIENTE',
+            reparto: pedido.estado === 'REPARTO',
+            completado: pedido.estado === 'COMPLETADO',
+            cancelado: pedido.estado === 'CANCELADO',
+          }"
+        >
           {{ pedido.estado }}
         </span>
       </div>
@@ -56,6 +64,32 @@
                 x{{ detalle.cantidad }}
               </p>
             }
+            <hr />
+
+            <h5>Cliente</h5>
+
+            <p>{{ pedidoSeleccionado.cliente.nombreCompleto }}</p>
+            <p>{{ pedidoSeleccionado.cliente.tlf }}</p>
+            <p>{{ pedidoSeleccionado.cliente.direccion }}</p>
+
+            @if (pedidoSeleccionado.especificacionesEntrega) {
+              <hr />
+              <h5>Nota entrega</h5>
+              <p>{{ pedidoSeleccionado.especificacionesEntrega }}</p>
+            }
+
+            <hr />
+
+            <h5>Cambiar estado</h5>
+
+            <select class="form-select" [(ngModel)]="pedidoSeleccionado.estado">
+              <option value="PENDIENTE">PENDIENTE</option>
+              <option value="REPARTO">REPARTO</option>
+              <option value="COMPLETADO">COMPLETADO</option>
+              <option value="CANCELADO">CANCELADO</option>
+            </select>
+
+            <button class="btn btn-success mt-3" (click)="guardarEstado()">Guardar estado</button>
           }
         </div>
       </div>

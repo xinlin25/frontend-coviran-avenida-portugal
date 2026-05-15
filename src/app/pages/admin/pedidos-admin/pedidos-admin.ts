@@ -50,11 +50,15 @@ export class PedidosAdmin implements OnInit {
       return;
     }
 
-    this.pedidos = this.pedidos.filter(
-      (pedido) =>
-        pedido.id.toString().includes(texto) ||
-        pedido.estado.toLowerCase().includes(texto.toLowerCase()),
-    );
+    this.pedidoService.buscarPedidos(texto).subscribe({
+      next: (data) => {
+        this.pedidos = data;
+      },
+
+      error: () => {
+        this.toast.error('Error al buscar pedidos');
+      },
+    });
   }
 
   onBuscarChange() {
@@ -63,5 +67,26 @@ export class PedidosAdmin implements OnInit {
 
   abrirModal(pedido: Pedido) {
     this.pedidoSeleccionado = pedido;
+  }
+
+  guardarEstado() {
+    if (!this.pedidoSeleccionado) return;
+
+    this.pedidoService
+      .cambiarEstado(
+        this.pedidoSeleccionado.id,
+
+        this.pedidoSeleccionado.estado,
+      )
+      .subscribe({
+        next: () => {
+          this.toast.success('Estado actualizado');
+          this.cargarPedidos();
+        },
+
+        error: () => {
+          this.toast.error('Error al actualizar estado');
+        },
+      });
   }
 }

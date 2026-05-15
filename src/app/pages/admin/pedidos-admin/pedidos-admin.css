@@ -60,8 +60,30 @@
   background-color: white;
 }
 
-.estado {
+.pendiente,
+.reparto,
+.completado,
+.cancelado {
   margin-left: 10px;
   font-weight: bold;
+}
+
+.pendiente {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.reparto {
+  background-color: #cce5ff;
+  color: #004085;
+}
+
+.completado {
+  background-color: #d4edda;
   color: var(--verde);
+}
+
+.cancelado {
+  background-color: #f8d7da;
+  color: var(--rojo);
 }
