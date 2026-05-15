@@ -77,3 +77,33 @@ a:hover {
   color: var(--rojo);
   text-decoration: none;
 }
+
+/* Toast */
+.toast-container .ngx-toastr {
+  width: 280px;
+  min-height: 50px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-size: 14px;
+}
+
+.toast-success {
+  background-color: var(--verde) !important;
+}
+
+.toast-error {
+  background-color: var(--rojo) !important;
+}
+
+.toast-success,
+.toast-error {
+  background-image: none !important;
+}
+
+.toast-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
