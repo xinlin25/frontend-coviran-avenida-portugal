@@ -22,6 +22,7 @@ import { CategoriasAdmin } from './pages/admin/categorias-admin/categorias-admin
 import { PedidosAdmin } from './pages/admin/pedidos-admin/pedidos-admin';
 import { adminGuard } from './guards/admin-guard';
 import { CategoriasContenido } from './pages/categorias-contenido/categorias-contenido';
+import { Busqueda } from './pages/busqueda/busqueda';
 
 export const routes: Routes = [
   {
@@ -43,6 +44,7 @@ export const routes: Routes = [
       { path: 'localizacion-contacto', component: LocCon },
       { path: 'entrega-devoluciones', component: EntDev },
       { path: 'pedidos', component: Pedidos },
+      { path: 'busqueda', component: Busqueda },
     ],
   },
 

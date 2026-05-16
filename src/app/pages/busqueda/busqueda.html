@@ -1,0 +1,24 @@
+<main class="contenido-categorias">
+  <h1 class="titulo-categoria">Resultados para "{{ query }}"</h1>
+
+  <div class="productos-grid">
+    @for (p of productos; track p.id) {
+      <app-tarjeta
+        [id]="p.id"
+        [titulo]="p.nombre"
+        [descripcion]="p.descripcion"
+        [precio]="p.enOferta ? (p.precioOferta ?? 0) : p.precio"
+        [precioOriginal]="p.enOferta ? p.precio : undefined"
+        [enOferta]="p.enOferta ?? false"
+        [imagen]="p.imagenUrl"
+        unidad="ud"
+        (agregar)="agregarAlCarrito($event)"
+      >
+      </app-tarjeta>
+    }
+  </div>
+
+  @if (productos.length === 0) {
+    <p>No se encontraron productos.</p>
+  }
+</main>

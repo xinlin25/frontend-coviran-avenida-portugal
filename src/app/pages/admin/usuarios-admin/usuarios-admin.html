@@ -71,7 +71,13 @@
             <div>
               <label>Correo</label>
               @if (modoEdicion) {
-                <input type="email" name="correo" [(ngModel)]="usuarioEditando.correo" required />
+                <input
+                  type="email"
+                  name="correo"
+                  [(ngModel)]="usuarioEditando.correo"
+                  required
+                  autocomplete="off"
+                />
               } @else {
                 <p>{{ usuarioEditando.correo }}</p>
               }
@@ -86,6 +92,7 @@
                   name="password"
                   [(ngModel)]="usuarioEditando.password"
                   required
+                  autocomplete="new-password"
                 />
               </div>
             }

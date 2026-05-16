@@ -1,0 +1,25 @@
+:host {
+  flex: 1;
+  min-width: 0;
+}
+
+.contenido-categorias {
+  padding: 20px;
+}
+
+.productos-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.titulo-categoria {
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+@media (max-width: 800px) {
+  .productos-grid {
+    justify-content: center;
+  }
+}

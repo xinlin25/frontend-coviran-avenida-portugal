@@ -23,8 +23,15 @@
 
     <!-- Barra de búsqueda -->
     <div class="search-container">
-      <input type="text" placeholder="Buscar productos..." class="search-input" />
-      <button class="search-button">
+      <input
+        type="text"
+        placeholder="Buscar productos..."
+        class="search-input"
+        [(ngModel)]="busqueda"
+        (keyup.enter)="buscar()"
+      />
+
+      <button class="search-button" (click)="buscar()">
         <i class="bi bi-search"></i>
       </button>
     </div>
