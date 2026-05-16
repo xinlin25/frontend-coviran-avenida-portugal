@@ -106,22 +106,24 @@ export class Carrito implements OnInit {
     const datos = this.checkoutForm.value;
 
     if (datos.metodoPago === 'EFECTIVO') {
-      this.procesandoCompra = true;
       this.carritoService.confirmarPedido(datos).subscribe({
-        next: (pedido) => {
-          console.log(pedido);
-          this.toast.success('Compra realizada exitosamente');
-          this.carrito = {
-            id: 0,
-            items: [],
-          };
-          this.procesandoCompra = false;
+        next: () => {
+          this.toast.success('Pedido realizado correctamente');
           this.router.navigate(['/pedidos']);
         },
 
-        error: (err) => {
-          this.toast.error('Error al confirmar el pedido');
-          this.procesandoCompra = false;
+        error: () => {
+          this.toast.error('Error al confirmar pedido');
+        },
+      });
+    } else if (datos.metodoPago === 'TARJETA') {
+      this.carritoService.checkoutStripe(datos).subscribe({
+        next: (url) => {
+          window.location.href = url;
+        },
+
+        error: () => {
+          this.toast.error('Error con Stripe');
         },
       });
     }
