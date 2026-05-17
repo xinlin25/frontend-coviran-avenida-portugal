@@ -1,5 +1,5 @@
 <div class="tarjeta" [routerLink]="['/detalle-producto', id]">
-  <img [src]="imagen" alt="{{ titulo }}" class="tarjeta-img" />
+  <img [src]="imagen || '/img/img-placeholder.jpg'" alt="{{ titulo }}" class="tarjeta-img" />
   <h5 class="titulo">{{ titulo }}</h5>
   <p class="descripcion">{{ descripcion }}</p>
   <p class="precio">

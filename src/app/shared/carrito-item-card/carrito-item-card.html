@@ -1,5 +1,9 @@
 <div class="item-card">
-  <img [src]="item.producto.imagenUrl" [alt]="item.producto.nombre" class="producto-img" />
+  <img
+    [src]="item.producto.imagenUrl || '/img/img-placeholder.jpg'"
+    [alt]="item.producto.nombre"
+    class="producto-img"
+  />
 
   <div class="info">
     <h3>
