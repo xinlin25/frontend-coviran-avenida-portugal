@@ -13,7 +13,7 @@
   <div class="lista">
     <h2 class="titulo">Pedidos</h2>
 
-    @for (pedido of pedidos; track pedido.id; let i = $index) {
+    @for (pedido of itemsPaginados; track pedido.id; let i = $index) {
       <div
         class="item"
         (click)="abrirModal(pedido)"
