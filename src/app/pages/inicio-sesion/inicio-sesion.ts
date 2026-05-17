@@ -15,6 +15,7 @@ export class InicioSesion {
   loginForm: FormGroup;
   mensaje: string = '';
   esError: boolean = false;
+  mostrarPassword = false;
 
   constructor(
     private fb: FormBuilder,
