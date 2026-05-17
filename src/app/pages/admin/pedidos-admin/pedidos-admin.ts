@@ -96,9 +96,7 @@ export class PedidosAdmin implements OnInit {
       .subscribe({
         next: () => {
           this.toast.success('Estado actualizado');
-
           this.cargarPedidos();
-
           this.pedidoSeleccionado!.estado = this.nuevoEstado as any;
         },
 
