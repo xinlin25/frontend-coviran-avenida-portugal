@@ -24,6 +24,51 @@
   margin-bottom: 30px;
 }
 
+.paginacion {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.numeros {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.numero-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+  border: 1px solid #ccc;
+  transition: 0.2s;
+}
+
+.numero-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.numero-btn.activa {
+  background-color: var(--verde);
+  color: white;
+  border-color: var(--verde);
+}
+
+.paginacion button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn {
+  color: white;
+}
+
 @media (max-width: 800px) {
   .productos-grid {
     justify-content: center;

@@ -24,6 +24,8 @@ export class CategoriasContenido implements OnInit {
   tituloPagina: string = '';
   subtituloPagina: string = '';
   categoriaSeleccionadaId?: number;
+  paginaActual = 1;
+  elementosPorPagina = 12;
 
   constructor(
     private route: ActivatedRoute,
@@ -125,5 +127,15 @@ export class CategoriasContenido implements OnInit {
         if (err.status === 401) this.toast.error('Primero debes de iniciar sesión');
       },
     });
+  }
+
+  get productosPaginados(): Producto[] {
+    const inicio = (this.paginaActual - 1) * this.elementosPorPagina;
+    const fin = inicio + this.elementosPorPagina;
+    return this.productos.slice(inicio, fin);
+  }
+
+  get totalPaginas(): number {
+    return Math.ceil(this.productos.length / this.elementosPorPagina);
   }
 }

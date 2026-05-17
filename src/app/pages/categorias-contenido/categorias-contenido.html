@@ -10,7 +10,7 @@
   }
 
   <div class="productos-grid">
-    @for (producto of productos; track producto.id) {
+    @for (producto of productosPaginados; track producto.id) {
       <app-tarjeta
         [id]="producto.id"
         [titulo]="producto.nombre"
@@ -25,4 +25,35 @@
       </app-tarjeta>
     }
   </div>
+  @if (totalPaginas > 1) {
+    <div class="paginacion">
+      <button
+        class="btn btn-primary"
+        [disabled]="paginaActual === 1"
+        (click)="paginaActual = paginaActual - 1"
+      >
+        Anterior
+      </button>
+
+      <div class="numeros">
+        @for (pagina of [].constructor(totalPaginas); track $index) {
+          <button
+            class="numero-btn"
+            [class.activa]="paginaActual === $index + 1"
+            (click)="paginaActual = $index + 1"
+          >
+            {{ $index + 1 }}
+          </button>
+        }
+      </div>
+
+      <button
+        class="btn btn-primary"
+        [disabled]="paginaActual === totalPaginas"
+        (click)="paginaActual = paginaActual + 1"
+      >
+        Siguiente
+      </button>
+    </div>
+  }
 </main>
