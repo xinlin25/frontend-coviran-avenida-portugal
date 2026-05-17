@@ -23,6 +23,7 @@ import { PedidosAdmin } from './pages/admin/pedidos-admin/pedidos-admin';
 import { adminGuard } from './guards/admin-guard';
 import { CategoriasContenido } from './pages/categorias-contenido/categorias-contenido';
 import { Busqueda } from './pages/busqueda/busqueda';
+import { RestablecerPassword } from './pages/restablecer-password/restablecer-password';
 
 export const routes: Routes = [
   {
@@ -54,6 +55,7 @@ export const routes: Routes = [
     children: [
       { path: 'registro', component: Registro },
       { path: 'recuperar-contraseña', component: Recuperar },
+      { path: 'restablecer-password', component: RestablecerPassword },
       { path: 'carrito', component: Carrito },
       { path: 'empleados', component: Empleados },
       { path: 'mi-perfil', component: MiPerfil, canActivate: [authGuard] },

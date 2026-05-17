@@ -77,4 +77,15 @@ export class Auth {
     const payload = this.getTokenPayload();
     return payload?.rol || null;
   }
+
+  recuperarPassword(correo: string) {
+    return this.http.post(
+      `${this.apiURL}/recuperar-password`,
+      { correo },
+      { responseType: 'text' },
+    );
+  }
+  restablecerPassword(data: { token: string; password: string }) {
+    return this.http.post(`${this.apiURL}/restablecer-password`, data, { responseType: 'text' });
+  }
 }

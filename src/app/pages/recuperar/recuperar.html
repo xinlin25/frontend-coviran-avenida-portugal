@@ -1,1 +1,37 @@
-<p>recuperar works!</p>
+<div class="contenedor">
+  <div class="contenido">
+    <img src="/img/formularios.jpg" alt="Imagen Frutería Covirán" />
+  </div>
+
+  <div class="contenido formulario">
+    <h1>Restablecer contraseña</h1>
+
+    <p class="descripcion">
+      Introduce el correo electrónico asociado a tu cuenta para restablecer la contraseña.
+    </p>
+
+    <form [formGroup]="recuperarForm" (ngSubmit)="onSubmit()">
+      <input type="email" placeholder="Correo electrónico*" formControlName="correo" />
+
+      @if (f['correo'].invalid && (f['correo'].touched || f['correo'].dirty)) {
+        @if (f['correo'].errors?.['required']) {
+          <p class="error">El correo es obligatorio</p>
+        }
+
+        @if (f['correo'].errors?.['email']) {
+          <p class="error">Formato de correo inválido</p>
+        }
+      }
+
+      @if (mensaje) {
+        <p [class.success]="!esError" [class.error]="esError">
+          {{ mensaje }}
+        </p>
+      }
+
+      <button type="submit" [disabled]="recuperarForm.invalid">Restablecer Contraseña</button>
+
+      <a routerLink="/inicio-sesion" class="volver-login"> o Iniciar Sesión </a>
+    </form>
+  </div>
+</div>

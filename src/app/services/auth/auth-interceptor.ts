@@ -11,7 +11,16 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   let authReq = req;
 
-  if (token) {
+  const rutasPublicas = [
+    '/auth/login',
+    '/auth/register',
+    '/auth/recuperar-password',
+    '/auth/restablecer-password',
+  ];
+
+  const esRutaPublica = rutasPublicas.some((ruta) => req.url.includes(ruta));
+
+  if (token && !esRutaPublica) {
     authReq = req.clone({
       setHeaders: {
         Authorization: 'Bearer ' + token,
@@ -21,7 +30,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   return next(authReq).pipe(
     catchError((error) => {
-      if (error.status === 401) {
+      if (error.status === 401 && !esRutaPublica) {
         authService.logout();
         router.navigate(['/inicio-sesion']);
       }
