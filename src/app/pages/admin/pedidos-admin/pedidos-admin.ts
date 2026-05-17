@@ -20,6 +20,8 @@ export class PedidosAdmin implements OnInit {
   private busquedaSubject: Subject<string> = new Subject();
   pedidoSeleccionado: Pedido | null = null;
   nuevoEstado: string = '';
+  paginaActual = 1;
+  elementosPorPagina = 10;
 
   constructor(
     private pedidoService: PedidoService,
@@ -104,5 +106,16 @@ export class PedidosAdmin implements OnInit {
           this.toast.error('Error al actualizar estado');
         },
       });
+  }
+
+  get itemsPaginados() {
+    const inicio = (this.paginaActual - 1) * this.elementosPorPagina;
+    const fin = inicio + this.elementosPorPagina;
+
+    return this.pedidos.slice(inicio, fin);
+  }
+
+  get totalPaginas() {
+    return Math.ceil(this.pedidos.length / this.elementosPorPagina);
   }
 }

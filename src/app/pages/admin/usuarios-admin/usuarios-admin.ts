@@ -21,6 +21,8 @@ export class UsuariosAdmin implements OnInit {
   usuarioEditando: Usuario | null = null;
   busqueda: string = '';
   private busquedaSubject = new Subject<string>();
+  paginaActual = 1;
+  elementosPorPagina = 10;
 
   constructor(
     private usuarioService: UsuarioService,
@@ -182,5 +184,16 @@ export class UsuariosAdmin implements OnInit {
 
   onBuscarChange() {
     this.busquedaSubject.next(this.busqueda);
+  }
+
+  get itemsPaginados() {
+    const inicio = (this.paginaActual - 1) * this.elementosPorPagina;
+    const fin = inicio + this.elementosPorPagina;
+
+    return this.usuarios.slice(inicio, fin);
+  }
+
+  get totalPaginas() {
+    return Math.ceil(this.usuarios.length / this.elementosPorPagina);
   }
 }

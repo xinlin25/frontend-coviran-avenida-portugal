@@ -40,6 +40,25 @@
       </div>
     }
   </div>
+  <div class="paginacion">
+    <button
+      class="btn btn-primary"
+      [disabled]="paginaActual === 1"
+      (click)="paginaActual = paginaActual - 1"
+    >
+      Anterior
+    </button>
+
+    <span> Página {{ paginaActual }} de {{ totalPaginas }} </span>
+
+    <button
+      class="btn btn-primary"
+      [disabled]="paginaActual === totalPaginas"
+      (click)="paginaActual = paginaActual + 1"
+    >
+      Siguiente
+    </button>
+  </div>
   <div class="modal fade" id="pedidoModal" tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">

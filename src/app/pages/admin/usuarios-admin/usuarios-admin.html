@@ -23,7 +23,7 @@
   <div class="lista">
     <h2 class="titulo">Usuarios</h2>
 
-    @for (u of usuarios; track u.id; let i = $index) {
+    @for (u of itemsPaginados; track u.id; let i = $index) {
       <div
         class="item"
         [class.fila-par]="i % 2 === 0"
@@ -37,6 +37,25 @@
         }
       </div>
     }
+  </div>
+  <div class="paginacion">
+    <button
+      class="btn btn-primary"
+      [disabled]="paginaActual === 1"
+      (click)="paginaActual = paginaActual - 1"
+    >
+      Anterior
+    </button>
+
+    <span> Página {{ paginaActual }} de {{ totalPaginas }} </span>
+
+    <button
+      class="btn btn-primary"
+      [disabled]="paginaActual === totalPaginas"
+      (click)="paginaActual = paginaActual + 1"
+    >
+      Siguiente
+    </button>
   </div>
 </div>
 

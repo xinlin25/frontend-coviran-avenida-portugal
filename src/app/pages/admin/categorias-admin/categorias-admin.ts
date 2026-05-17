@@ -20,6 +20,8 @@ export class CategoriasAdmin implements OnInit {
   modoEdicion: boolean = false;
   busqueda: string = '';
   private busquedaSubject = new Subject<string>();
+  paginaActual = 1;
+  elementosPorPagina = 10;
 
   constructor(
     private categoriaService: CategoriasService,
@@ -141,5 +143,16 @@ export class CategoriasAdmin implements OnInit {
 
   onBuscarChange() {
     this.busquedaSubject.next(this.busqueda);
+  }
+
+  get itemsPaginados() {
+    const inicio = (this.paginaActual - 1) * this.elementosPorPagina;
+    const fin = inicio + this.elementosPorPagina;
+
+    return this.categorias.slice(inicio, fin);
+  }
+
+  get totalPaginas() {
+    return Math.ceil(this.categorias.length / this.elementosPorPagina);
   }
 }

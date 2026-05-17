@@ -26,6 +26,8 @@ export class ProductosAdmin implements OnInit {
   categorias: Categoria[] = [];
   imagenSeleccionada: File | null = null;
   destacado?: boolean;
+  paginaActual = 1;
+  elementosPorPagina = 10;
 
   private busquedaSubject = new Subject<string>();
 
@@ -195,5 +197,16 @@ export class ProductosAdmin implements OnInit {
         },
       });
     }
+  }
+
+  get itemsPaginados() {
+    const inicio = (this.paginaActual - 1) * this.elementosPorPagina;
+    const fin = inicio + this.elementosPorPagina;
+
+    return this.productos.slice(inicio, fin);
+  }
+
+  get totalPaginas() {
+    return Math.ceil(this.productos.length / this.elementosPorPagina);
   }
 }
