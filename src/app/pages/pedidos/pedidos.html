@@ -1,37 +1,115 @@
 <div class="pedidos-container">
-  <h1>Mis pedidos</h1>
+  <h1 class="titulo">Mis pedidos</h1>
 
   @if (cargando) {
     <p>Cargando pedidos...</p>
   } @else {
     @if (pedidos.length > 0) {
-      @for (pedido of pedidos; track pedido.id) {
-        <div class="pedido-card">
-          <div class="pedido-header">
-            <div>
-              <p>Pedido #{{ pedido.id }}</p>
-              <p>{{ pedido.fecha }}</p>
-            </div>
+      <div class="lista">
+        @for (pedido of pedidos; track pedido.id; let i = $index) {
+          <div
+            class="pedido-card"
+            (click)="abrirModal(pedido)"
+            data-bs-toggle="modal"
+            data-bs-target="#pedidoModal"
+          >
+            <div class="pedido-header">
+              <div>
+                <p>Pedido #{{ pedido.id }}</p>
+                <p>{{ pedido.fecha }}</p>
+              </div>
 
-            <div>
-              <p
-                class="estado"
-                [ngClass]="{
-                  pendiente: pedido.estado === 'PENDIENTE',
-                  reparto: pedido.estado === 'REPARTO',
-                  completado: pedido.estado === 'COMPLETADO',
-                  cancelado: pedido.estado === 'CANCELADO',
-                }"
-              >
-                {{ pedido.estado }}
-              </p>
-              <p class="total">{{ pedido.total | number: '1.2-2' }} €</p>
+              <div>
+                <p
+                  class="estado"
+                  [ngClass]="{
+                    pendiente: pedido.estado === 'PENDIENTE',
+                    reparto: pedido.estado === 'REPARTO',
+                    completado: pedido.estado === 'COMPLETADO',
+                    cancelado: pedido.estado === 'CANCELADO',
+                  }"
+                >
+                  {{ pedido.estado }}
+                </p>
+
+                <p class="total">{{ pedido.total | number: '1.2-2' }} €</p>
+              </div>
             </div>
           </div>
-        </div>
-      }
+        }
+      </div>
     } @else {
       <p>Aún no tienes pedidos</p>
     }
   }
+</div>
+
+<div class="modal fade" id="pedidoModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Pedido #{{ pedidoSeleccionado?.id }}</h5>
+
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        @if (pedidoSeleccionado) {
+          <p>
+            <strong>Estado:</strong>
+            {{ pedidoSeleccionado.estado }}
+          </p>
+
+          <p>
+            <strong>Fecha:</strong>
+            {{ pedidoSeleccionado.fecha }}
+          </p>
+
+          <p>
+            <strong>Método pago:</strong>
+            {{ pedidoSeleccionado.metodoPago }}
+          </p>
+
+          <p>
+            <strong>Total:</strong>
+            {{ pedidoSeleccionado.total | number: '1.2-2' }} €
+          </p>
+
+          <hr />
+
+          <h5>Productos</h5>
+
+          @for (detalle of pedidoSeleccionado.detalles; track detalle.id) {
+            <p>
+              {{ detalle.producto.nombre }}
+              x{{ detalle.cantidad }}
+            </p>
+          }
+
+          <hr />
+
+          <h5>Entrega</h5>
+
+          <p>{{ pedidoSeleccionado.cliente.nombreCompleto }}</p>
+          <p>{{ pedidoSeleccionado.cliente.direccion }}</p>
+
+          @if (pedidoSeleccionado.especificacionesEntrega) {
+            <hr />
+
+            <h5>Nota entrega</h5>
+
+            <p>
+              {{ pedidoSeleccionado.especificacionesEntrega }}
+            </p>
+          }
+
+          @if (pedidoSeleccionado.estado === 'PENDIENTE') {
+            <button class="btn btn-danger w-100 mt-3" (click)="cancelarPedido()">
+              Cancelar pedido
+            </button>
+          }
+        }
+      </div>
+    </div>
+  </div>
 </div>

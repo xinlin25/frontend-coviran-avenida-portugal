@@ -27,4 +27,8 @@ export class PedidoService {
   cambiarEstado(id: number, estado: string) {
     return this.http.put(`${this.apiUrl}/${id}/estado?estado=${estado}`, {});
   }
+
+  cancelarPedido(id: number) {
+    return this.http.put(`${this.apiUrl}/${id}/cancelar`, {});
+  }
 }

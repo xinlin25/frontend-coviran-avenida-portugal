@@ -54,7 +54,7 @@
             <p>Estado: {{ pedidoSeleccionado.estado }}</p>
             <p>Fecha: {{ pedidoSeleccionado.fecha }}</p>
             <p>Método pago: {{ pedidoSeleccionado.metodoPago }}</p>
-            <p>Total: {{ pedidoSeleccionado.total }} €</p>
+            <p>Total: {{ pedidoSeleccionado.total | number: '1.2-2' }} €</p>
             <hr />
             <h5>Productos</h5>
 

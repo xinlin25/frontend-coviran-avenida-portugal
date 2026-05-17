@@ -63,6 +63,59 @@
   margin-top: 10px !important;
 }
 
+.pedido-card {
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.pedido-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.modal-content {
+  border-radius: 18px;
+  border: none;
+}
+
+.modal-header {
+  border-bottom: 1px solid #eee;
+}
+
+.modal-title {
+  font-weight: bold;
+}
+
+.modal-body h5 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.modal-body p {
+  margin-bottom: 10px;
+}
+
+.modal-body hr {
+  margin: 20px 0;
+}
+
+.btn-danger {
+  background-color: var(--rojo);
+  border: none;
+  font-weight: bold;
+  padding: 12px;
+  border-radius: 12px;
+  transition: 0.2s;
+}
+
+.btn-danger:hover {
+  opacity: 0.9;
+}
+
 @media (max-width: 768px) {
   .pedido-header {
     flex-direction: column;
