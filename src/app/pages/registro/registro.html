@@ -34,12 +34,50 @@
       }
     }
 
-    <input
-      type="password"
-      placeholder="Contraseña*"
-      formControlName="password"
-      autocomplete="new-password"
-    />
+    <div class="password-container">
+      <input
+        [type]="mostrarPassword ? 'text' : 'password'"
+        placeholder="Contraseña*"
+        formControlName="password"
+        autocomplete="new-password"
+      />
+
+      <button type="button" class="toggle-password" (click)="mostrarPassword = !mostrarPassword">
+        <i class="bi" [class.bi-eye]="!mostrarPassword" [class.bi-eye-slash]="mostrarPassword"></i>
+      </button>
+    </div>
+    <div class="password-container">
+      <input
+        [type]="mostrarConfirmPassword ? 'text' : 'password'"
+        placeholder="Confirmar contraseña*"
+        formControlName="confirmPassword"
+        autocomplete="new-password"
+      />
+
+      <button
+        type="button"
+        class="toggle-password"
+        (click)="mostrarConfirmPassword = !mostrarConfirmPassword"
+      >
+        <i
+          class="bi"
+          [class.bi-eye]="!mostrarConfirmPassword"
+          [class.bi-eye-slash]="mostrarConfirmPassword"
+        ></i>
+      </button>
+    </div>
+
+    @if (
+      f['confirmPassword'].invalid && (f['confirmPassword'].touched || f['confirmPassword'].dirty)
+    ) {
+      @if (f['confirmPassword'].errors?.['required']) {
+        <p class="error">Debes confirmar la contraseña</p>
+      }
+
+      @if (f['confirmPassword'].errors?.['noCoinciden']) {
+        <p class="error">Las contraseñas no coinciden</p>
+      }
+    }
     @if (f['password'].invalid && (f['password'].touched || f['password'].dirty)) {
       @if (f['password'].errors?.['required']) {
         <p class="error">La contraseña es obligatoria</p>
