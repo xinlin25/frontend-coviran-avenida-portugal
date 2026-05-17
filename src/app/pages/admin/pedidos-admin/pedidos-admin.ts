@@ -19,6 +19,7 @@ export class PedidosAdmin implements OnInit {
   busqueda: string = '';
   private busquedaSubject: Subject<string> = new Subject();
   pedidoSeleccionado: Pedido | null = null;
+  nuevoEstado: string = '';
 
   constructor(
     private pedidoService: PedidoService,
@@ -67,21 +68,38 @@ export class PedidosAdmin implements OnInit {
 
   abrirModal(pedido: Pedido) {
     this.pedidoSeleccionado = pedido;
+    this.nuevoEstado = pedido.estado;
+  }
+
+  estadosDisponibles(): string[] {
+    if (!this.pedidoSeleccionado) return [];
+
+    switch (this.pedidoSeleccionado.estado) {
+      case 'PENDIENTE':
+        return ['PENDIENTE', 'REPARTO', 'CANCELADO'];
+      case 'REPARTO':
+        return ['REPARTO', 'COMPLETADO'];
+      case 'COMPLETADO':
+        return ['COMPLETADO'];
+      case 'CANCELADO':
+        return ['CANCELADO'];
+      default:
+        return [];
+    }
   }
 
   guardarEstado() {
     if (!this.pedidoSeleccionado) return;
 
     this.pedidoService
-      .cambiarEstado(
-        this.pedidoSeleccionado.id,
-
-        this.pedidoSeleccionado.estado,
-      )
+      .cambiarEstado(this.pedidoSeleccionado.id, this.nuevoEstado as any)
       .subscribe({
         next: () => {
           this.toast.success('Estado actualizado');
+
           this.cargarPedidos();
+
+          this.pedidoSeleccionado!.estado = this.nuevoEstado as any;
         },
 
         error: () => {

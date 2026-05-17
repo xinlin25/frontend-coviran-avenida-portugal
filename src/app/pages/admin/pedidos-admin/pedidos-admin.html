@@ -82,11 +82,12 @@
 
             <h5>Cambiar estado</h5>
 
-            <select class="form-select" [(ngModel)]="pedidoSeleccionado.estado">
-              <option value="PENDIENTE">PENDIENTE</option>
-              <option value="REPARTO">REPARTO</option>
-              <option value="COMPLETADO">COMPLETADO</option>
-              <option value="CANCELADO">CANCELADO</option>
+            <select class="form-select" [(ngModel)]="nuevoEstado">
+              @for (estado of estadosDisponibles(); track estado) {
+                <option [value]="estado">
+                  {{ estado }}
+                </option>
+              }
             </select>
 
             <button class="btn btn-success mt-3" (click)="guardarEstado()">Guardar estado</button>
