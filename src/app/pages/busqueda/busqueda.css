@@ -5,7 +5,7 @@
 
 .contenido-categorias {
   padding: 20px;
-  height: 100vh;
+  height: fit-content;
 }
 
 .productos-grid {
@@ -17,6 +17,53 @@
 .titulo-categoria {
   margin-top: 20px;
   margin-bottom: 30px;
+}
+
+.paginacion {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 40px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  color: white;
+}
+
+.numeros {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.numero-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background-color: white;
+  border: 1px solid #ccc;
+  font-weight: bold;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.numero-btn:hover {
+  background-color: #f0f0f0;
+}
+
+.numero-btn.activa {
+  background-color: var(--verde);
+  color: white;
+  border-color: var(--verde);
+}
+
+.paginacion button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 @media (max-width: 800px) {

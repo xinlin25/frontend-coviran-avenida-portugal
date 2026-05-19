@@ -41,7 +41,7 @@ form {
   gap: 30px;
 }
 
-input {
+.input {
   width: clamp(280px, 50vw, 600px);
   height: clamp(60px, 8vw, 80px);
   border-radius: 15px;
@@ -51,11 +51,11 @@ input {
 }
 
 /*Para que no salga rojo directamente*/
-input:invalid:not(:placeholder-shown) {
+.input:invalid:not(:placeholder-shown) {
   border-color: rgba(255, 0, 0, 0.31);
 }
 
-input:valid {
+.input:valid {
   border-color: var(--verde-claro);
 }
 
@@ -143,7 +143,11 @@ button {
     box-sizing: border-box;
   }
 
-  input {
+  .password-container {
+    width: 100%;
+  }
+
+  .input {
     width: 100%;
     height: 65px;
     font-size: 14px;

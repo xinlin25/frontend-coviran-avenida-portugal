@@ -21,7 +21,11 @@
   <div class="detalle-container">
     <!-- IZQUIERDA -->
     <div class="imagen-container">
-      <img [src]="producto.imagenUrl" [alt]="producto.nombre" class="imagen-producto" />
+      <img
+        [src]="producto.imagenUrl || '/img/img-placeholder.jpg'"
+        [alt]="producto.nombre"
+        class="imagen-producto"
+      />
     </div>
 
     <!-- DERECHA -->

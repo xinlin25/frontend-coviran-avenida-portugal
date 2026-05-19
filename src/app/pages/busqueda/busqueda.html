@@ -2,7 +2,7 @@
   <h1 class="titulo-categoria">Resultados para "{{ query }}"</h1>
 
   <div class="productos-grid">
-    @for (p of productos; track p.id) {
+    @for (p of productosPaginados; track p.id) {
       <app-tarjeta
         [id]="p.id"
         [titulo]="p.nombre"
@@ -17,6 +17,37 @@
       </app-tarjeta>
     }
   </div>
+  @if (totalPaginas > 1) {
+    <div class="paginacion">
+      <button
+        class="btn btn-primary"
+        [disabled]="paginaActual === 1"
+        (click)="paginaActual = paginaActual - 1"
+      >
+        Anterior
+      </button>
+
+      <div class="numeros">
+        @for (pagina of paginas; track pagina) {
+          <button
+            class="numero-btn"
+            [class.activa]="paginaActual === pagina"
+            (click)="paginaActual = pagina"
+          >
+            {{ pagina }}
+          </button>
+        }
+      </div>
+
+      <button
+        class="btn btn-primary"
+        [disabled]="paginaActual === totalPaginas"
+        (click)="paginaActual = paginaActual + 1"
+      >
+        Siguiente
+      </button>
+    </div>
+  }
 
   @if (productos.length === 0) {
     <p>No se encontraron productos.</p>

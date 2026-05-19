@@ -34,10 +34,10 @@ export class InicioSesion {
 
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
-        this.toast.success('Se ha iniciado sesión correctamente');
         this.authService.guardarToken(response.token);
         this.esError = false;
         this.router.navigate(['/']);
+        this.toast.success('Se ha iniciado sesión correctamente');
       },
       error: (err) => {
         this.toast.error('Error al iniciar sesión');

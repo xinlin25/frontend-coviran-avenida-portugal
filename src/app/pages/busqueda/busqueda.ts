@@ -15,6 +15,8 @@ import { CommonModule } from '@angular/common';
 export class Busqueda implements OnInit {
   productos: Producto[] = [];
   query: string = '';
+  paginaActual = 1;
+  elementosPorPagina = 12;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,9 +30,25 @@ export class Busqueda implements OnInit {
       if (this.query.trim()) {
         this.productoService.buscarProductos(this.query).subscribe((data) => {
           this.productos = data;
+          this.paginaActual = 1;
         });
       }
     });
+  }
+
+  get productosPaginados(): Producto[] {
+    const inicio = (this.paginaActual - 1) * this.elementosPorPagina;
+    const fin = inicio + this.elementosPorPagina;
+
+    return this.productos.slice(inicio, fin);
+  }
+
+  get totalPaginas(): number {
+    return Math.ceil(this.productos.length / this.elementosPorPagina);
+  }
+
+  get paginas(): number[] {
+    return Array.from({ length: this.totalPaginas }, (_, i) => i + 1);
   }
 
   agregarAlCarrito(id: number) {

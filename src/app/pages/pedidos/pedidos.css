@@ -122,4 +122,8 @@
     align-items: flex-start;
     gap: 15px;
   }
+
+  .pedidos-container {
+    height: fit-content;
+  }
 }

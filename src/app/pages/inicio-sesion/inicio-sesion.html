@@ -8,10 +8,16 @@
     <a routerLink="/registro" class="registro">o Crear Cuenta</a>
 
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-      <input type="email" formControlName="correo" placeholder="Correo electrónico*" />
+      <input
+        type="email"
+        class="input"
+        formControlName="correo"
+        placeholder="Correo electrónico*"
+      />
 
       <div class="password-container">
         <input
+          class="input"
           [type]="mostrarPassword ? 'text' : 'password'"
           formControlName="password"
           placeholder="Contraseña*"

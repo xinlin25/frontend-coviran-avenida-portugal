@@ -121,9 +121,7 @@ iframe {
   }
 
   .contenido {
-    display: flex;
     flex-direction: column;
-    gap: 30px;
     padding: auto;
     max-height: 400px;
   }
