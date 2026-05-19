@@ -34,7 +34,7 @@ export class InicioSesion {
 
     this.authService.login(this.loginForm.value).subscribe({
       next: (response) => {
-        this.authService.guardarToken(response.token);
+        this.authService.guardarSesion(response);
         this.esError = false;
         this.router.navigate(['/']);
         this.toast.success('Se ha iniciado sesión correctamente');

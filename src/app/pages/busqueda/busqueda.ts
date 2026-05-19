@@ -4,6 +4,8 @@ import { ProductoService } from '../../services/productos/productos.service';
 import { Producto } from '../../models/producto';
 import { TarjetaComponent } from '../../shared/tarjeta/tarjeta';
 import { CommonModule } from '@angular/common';
+import { Auth } from '../../services/auth/auth.service';
+import { ToastService } from '../../services/toast/toast.service';
 
 @Component({
   selector: 'app-busqueda',
@@ -21,6 +23,8 @@ export class Busqueda implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productoService: ProductoService,
+    private authService: Auth,
+    private toast: ToastService,
   ) {}
 
   ngOnInit() {
@@ -52,6 +56,11 @@ export class Busqueda implements OnInit {
   }
 
   agregarAlCarrito(id: number) {
+    if (this.authService.esAdminOEmpleado()) {
+      this.toast.error('No puedes añadir productos al carrito siendo admin o empleado');
+      return;
+    }
+
     console.log('Agregar producto', id);
   }
 }

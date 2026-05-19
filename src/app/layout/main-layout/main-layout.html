@@ -37,12 +37,14 @@
     </div>
 
     <!-- Carrito y cuenta -->
-    <a
-      routerLink="/carrito"
-      routerLinkActive="active-link"
-      [routerLinkActiveOptions]="{ exact: false }"
-      ><i class="bi bi-cart3"></i> Carrito</a
-    >
+    @if (!authService.esAdminOEmpleado()) {
+      <a
+        routerLink="/carrito"
+        routerLinkActive="active-link"
+        [routerLinkActiveOptions]="{ exact: false }"
+        ><i class="bi bi-cart3"></i> Carrito</a
+      >
+    }
 
     @if (!authService.estaAutenticado()) {
       <a

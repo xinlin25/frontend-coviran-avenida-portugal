@@ -21,6 +21,7 @@ import { ProductosAdmin } from './pages/admin/productos-admin/productos-admin';
 import { CategoriasAdmin } from './pages/admin/categorias-admin/categorias-admin';
 import { PedidosAdmin } from './pages/admin/pedidos-admin/pedidos-admin';
 import { adminGuard } from './guards/admin-guard';
+import { clienteGuard } from './guards/cliente-guard';
 import { CategoriasContenido } from './pages/categorias-contenido/categorias-contenido';
 import { Busqueda } from './pages/busqueda/busqueda';
 import { RestablecerPassword } from './pages/restablecer-password/restablecer-password';
@@ -44,7 +45,7 @@ export const routes: Routes = [
       { path: 'detalle-producto/:id', component: DetalleProd },
       { path: 'localizacion-contacto', component: LocCon },
       { path: 'entrega-devoluciones', component: EntDev },
-      { path: 'pedidos', component: Pedidos },
+      { path: 'pedidos', component: Pedidos, canActivate: [clienteGuard] },
       { path: 'busqueda', component: Busqueda },
     ],
   },
@@ -56,7 +57,7 @@ export const routes: Routes = [
       { path: 'registro', component: Registro },
       { path: 'recuperar-contraseña', component: Recuperar },
       { path: 'restablecer-password', component: RestablecerPassword },
-      { path: 'carrito', component: Carrito },
+      { path: 'carrito', component: Carrito, canActivate: [clienteGuard] },
       { path: 'empleados', component: Empleados },
       { path: 'mi-perfil', component: MiPerfil, canActivate: [authGuard] },
       { path: 'inicio-sesion', component: InicioSesion },

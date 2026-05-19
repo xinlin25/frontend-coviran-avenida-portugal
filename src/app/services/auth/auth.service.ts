@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { finalize, shareReplay, tap } from 'rxjs/operators';
 
 //Lo que le vamos a enviar al backend
 interface LoginRequest {
@@ -11,6 +12,7 @@ interface LoginRequest {
 //Lo que esperamos recibir del backend
 interface LoginResponse {
   token: string;
+  refreshToken: string;
 }
 
 @Injectable({
@@ -19,11 +21,30 @@ interface LoginResponse {
 export class Auth {
   //Conecta con @RequestMapping("/auth")
   private apiURL = 'https://backend-coviran.onrender.com/auth';
+  private refreshTokenRequest?: Observable<LoginResponse>;
   //Para hacer peticiones HTTP
   constructor(private http: HttpClient) {}
 
   login(data: LoginRequest): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(`${this.apiURL}/login`, data);
+  }
+
+  refreshToken(): Observable<LoginResponse> {
+    return this.http.post<LoginResponse>(`${this.apiURL}/refresh-token`, {
+      refreshToken: this.obtenerRefreshToken(),
+    });
+  }
+
+  refrescarSesion(): Observable<LoginResponse> {
+    if (!this.refreshTokenRequest) {
+      this.refreshTokenRequest = this.refreshToken().pipe(
+        tap((response) => this.guardarSesion(response)),
+        finalize(() => (this.refreshTokenRequest = undefined)),
+        shareReplay(1),
+      );
+    }
+
+    return this.refreshTokenRequest;
   }
 
   register(data: any) {
@@ -34,27 +55,50 @@ export class Auth {
     localStorage.setItem('token', token);
   }
 
+  guardarRefreshToken(refreshToken: string) {
+    localStorage.setItem('refreshToken', refreshToken);
+  }
+
+  guardarSesion(response: LoginResponse) {
+    this.guardarToken(response.token);
+    this.guardarRefreshToken(response.refreshToken);
+  }
+
   obtenerToken(): string | null {
     return localStorage.getItem('token');
+  }
+
+  obtenerRefreshToken(): string | null {
+    return localStorage.getItem('refreshToken');
   }
 
   estaAutenticado(): boolean {
     const payload = this.getTokenPayload();
 
-    if (!payload) return false;
+    if (!payload) return !!this.obtenerRefreshToken();
 
     const ahora = Math.floor(Date.now() / 1000);
 
     if (payload.exp < ahora) {
-      this.logout();
-      return false;
+      return !!this.obtenerRefreshToken();
     }
 
     return true;
   }
 
   logout() {
+    const refreshToken = this.obtenerRefreshToken();
+
+    if (refreshToken) {
+      this.http.post(`${this.apiURL}/logout`, { refreshToken }).subscribe();
+    }
+
+    this.limpiarSesion();
+  }
+
+  limpiarSesion() {
     localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
   }
 
   getMiPerfil() {
@@ -76,6 +120,11 @@ export class Auth {
   getRol(): string | null {
     const payload = this.getTokenPayload();
     return payload?.rol || null;
+  }
+
+  esAdminOEmpleado(): boolean {
+    const rol = this.getRol();
+    return rol === 'ADMIN' || rol === 'EMPLEADO';
   }
 
   recuperarPassword(correo: string) {

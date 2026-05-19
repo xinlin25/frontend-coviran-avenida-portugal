@@ -58,4 +58,8 @@ export class MiPerfil implements OnInit {
     this.authService.logout();
     this.router.navigate(['/']);
   }
+
+  esAdminOEmpleado(): boolean {
+    return this.authService.esAdminOEmpleado();
+  }
 }

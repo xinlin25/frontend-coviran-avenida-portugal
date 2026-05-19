@@ -8,6 +8,7 @@ import { CarritoService } from '../../services/carrito/carrito.service';
 import { Categoria } from '../../models/categoria';
 import { Producto } from '../../models/producto';
 import { ProductoService } from '../../services/productos/productos.service';
+import { Auth } from '../../services/auth/auth.service';
 
 @Component({
   selector: 'app-inicio',
@@ -25,6 +26,7 @@ export class Inicio implements OnInit {
     private productoService: ProductoService,
     private carritoService: CarritoService,
     private toast: ToastService,
+    private authService: Auth,
   ) {}
 
   ngOnInit(): void {
@@ -79,6 +81,11 @@ export class Inicio implements OnInit {
   }
 
   agregarProducto(productoId: number) {
+    if (this.authService.esAdminOEmpleado()) {
+      this.toast.error('No puedes añadir productos al carrito siendo admin o empleado');
+      return;
+    }
+
     this.carritoService.agregarProducto(productoId).subscribe({
       next: () => {
         this.toast.success('Producto añadido al carrito');

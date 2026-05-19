@@ -2,7 +2,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Auth } from './auth.service';
 import { Router } from '@angular/router';
-import { catchError, throwError } from 'rxjs';
+import { catchError, switchMap, throwError } from 'rxjs';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(Auth);
@@ -14,6 +14,8 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const rutasPublicas = [
     '/auth/login',
     '/auth/register',
+    '/auth/refresh-token',
+    '/auth/logout',
     '/auth/recuperar-password',
     '/auth/restablecer-password',
   ];
@@ -31,8 +33,31 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(authReq).pipe(
     catchError((error) => {
       if (error.status === 401 && !esRutaPublica) {
-        authService.logout();
-        router.navigate(['/inicio-sesion']);
+        const refreshToken = authService.obtenerRefreshToken();
+
+        if (!refreshToken) {
+          authService.limpiarSesion();
+          router.navigate(['/inicio-sesion']);
+          return throwError(() => error);
+        }
+
+        return authService.refrescarSesion().pipe(
+          catchError((refreshError) => {
+            authService.limpiarSesion();
+            router.navigate(['/inicio-sesion']);
+
+            return throwError(() => refreshError);
+          }),
+          switchMap((response) => {
+            const retryReq = req.clone({
+              setHeaders: {
+                Authorization: 'Bearer ' + response.token,
+              },
+            });
+
+            return next(retryReq);
+          }),
+        );
       }
 
       return throwError(() => error);

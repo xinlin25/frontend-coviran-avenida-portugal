@@ -24,7 +24,9 @@
 
     <div class="fila">
       <button (click)="activarEdicion()" class="editar">Editar perfil</button>
-      <button routerLink="/pedidos" class="pedidos">Mis pedidos</button>
+      @if (!esAdminOEmpleado()) {
+        <button routerLink="/pedidos" class="pedidos">Mis pedidos</button>
+      }
       <button (click)="logout()" class="sesion">Cerrar sesión</button>
     </div>
   }
