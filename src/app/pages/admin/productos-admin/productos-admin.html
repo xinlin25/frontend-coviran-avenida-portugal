@@ -128,10 +128,14 @@
               <label>Imagen</label>
 
               @if (modoEdicion) {
-                <input type="file" accept="image/*" (change)="onImagenSeleccionada($event)" />
+                <input type="file" accept="image/*" multiple (change)="onImagenSeleccionada($event)" />
               }
-              @if (productoEditando.imagenUrl) {
-                <img [src]="productoEditando.imagenUrl" alt="producto" class="img" />
+              @if (obtenerImagenesProducto(productoEditando).length > 0) {
+                <div class="imagenes-preview">
+                  @for (imagen of obtenerImagenesProducto(productoEditando); track imagen) {
+                    <img [src]="imagen" alt="producto" class="img" />
+                  }
+                </div>
               }
             </div>
 

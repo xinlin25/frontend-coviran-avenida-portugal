@@ -13,12 +13,17 @@ export class TarjetaComponent {
   @Input() id!: number;
   @Input() titulo: string = 'Título por defecto';
   @Input() descripcion: string = 'Descripción por defecto';
-  @Input() imagen?: string;
+  @Input() imagen?: string | string[];
   @Input() precio: number = 0.0;
   @Input() unidad: string = 'ud';
   @Input() precioOriginal?: number;
   @Input() enOferta: boolean = false;
   @Output() agregar = new EventEmitter<number>();
+
+  get imagenPrincipal(): string {
+    if (Array.isArray(this.imagen)) return this.imagen[0] || '/img/img-placeholder.jpg';
+    return this.imagen || '/img/img-placeholder.jpg';
+  }
 
   manejarClick(event: MouseEvent) {
     event.stopPropagation();

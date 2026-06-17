@@ -62,6 +62,14 @@
   width: 120px;
 }
 
+.imagenes-preview {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
 .fila-par {
   background-color: white;
 }

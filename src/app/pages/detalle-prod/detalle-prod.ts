@@ -17,6 +17,7 @@ import { Auth } from '../../services/auth/auth.service';
 export class DetalleProd implements OnInit {
   producto?: Producto;
   productosRelacionados: Producto[] = [];
+  imagenSeleccionada: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -38,6 +39,7 @@ export class DetalleProd implements OnInit {
     this.productoService.getProductoById(id).subscribe({
       next: (data) => {
         this.producto = data;
+        this.imagenSeleccionada = this.imagenesProducto[0] || '/img/img-placeholder.jpg';
 
         if (data.categoria?.id) {
           this.cargarRelacionados(data.categoria.id, data.id);
@@ -67,10 +69,20 @@ export class DetalleProd implements OnInit {
   cargarRelacionados(categoriaId: number, productoActualId: number) {
     this.productoService.getProductosPorCategoria(categoriaId).subscribe({
       next: (data) => {
-        this.productosRelacionados = data.filter((p) => p.id !== productoActualId).slice(0, 4);
+        this.productosRelacionados = data.filter((p) => p.id !== productoActualId).slice(0, 6);
       },
 
       error: (err) => this.toast.error('Error al cargar productos relacionados'),
     });
+  }
+
+  get imagenesProducto(): string[] {
+    const imagenes = this.producto?.imagenUrl as string[] | string | undefined;
+    if (Array.isArray(imagenes)) return imagenes.length ? imagenes : ['/img/img-placeholder.jpg'];
+    return imagenes ? [imagenes] : ['/img/img-placeholder.jpg'];
+  }
+
+  seleccionarImagen(imagen: string) {
+    this.imagenSeleccionada = imagen;
   }
 }

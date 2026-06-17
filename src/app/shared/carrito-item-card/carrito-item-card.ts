@@ -22,6 +22,12 @@ export class CarritoItemCard {
   @Output()
   eliminar = new EventEmitter<number>();
 
+  get imagenProducto(): string {
+    const imagenes = this.item?.producto?.imagenUrl as string[] | string | undefined;
+    if (Array.isArray(imagenes)) return imagenes[0] || '/img/img-placeholder.jpg';
+    return imagenes || '/img/img-placeholder.jpg';
+  }
+
   sumarCantidad() {
     this.sumar.emit(this.item.id);
   }

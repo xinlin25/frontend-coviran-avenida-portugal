@@ -19,13 +19,23 @@
     </span>
   </div>
   <div class="detalle-container">
-    <!-- IZQUIERDA -->
-    <div class="imagen-container">
-      <img
-        [src]="producto.imagenUrl || '/img/img-placeholder.jpg'"
-        [alt]="producto.nombre"
-        class="imagen-producto"
-      />
+    <div class="galeria-container">
+      <div class="miniaturas" aria-label="Imágenes del producto">
+        @for (imagen of imagenesProducto; track imagen) {
+          <button
+            type="button"
+            class="miniatura"
+            [class.activa]="imagen === imagenSeleccionada"
+            (click)="seleccionarImagen(imagen)"
+          >
+            <img [src]="imagen" [alt]="producto.nombre" />
+          </button>
+        }
+      </div>
+
+      <div class="imagen-container">
+        <img [src]="imagenSeleccionada" [alt]="producto.nombre" class="imagen-producto" />
+      </div>
     </div>
 
     <!-- DERECHA -->
@@ -57,7 +67,7 @@
         }
       </div>
 
-      <button class="btn-add" (click)="agregarProducto(producto.id)">Añadir</button>
+      <button class="btn-add" (click)="agregarProducto(producto.id)">Añadir al carro</button>
     </div>
   </div>
 

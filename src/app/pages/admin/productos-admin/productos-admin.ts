@@ -24,7 +24,7 @@ export class ProductosAdmin implements OnInit {
   modoEdicion: boolean = false;
   productoEditando: any = null;
   categorias: Categoria[] = [];
-  imagenSeleccionada: File | null = null;
+  imagenesSeleccionadas: File[] = [];
   destacado?: boolean;
   paginaActual = 1;
   elementosPorPagina = 10;
@@ -110,7 +110,7 @@ export class ProductosAdmin implements OnInit {
       stock: 0,
       categoriaId: null,
       activo: true,
-      imagenUrl: '',
+      imagenUrl: [],
       enOferta: false,
       precioOferta: 0,
       destacado: false,
@@ -118,17 +118,16 @@ export class ProductosAdmin implements OnInit {
   }
 
   onImagenSeleccionada(event: any) {
-    const archivo = event.target.files[0];
+    const archivos = Array.from(event.target.files || []) as File[];
 
-    if (archivo) {
-      this.imagenSeleccionada = archivo;
-    }
+    this.imagenesSeleccionadas = archivos;
   }
 
   cerrarModal() {
     this.productoEditando = null;
     this.productoSeleccionado = null;
     this.modoEdicion = false;
+    this.imagenesSeleccionadas = [];
   }
 
   guardarCambios() {
@@ -150,9 +149,7 @@ export class ProductosAdmin implements OnInit {
 
       formData.append('precioOferta', this.productoEditando.precioOferta.toString());
       formData.append('destacado', this.productoEditando.destacado.toString());
-      if (this.imagenSeleccionada) {
-        formData.append('imagen', this.imagenSeleccionada);
-      }
+      this.imagenesSeleccionadas.forEach((imagen) => formData.append('imagenes', imagen));
 
       this.productoService.crearProducto(formData).subscribe({
         next: () => {
@@ -178,7 +175,7 @@ export class ProductosAdmin implements OnInit {
       formData.append('enOferta', this.productoEditando.enOferta.toString());
       formData.append('precioOferta', this.productoEditando.precioOferta.toString());
       formData.append('destacado', this.productoEditando.destacado.toString());
-      if (this.imagenSeleccionada) formData.append('imagen', this.imagenSeleccionada);
+      this.imagenesSeleccionadas.forEach((imagen) => formData.append('imagenes', imagen));
 
       this.productoService.actualizarProducto(this.productoEditando.id, formData).subscribe({
         next: () => {
@@ -208,5 +205,11 @@ export class ProductosAdmin implements OnInit {
 
   get totalPaginas() {
     return Math.ceil(this.productos.length / this.elementosPorPagina);
+  }
+
+  obtenerImagenesProducto(producto: Producto | any): string[] {
+    const imagenes = producto?.imagenUrl as string[] | string | undefined;
+    if (Array.isArray(imagenes)) return imagenes;
+    return imagenes ? [imagenes] : [];
   }
 }
